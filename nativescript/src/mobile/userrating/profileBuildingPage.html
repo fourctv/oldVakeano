@@ -1,0 +1,45 @@
+    <ActionBar class="action-bar" title="Profile Building"> 
+        <NavigationButton text=""></NavigationButton>
+    </ActionBar>
+
+    <StackLayout style="background-color: white;" horizontalAlignment="center" verticalAlignment="center" (swipe)="onSwipe($event)">
+        <StackLayout [visibility]="frontPageisUp ? 'visible' : 'collapsed'" horizontalAlignment="center" marginBottom="30">
+            <StackLayout margin="24">
+                <Label class="body" text="We will preset you with a list of Control Features we need you to rate." textWrap="true"></Label>
+                <Label class="body" text="For each movie, Swipe LEFT if you've not seen it, or have no opinion." textWrap="true"></Label>
+                <Label class="body" text="Swipe UP if you liked it, DOWN if you did not like it" textWrap="true"></Label>
+                <Label class="body" text="or RIGHT if you loved it!" textWrap="true"></Label>
+            </StackLayout>
+            <Button text="Tap here when you're ready to go" (tap)="frontPageisUp=false" marginTop="30"></Button>
+        </StackLayout>
+
+        <ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'" row="1" horizontalAlignment="center" verticalAlignment="center" class="activity-indicator"></ActivityIndicator>
+
+        <GridLayout rows="*,auto" [visibility]="(isLoading || frontPageisUp) ? 'collapse' : 'visible'" marginTop="5" marginBottom="5">
+            <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
+                <Image [src]='fullResPosterURL()' (tap)="showIMDB()"></Image>
+            </StackLayout>
+
+            <GridLayout rows="auto,*,auto,auto" row="0" (longPress)="showIMDB()">
+
+                <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
+                    <Label [text]="thumbsUp"  class="icon" (tap)="rateThis(3)"></Label>
+                </StackLayout>
+
+                <DockLayout columns="auto,*,auto" row="1" verticalAlignment="center" marginLeft="5" marginRight="5">
+                    <Label dock="left" [text]="arrow" class="icon" (tap)="nextFeature()"></Label>
+                    <Label dock="right" [text]="loveIt" class="icon" (tap)="rateThis(5)" horizontalAlignment="right"></Label>
+                </DockLayout>
+
+                <StackLayout row="2" verticalAlignment="center" horizontalAlignment="center" marginBottom="5">
+                    <Label [text]="thumbsDown" class="icon" (tap)="rateThis(1)"></Label>
+                </StackLayout>
+
+                <StackLayout row="3" horizontalAlignment="center" marginTop="30">
+                    <Label [text]="'We need you to rate at least 5 movies. So far you have rated '+rateCount+'.'" class="text-muted" style="font-size:10;font-style: italic;"></Label>
+                </StackLayout>
+            </GridLayout>
+
+        </GridLayout>
+
+    </StackLayout>

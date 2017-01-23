@@ -21,3 +21,20 @@ $btn-color-secondary: darken($accent, 5%);
 .even {
   background-color: $white;
 }
+
+/* @import 'nativescript-theme-core/scss/light'; */
+
+.prompt {
+  font-size: 12;
+}
+
+.icon {
+    font-family: FontAwesome, fontawesome;
+    font-size: 20;
+    color: darkred;
+    border-radius: 10;
+    border-width: 2;
+    border-color: white;
+    background-color: white;
+    margin:2; 
+    }

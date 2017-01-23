@@ -1,0 +1,27 @@
+<web-application (userHasLoggedIn)="userHasLoggedIn($event)">
+    <div class="container">
+        <h1>Movie Genome Profile Generator</h1>
+        <br/>
+        <div class="row" style="padding-left:10px;">
+            <h4>Here is a list of Control Movies.<br/>For each picture, if you have seen it please give it 1-5 stars.</h4>
+         </div>
+        
+        <hr style="margin-top:0;width:1100px;" />
+        
+        <div style="display:block;float:left;width:1100px;height:600px;padding-top:15px;overflow:scroll;">
+            <fieldset *ngFor="let currentFeature of controlList.models" class="product">
+                <label style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size: 16px !important;">{{currentFeature.IMDBTitle}}</label>
+                <img src="http://54.191.46.243:8080/4DAction/REST_GetWebImage?image={{currentFeature.PosterURL}}" alt="Image preview"/>
+                <br/>
+                <div  class="rating">
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="5"/><label title="Rocks!" (click)="rateThis(currentFeature,5)">5 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="4"/><label title="Pretty good" (click)="rateThis(currentFeature,4)">4 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="3"/><label title="Meh" (click)="rateThis(currentFeature,3)">3 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="2"/><label title="Kinda bad" (click)="rateThis(currentFeature,2)">2 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="1"/><label title="Sucks big time" (click)="rateThis(currentFeature,1)">1 star</label>
+                </div>
+            </fieldset>
+		</div>
+
+    </div>
+</web-application>

@@ -1,0 +1,81 @@
+<div class="formPanel">
+    <fieldset class="titledGroupBox">
+        <legend class="formHeaderSmall">Taste Profile Details</legend>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:115px;">Profile ID</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.ProfileID"  size="12" disabled/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold">User Name</label>
+                <input type="text" class="fieldEntry" size="30" [(ngModel)]="currentRecord.UserName" disabled/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold">Profile Name</label>
+                <input type="text" class="fieldEntry" size="30" [(ngModel)]="currentRecord.Name" />
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:115px;">Origin</label>
+                <select class="fieldEntry" style="width:180px;height:20px;" (change)='currentRecord.Origin = $event.target.value' [(value)]='currentRecord.Origin'
+                [disabled]="currentRecord.isRecordLoaded()">
+                    <option></option>
+                    <option>LEARNING ENGINE</option>
+                    <option>Curator</option>
+                </select>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold">Priority</label>
+                <input type="text" class="fieldEntry" size="8" [(ngModel)]="currentRecord.Priority" />
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold">Usage Frequency</label>
+                <input type="text" class="fieldEntry" size="8" [(ngModel)]="currentRecord.UsageFrequency" />
+            </span>
+            <span style="padding-left:30px;">
+                    <input type="checkbox" class="fieldEntry" [(ngModel)]="currentRecord.GenomeEnabled" style="margin-left:30px;margin-right:10px;"/>
+                    Genome Enabled?
+            </span>
+        </div>
+    </fieldset>
+
+    <hr style="margin:0;" />
+
+    <tabs class="nav nav-tabs">
+        <tab [title]="'Taste Profile Info'">
+            <div style="height: 450px;">
+                <userprofile-info [currentRecord]="currentRecord"></userprofile-info>
+            </div>
+        </tab>
+
+        <tab [title]="'Edit Taste Profile'" *ngIf="currentRecord.isRecordLoaded()">
+            <div style="height: 450px;">
+                <edit-taste-profile [currentRecord]="currentRecord" (profileUpdated)="profileUpdated()"></edit-taste-profile>
+            </div>
+        </tab>
+
+        <tab [title]="'Profile Genes'" *ngIf="currentRecord.isRecordLoaded()">
+            <div style="height: 450px;">
+                <profilegenes-info [record]="currentRecord"></profilegenes-info>
+            </div>
+        </tab>
+
+        <tab [title]="'Viewer Content'" *ngIf="currentRecord.isRecordLoaded()">
+            <div style="height: 450px;">
+                <viewercontent-info [record]="currentRecord"></viewercontent-info>
+            </div>
+        </tab>
+
+        <tab [title]="'Recommendations'" *ngIf="currentRecord.isRecordLoaded()">
+            <div style="height: 450px;">
+                <profilerecommendations-info [record]="currentRecord"></profilerecommendations-info>
+            </div>
+        </tab>
+
+
+        <div class="buttonBar">
+            <button class="regularButton" style="margin-left:20px;width:90px;" (click)="saveRecord()" [disabled]="!currentRecord.recordIsDirty()">SAVE</button>
+        </div>
+    </tabs>
+</div>

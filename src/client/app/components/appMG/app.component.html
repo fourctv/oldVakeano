@@ -1,0 +1,32 @@
+<section class="web-content">
+
+    <!-- This is our Header, with the web apps drop down -->
+    <header [hidden]="!userIsLoggedIn">
+        <div>
+                <img src="./assets/icons/MGLogo.jpeg" style="display: inline-block;vertical-align: top; margin-right:20px" height="132"/>
+                <span style="display:inline-block;padding-left:40px ">
+                    <label class="fieldPromptBold" style="font-size:32pt;">Welcome {{currentUser}}</label>
+                    <br/>
+                    <nav>
+                        <a *ngFor="let menuItem of menuList" (click)="openJSApp(menuItem)" [hidden]="menuItem.hideMenu">{{menuItem.title}}</a>
+                        <a (click)="doLogin();" style="padding-left:50px;">Logout</a>
+                    </nav>
+                </span>
+ 
+            <!--
+            <ul id="main-app-menu">
+
+                <li *ngFor="let menuItem of menuList">
+                    <a (click)="openJSApp(menuItem)">{{menuItem.title}}</a>
+                </li>
+                <li><hr style="margin:0;"/></li>
+                <li><a (click)="doLogin();">> Logout</a></li>
+            </ul>
+-->
+
+        </div>
+
+    </header>
+
+
+</section>

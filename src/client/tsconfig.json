@@ -20,7 +20,7 @@
       "../../node_modules/@types",
       "../../node_modules"
     ],
-    "types": [
+    "types": [ "jquery", "kendo-ui",
       "node",
       "jasmine",
       "protractor",

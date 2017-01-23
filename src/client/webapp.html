@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="<%= APP_BASE %>">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%= WEB_APP_TITLE %></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <!-- inject:css -->
+  <!-- endinject -->
+
+  <% if (TARGET_DESKTOP) { %>
+  <!-- shims:js -->
+  <!-- endinject -->
+  <% } %>
+  
+  <style>
+    .webComponent {
+      border: 1px;
+      border-style: ridge;
+      border-color: black;
+      padding: 2px;
+      background: white;
+      width: 97%;
+      box-shadow: 5px 5px 5px #939da5;
+    }
+  </style>
+  
+     <% if (BUILD_TYPE === 'prod') { %>    
+      <style>
+       @font-face {
+        font-family: 'Glyphicons Halflings';
+
+        src: url('css/fonts/glyphicons-halflings-regular.eot');
+        src: url('css/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('css/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('css/fonts/glyphicons-halflings-regular.woff') format('woff'), url('css/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('css/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+      }
+      </style>
+
+   <% } %>
+  
+</head>
+<body style="height:100%;padding:15px;background:lightgrey;">
+
+  <<%= WEB_APP_SELECTOR %>>Loading...</<%= WEB_APP_SELECTOR %>>
+
+  <script>
+  // Fixes undefined module function in SystemJS bundle
+  function module() {}
+  </script>
+
+  <% if (!TARGET_DESKTOP) { %>
+  <!-- shims:js -->
+  <!-- endinject -->
+  <% } %>
+
+  <% if (BUILD_TYPE === 'dev') { %>
+  <script>
+System.config(JSON.parse('{"defaultJSExtensions":true,"paths":{"app/main":"/app/main","@angular/common":"node_modules/@angular/common/bundles/common.umd.js","@angular/compiler":"node_modules/@angular/compiler/bundles/compiler.umd.js","@angular/core":"node_modules/@angular/core/bundles/core.umd.js","@angular/forms":"node_modules/@angular/forms/bundles/forms.umd.js","@angular/http":"node_modules/@angular/http/bundles/http.umd.js","@angular/platform-browser":"node_modules/@angular/platform-browser/bundles/platform-browser.umd.js","@angular/platform-browser-dynamic":"node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js","@angular/router":"node_modules/@angular/router/bundles/router.umd.js","@angular/common/testing":"node_modules/@angular/common/bundles/common-testing.umd.js","@angular/compiler/testing":"node_modules/@angular/compiler/bundles/compiler-testing.umd.js","@angular/core/testing":"node_modules/@angular/core/bundles/core-testing.umd.js","@angular/http/testing":"node_modules/@angular/http/bundles/http-testing.umd.js","@angular/platform-browser/testing":"node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js","@angular/platform-browser-dynamic/testing":"node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js","@angular/router/testing":"node_modules/@angular/router/bundles/router-testing.umd.js","app/*":"/app/*","dist/dev/*":"/base/dist/dev/*","*":"node_modules/*","main.web":"<%= WEB_APP_MAIN %>","base-64": "node_modules/base-64/base64","angulartics2":"node_modules/angulartics2/index","angulartics2/*":"node_modules/angulartics2/*","lodash":"node_modules/lodash/index"},"packages":{"rxjs":{"defaultExtension":"js"},"@ngrx/core":{"main":"index.js","defaultExtension":"js"},"@ngrx/store":{"main":"index.js","defaultExtension":"js"},"defaultExtension":"js"}}}'));
+
+  </script>
+  <% } %>
+
+  <!-- libs:js -->
+  <!-- endinject -->
+
+  <!-- inject:js -->
+  <!-- endinject -->
+
+  <% if (BUILD_TYPE === 'dev') { %>
+  <script>
+  System.import('main.web')
+    .catch(function (e) {
+      console.error(e,
+        'Report this error at https://github.com/NathanWalker/angular2-seed-advanced/issues');
+    });
+  </script>
+  <% } %>
+
+  <% if (TARGET_DESKTOP && BUILD_TYPE !== 'prod') { %>
+  <script>require('electron-connect').client.create()</script> 
+  <% } %>
+
+</body>
+</html>

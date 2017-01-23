@@ -1,0 +1,45 @@
+<web-application (userHasLoggedIn)="userHasLoggedIn($event)">
+    <div class="container">
+        <h1>Movie Genome Recommendations</h1>
+        <br/>
+        <div class="row" style="padding-left:10px;">
+            <h4>Here is a list of Recommended Features.<br/>For each picture, if you have seen it please give it 1-5 stars,<br/>or if you have not seen it, leave it on your recommendation list.</h4>
+            <h4>{{currentRecommendation}}</h4>
+        </div>
+        
+        <hr style="margin-top:0;width:1100px;" />
+        
+        <div style="display:block;float:left;width:1100px;height:600px;padding-top:15px;overflow:scroll;">
+            <fieldset *ngFor="let currentFeature of controlList.models" class="product">
+                <label style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size: 16px !important;">{{currentFeature.IMDBTitle}}</label>
+                <img src="http://54.191.46.243:8080/4DAction/REST_GetWebImage?image={{currentFeature.PosterURL}}" alt="Image preview"/>
+                <br/>
+                <div  class="rating">
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="5"/><label title="Rocks!" (click)="rateThis(currentFeature,5)">5 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="4"/><label title="Pretty good" (click)="rateThis(currentFeature,4)">4 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="3"/><label title="Meh" (click)="rateThis(currentFeature,3)">3 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="2"/><label title="Kinda bad" (click)="rateThis(currentFeature,2)">2 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="1"/><label title="Sucks big time" (click)="rateThis(currentFeature,1)">1 star</label>
+                </div>
+                <p><span class="formHeaderSmall" style="color:red;">Predicted Score: {{currentFeature.MGPVR}}</span><br/>
+                    CCI: {{currentFeature.MGCCI}}<br/>
+                    EQI: {{currentFeature.MGEQI}}<br/>
+                    PAI: {{currentFeature.MGPAI}}<br/>
+                    PEI: {{currentFeature.MGPEI}}<br/>
+                    NQI: {{currentFeature.MGNQI}}<br/>
+                   <br/><span class="formHeaderSmall" style="color:red;">Theme:</span><br/>
+                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Theme)"></span>
+                    <br/><span class="formHeaderSmall" style="color:red;">Narrative:</span><br/>
+                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Narrative)"></span><br/>
+                    <br/><span class="formHeaderSmall" style="color:red;">Content:</span><br/>
+                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Content)"></span><br/>
+                    <br/><span class="formHeaderSmall" style="color:red;">Execution:</span><br/>
+                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Execution)"></span><br/>
+                    <br/><span class="formHeaderSmall" style="color:red;">Style:</span><br/>
+                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Style)"></span>
+                </p>
+            </fieldset>
+		</div>
+
+    </div>
+</web-application>

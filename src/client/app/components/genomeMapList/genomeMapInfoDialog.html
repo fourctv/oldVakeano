@@ -1,0 +1,82 @@
+<div class="formPanel">
+    <fieldset class="titledGroupBox">
+        <legend class="formHeaderSmall">Gene Details</legend>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:115px;">Gene ID</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.GeneId"  size="12" disabled/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold">Gene Name</label>
+                <input type="text" class="fieldEntry" size="80" [(ngModel)]="currentRecord.GeneName" />
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:115px;">Vector</label>
+                <mglist-dropdown class="fieldEntry" listName="GMM_GeneVectors" [(selectedValue)]="currentRecord.Vector" (change)="currentRecord.Vector = $event.target.value"></mglist-dropdown>
+            </span>
+            <span style="padding-left:30px;">
+                <label class="fieldPromptBold">Cluster</label>
+                <mglist-dropdown class="fieldEntry" listName="GMM_GeneClusters" [(selectedValue)]="currentRecord.Cluster" (change)="currentRecord.Cluster = $event.target.value"></mglist-dropdown>
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:115px;">Acting Type</label>
+                <mglist-dropdown class="fieldEntry" listName="GMM_ActingTypes" [(selectedValue)]="currentRecord.AppActingType" (change)="currentRecord.AppActingType = $event.target.value"></mglist-dropdown>
+            </span>
+            <span style="padding-left:30px;">
+                <label class="fieldPromptBold" style="padding-right:20px;">Narrative Type</label>
+                <mglist-dropdown class="fieldEntry" listName="GMM_NarrativeTypes" [(selectedValue)]="currentRecord.AppNarrativeType" (change)="currentRecord.AppNarrativeType = $event.target.value"></mglist-dropdown>
+            </span>
+            <span style="padding-left:30px;">
+                <label class="fieldPromptBold" style="padding-right:20px;">Values List</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.AcceptedValuesList"  size="40"/>
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:115px;">Coordinate</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.Coordinate"  size="8"/>
+            </span>
+            <span style="padding-left:30px;">
+                    <input type="checkbox" class="fieldEntry" [(ngModel)]="currentRecord.AvailableInUI" style="margin-left:30px;margin-right:10px;"/>Available in UI?
+            </span>
+            <span style="padding-left:30px;">
+                    <input type="checkbox" class="fieldEntry" [(ngModel)]="currentRecord.DTPRequired" style="margin-left:30px;margin-right:10px;"/>DTP Required?
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:115px;">UI Name</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.UIName"  size="80"/>
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:115px;">UI Group</label>
+                <input type="text" class="fieldEntry" size="80" [(ngModel)]="currentRecord.UIGroup" />
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:115px;">UI Description</label>
+                <input type="text" class="fieldEntry" size="120" [(ngModel)]="currentRecord.UIDescription" />
+            </span>
+        </div>
+    </fieldset>
+
+    <fieldset class="titledGroupBox">
+        <legend class="formHeaderSmall">Gene Description</legend>
+        <span class="textarea">
+            <textarea style="width:800px;height:100px" class="fieldEntry" type="text" [(ngModel)]="currentRecord.GeneDescription"></textarea>
+        </span>
+    </fieldset>
+
+
+    <div class="buttonBar">
+        <button class="regularButton" style="width:90px;" (click)="dialog.close('cancel')">Cancel</button>
+        <button class="regularButton" style="margin-left:20px;width:90px;" (click)="saveRecord()">SAVE</button>
+    </div>
+</div>

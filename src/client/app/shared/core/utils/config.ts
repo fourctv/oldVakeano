@@ -75,4 +75,9 @@ export class Config {
       Config.DEBUG[key] = false;
     }
   }
+
+  // app version
+  public static APP_VERSION():string {
+    return '<%= VERSION %>';
+  }
 }

@@ -1,0 +1,35 @@
+        <fieldset class="titledGroupBox">
+            <legend class="formHeaderSmall"> Profile Vectors</legend>
+            <span>
+                <label class="fieldPromptBold" style="width:115px;padding-right:20px;">Theme Vector</label>
+                <input type="text" class="fieldEntry" size="60" [(ngModel)]="currentRecord.ThemeVector" disabled/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold" style="width:115px;padding-right:10px;">Narrative Vector</label>
+                <input type="text" class="fieldEntry" size="20" [(ngModel)]="currentRecord.NarrativeVector" disabled/>
+            </span>
+           <br/>
+             <span>
+                <label class="fieldPromptBold" style="width:115px;padding-right:20px;">Content Vector</label>
+                <input type="text" class="fieldEntry" size="60" [(ngModel)]="currentRecord.ContentVector" disabled/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold" style="width:115px;padding-right:10px;">Execution Vector</label>
+                <input type="text" class="fieldEntry" size="20" [(ngModel)]="currentRecord.ExecutionVector" disabled/>
+            </span>
+           <br/>
+             <span>
+                <label class="fieldPromptBold" style="width:115px;padding-right:20px;">Style Vector</label>
+                <input type="text" class="fieldEntry" size="100" [(ngModel)]="currentRecord.StyleVector" disabled/>
+            </span>
+
+      </fieldset>
+
+    <fieldset class="titledGroupBox">
+        <legend class="formHeaderSmall">Profile Description</legend>
+        <span class="textarea">
+            <textarea style="width:800px;height:100px" class="fieldEntry" type="text" [(ngModel)]="currentRecord.Description"></textarea>
+        </span>
+        <label class="fieldPromptBold" style="padding-left:20px; margin-top:5px; font-style: italic;" [hidden]="currentRecord.isRecordLoaded()">Fill in all fields for a new Taste Profile, save it and then re-open it to add Gene information.</label>
+    </fieldset>
+

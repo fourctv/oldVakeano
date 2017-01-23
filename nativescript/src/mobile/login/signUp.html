@@ -1,0 +1,48 @@
+<ActionBar title="Movie Genome Sign Up" class="action-bar"> 
+  <NavigationButton text="Login"></NavigationButton>
+</ActionBar>
+
+<StackLayout class="container-content"  marginTop="3" padding="10">
+    <Label text="Please fill in all details below to register into Movie Genome." textWrap="true" class="body"></Label>
+
+    <ScrollView orientation="vertical"><StackLayout marginTop="10" padding="5">
+      <StackLayout  orientation="horizontal" marginTop="3" class="input-field">
+          <Label text="User Name:  " class="prompt"></Label>
+          <TextField [(ngModel)]="userRecord.UserName" hint="login user name" autocorrect="false" autocapitalizationType="none" class="input"></TextField>
+      </StackLayout>
+      <StackLayout  orientation="horizontal" marginTop="3" class="input-field">
+          <Label text="Password:  " class="prompt"></Label>
+          <TextField [(ngModel)]="userRecord.Password" hint="user password" secure="true" autocorrect="false" autocapitalizationType="none" class="input"></TextField>
+      </StackLayout>
+      <StackLayout  orientation="horizontal" marginTop="3" class="input-field">
+          <Label text="Repeat Password:  " class="prompt"></Label>
+          <TextField [(ngModel)]="repeatPassword" hint="user password" secure="true" autocorrect="false" autocapitalizationType="none" class="input"></TextField>
+      </StackLayout>
+      <StackLayout  orientation="horizontal" marginTop="3" class="input-field">
+          <Label text="First Name:  " class="prompt"></Label>
+          <TextField [(ngModel)]="userRecord.FirstName" hint="your first name" autocorrect="false" autocapitalizationType="none" class="input"></TextField>
+      </StackLayout>
+      <StackLayout  orientation="horizontal" marginTop="3" class="input-field">
+          <Label text="Last Name:  " class="prompt"></Label>
+          <TextField [(ngModel)]="userRecord.LastName" hint="your last name" autocorrect="false" autocapitalizationType="none" class="input"></TextField>
+      </StackLayout>
+      <StackLayout  orientation="horizontal" marginTop="3" class="input-field">
+          <Label text="Email:  " class="prompt"></Label>
+          <TextField [(ngModel)]="userRecord.emailAddress" hint="your email address" autocorrect="false" autocapitalizationType="none" class="input"></TextField>
+      </StackLayout>
+      <StackLayout  orientation="horizontal" marginTop="3" class="input-field">
+          <Label text="Date of Birth: " class="prompt"></Label>
+          <DatePicker [(ngModel)]="userRecord.DOB" verticalAlignment="center" horizontalAlignment="center"></DatePicker>
+      </StackLayout>
+      <StackLayout  orientation="horizontal" marginTop="3" class="input-field">
+          <Label text="Country:  " class="prompt"></Label>
+          <TextField [(ngModel)]="userRecord.Country" hint="your country" autocorrect="false" autocapitalizationType="none" class="input"></TextField>
+      </StackLayout>
+      <StackLayout  orientation="horizontal" marginTop="15" horizontalAlignment="center">
+          <Button text="Sign Up" (tap)="signUp()" class="btn btn-primary btn-active btn-rounded-lg" width="160"></Button>
+      </StackLayout>
+        
+    <Label [text]="showError" style="color: red;"></Label>
+
+    </StackLayout></ScrollView>
+</StackLayout>

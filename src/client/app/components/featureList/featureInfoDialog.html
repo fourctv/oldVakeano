@@ -1,0 +1,54 @@
+<div class="formPanel">
+    <fieldset class="titledGroupBox">
+        <legend class="formHeaderSmall">Feature</legend>
+        <span>
+                        <label class="fieldPromptBold">IMDB ID</label>
+                        <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.IMDBID"  size="12"/>
+                    </span>
+        <span style="padding-left:10px;">
+                        <label class="fieldPromptBold">IMDB Title</label>
+                        <input type="text" class="fieldEntry" size="80" [(ngModel)]="currentRecord.IMDBTitle" />
+                   </span>
+        <br/>
+        <span>
+                        <label class="fieldPromptBold">Production Title</label>
+                        <input type="text" class="fieldEntry" size="80" [(ngModel)]="currentRecord.ProductionTitle" />
+                    </span>
+        <br/>
+        <span>
+                        <label class="fieldPromptBold">Series</label>
+                        <input type="text" class="fieldEntry" size="30" [(ngModel)]="currentRecord.SeriesName" disabled/>
+                    </span>
+        <span style="padding-left:10px;">
+                        <label class="fieldPromptBold" style="width:85px;">Season</label>
+                        <input type="text" class="fieldEntry" size="20" [(ngModel)]="currentRecord.SeasonName" disabled/>
+                    </span>
+        <span style="padding-left:10px;">
+                        <label class="fieldPromptBold">Episode</label>
+                        <input type="text" class="fieldEntry" size="8" [(ngModel)]="currentRecord.EpisodeNumber" />
+                    </span>
+        <input type="checkbox" class="fieldEntry" [(ngModel)]="currentRecord.isControlFeature" style="margin-left:30px;margin-right:10px;"
+        />THIS IS A CONTROL FEATURE?
+    </fieldset>
+
+    <hr style="margin:0;" />
+
+    <tabs class="nav nav-tabs">
+        <tab [title]="'Feature Info'" style="height:475px">
+            <feature-info [record]="currentRecord"></feature-info>
+        </tab>
+
+        <tab [title]="'Edit Profile'" style="height:475px" *ngIf="currentRecord.isRecordLoaded()">
+            <edit-profile [record]="currentRecord"></edit-profile>
+        </tab>
+
+        <tab [title]="'Profile Records'" style="height:475px" *ngIf="currentRecord.isRecordLoaded()">
+            <contentprofile-info [record]="currentRecord"></contentprofile-info>
+        </tab>
+
+
+        <div class="buttonBar">
+            <button class="regularButton" style="margin-left:20px;width:90px;" (click)="saveRecord()" [disabled]="!currentRecord.recordIsDirty()">SAVE</button>
+        </div>
+    </tabs>
+</div>

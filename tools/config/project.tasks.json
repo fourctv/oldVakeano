@@ -1,5 +1,20 @@
 {
-  "test": [
+  
+  "build.prod.lazy": [
+    "check.tools",
+    "clean.prod",
+    "tslint",
+    "build.assets.prod",
+    "build.html_css",
+    "copy.prod",
+    "build.js.prod",
+    "build.bundles",
+    "buildtest",
+    "minify.bundles",
+    "build.index.prod"
+  ],
+
+"test": [
     "tslint",
     "build.test",
     "karma.run"

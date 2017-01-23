@@ -1,0 +1,80 @@
+    <div style="margin:0;height:375px;">   
+    <tabs class="nav nav-tabs">
+        <tab [title]="'Themes Genes'">
+             <table style="height: 340px;overflow-y:auto;display:block;">
+                <tr *ngFor="let gene of genomeModel.themesGenes" style="height:45px;">
+                    <td style="width:40px;">
+                        <a role="button" class="btn" (click)="toggleGene(gene)"><span [ngClass]="getGeneIcon(gene)"></span></a>
+                        <!-- <img src="./assets/icons/yesIcon.jpg" (click)="toggleGene(gene)" style="width:24px;" *ngIf="getGeneValue(gene) == 1"/> 
+                        <img src="./assets/icons/noIcon.jpg" (click)="toggleGene(gene)" style="width:16px;" *ngIf="getGeneValue(gene) == 0"/>  -->
+                    </td>
+                    <td><label class="formHeaderSmall" (click)="toggleGene(gene)">{{gene.UIName}} : {{gene.Cluster}}</label></td>
+                </tr>
+            </table>
+
+        </tab>
+        
+        <tab [title]="'Narrative Genes'">
+            <table style="height: 340px;overflow-y:auto;display:block;">
+                <tr *ngFor="let gene of genomeModel.narrativeGenes" style="height:45px;">
+                    <td class="rating" style="margin-right:15px;">
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="5" [checked]="doesGeneStarRatingMatch(gene,'5')"/><label title="{{getGeneToolTip(gene,'5')}}" (click)="setGeneRating(gene,'5')">5 stars</label>
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="4" [checked]="doesGeneStarRatingMatch(gene,'4')"/><label title="{{getGeneToolTip(gene,'4')}}" (click)="setGeneRating(gene,'4')">4 stars</label>
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="3" [checked]="doesGeneStarRatingMatch(gene,'3')"/><label title="{{getGeneToolTip(gene,'3')}}" (click)="setGeneRating(gene,'3')">3 stars</label>
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="2" [checked]="doesGeneStarRatingMatch(gene,'2')"/><label title="{{getGeneToolTip(gene,'2')}}" (click)="setGeneRating(gene,'2')">2 stars</label>
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="1" [checked]="doesGeneStarRatingMatch(gene,'1')"/><label title="{{getGeneToolTip(gene,'1')}}" (click)="setGeneRating(gene,'1')">1 star</label>
+                    </td>
+                     <td><label class="formHeaderSmall">{{gene.UIName}} : {{gene.Cluster}} (<span class="fieldData">{{getGeneRatingInterpretation(gene)}}</span>)</label></td>
+               </tr>
+            </table>
+
+        </tab>
+        
+        <tab [title]="'Content Genes'">
+            <table style="height: 340px;overflow-y:auto;display:block;">
+                <tr *ngFor="let gene of genomeModel.contentGenes" style="height:45px;">
+                    <td style="width:40px;">
+                        <a role="button" class="btn" (click)="toggleGene(gene)"><span [ngClass]="getGeneIcon(gene)"></span></a>
+                        <!-- <img src="./assets/icons/yesIcon.jpg" (click)="toggleGene(gene)" style="width:24px;" *ngIf="getGeneValue(gene) == 1"/> 
+                        <img src="./assets/icons/noIcon.jpg" (click)="toggleGene(gene)" style="width:16px;" *ngIf="getGeneValue(gene) == 0"/>  -->
+                    </td>
+                    <td><label class="formHeaderSmall" (click)="toggleGene(gene)">{{gene.UIName}} : {{gene.Cluster}}</label></td>
+                </tr>
+            </table>
+ 
+        </tab>
+        
+        <tab [title]="'Execution Genes'">
+            <table style="height: 340px;overflow-y:auto;display:block;">
+                <tr *ngFor="let gene of genomeModel.executionGenes" style="height:45px;">
+                    <td class="rating" style="margin-right:15px;">
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="5" [checked]="doesGeneStarRatingMatch(gene,'5')"/><label title="{{getGeneToolTip(gene,'5')}}" (click)="setGeneRating(gene,'5')">5 stars</label>
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="4" [checked]="doesGeneStarRatingMatch(gene,'4')"/><label title="{{getGeneToolTip(gene,'4')}}" (click)="setGeneRating(gene,'4')">4 stars</label>
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="3" [checked]="doesGeneStarRatingMatch(gene,'3')"/><label title="{{getGeneToolTip(gene,'3')}}" (click)="setGeneRating(gene,'3')">3 stars</label>
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="2" [checked]="doesGeneStarRatingMatch(gene,'2')"/><label title="{{getGeneToolTip(gene,'2')}}" (click)="setGeneRating(gene,'2')">2 stars</label>
+                        <input type="radio" name="{{'rating'+gene.GeneId}}" value="1" [checked]="doesGeneStarRatingMatch(gene,'1')"/><label title="{{getGeneToolTip(gene,'1')}}" (click)="setGeneRating(gene,'1')">1 star</label>
+                    </td>
+                    <td><label class="formHeaderSmall">{{gene.UIName}} : {{gene.Cluster}} (<span class="fieldData">{{getGeneRatingInterpretation(gene)}}</span>)</label></td>
+              </tr>
+            </table>
+
+        </tab>
+        
+        <tab [title]="'Style Genes'">
+            <table style="height: 340px;overflow-y:auto;display:block;">
+                <tr *ngFor="let gene of genomeModel.styleGenes" style="height:45px;">
+                    <td style="width:40px;">
+                        <a role="button" class="btn" (click)="toggleGene(gene)"><span [ngClass]="getGeneIcon(gene)"></span></a>
+                        <!-- <img src="./assets/icons/yesIcon.jpg" (click)="toggleGene(gene)" style="width:24px;" *ngIf="getGeneValue(gene) == 1"/> 
+                        <img src="./assets/icons/noIcon.jpg" (click)="toggleGene(gene)" style="width:16px;" *ngIf="getGeneValue(gene) == 0"/>  -->
+                    </td>
+                    <td><label class="formHeaderSmall" (click)="toggleGene(gene)">{{gene.UIName}} : {{gene.Cluster}}</label></td>
+                </tr>
+            </table>
+
+        </tab>
+       
+    </tabs>
+    
+    <label class="formHeaderSmall" style="font-style: italic;color: red;margin-top: 15px;">* changes made are saved immediately!</label>
+   </div>

@@ -1,0 +1,19 @@
+<preferencepanel pageTitle="Recommendations">
+ <StackLayout class="container-content" padding="10">
+  <Label class="body" text="Here is a list of Recommended Features. For each picture, if you have seen it please tap on it to get to the rating page. If you have not seen it, leave it on your recommendations list." textWrap="true"></Label>
+  
+  <!--<Label [text]='currentRecommendation'  textWrap="true" marginTop='15'></Label>-->
+  
+  
+      <ListView [items]="controlList.models" (itemTap)="onItemTap($event)" marginTop='15'>
+          <template let-item="item" let-i="index">
+              <StackLayout [class.odd]="odd" [class.even]="even" orientation="horizontal" marginTop="3">
+                  <Image [src]='item.PosterURL' width="64" height="64" marginLeft="5" (tap)="showIMDB(item)"></Image>
+                  <Label [text]='item.IMDBTitle'></Label>
+              </StackLayout>
+          </template>
+      </ListView>
+
+    <ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'" row="1" horizontalAlignment="center" verticalAlignment="center"></ActivityIndicator>
+ </StackLayout>
+</preferencepanel>

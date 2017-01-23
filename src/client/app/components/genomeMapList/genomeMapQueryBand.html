@@ -1,0 +1,39 @@
+             <form style="height:92px;" *ngIf="userIsLoggedIn">
+                  <div style="float: left;height: 100%; margin-right: 10px;">
+                    <span>
+                        <label class="fieldPrompt" for="geneName" style="margin-right:10px;">Gene Name</label>
+                        <br/>
+                        <input name="geneName" type="text" class="fieldEntry"  style="width:180px;height:20px;" [(ngModel)]="geneName"/>
+                    </span>
+                </div>
+                <div style="float: left;height: 100%; margin-right: 10px;">
+                    <span>
+                            <label for="selectVector" class="fieldPrompt">Vector</label>
+                            <br/>
+                            <mglist-dropdown class="fieldEntry" style="width:180px;height:20px;" listName="GMM_GeneVectors"
+                            [(selectedValue)]="selectVector" (change)="selectVector = $event.target.value"></mglist-dropdown>
+                    </span>
+                    <br/>
+                    <span>
+                            <label for="selectCluster" class="fieldPrompt" style="margin-top:10px;">Cluster</label>
+                            <br/>
+                            <mglist-dropdown class="fieldEntry" style="width:180px;height:20px;" listName="GMM_GeneClusters"
+                            [(selectedValue)]="selectCluster" (change)="selectCluster = $event.target.value"></mglist-dropdown>
+                    </span>
+                </div>
+                <div style="float: left;height: 100%; margin-right: 10px;">
+                    <span>
+                            <label for="selectNarrative" class="fieldPrompt">Narrative Type</label>
+                            <br/>
+                            <mglist-dropdown class="fieldEntry" style="width:180px;height:20px;" listName="GMM_NarrativeTypes"
+                            [(selectedValue)]="selectNarrative" (change)="selectNarrative = $event.target.value"></mglist-dropdown>
+                    </span>
+                    <br/>
+                    <span>
+                            <label for="selectActingType" class="fieldPrompt" style="margin-top:10px;">Acting Type</label>
+                            <br/>
+                            <mglist-dropdown class="fieldEntry" style="width:180px;height:20px;" listName="GMM_ActingTypes"
+                            [(selectedValue)]="selectActingType" (change)="selectActingType = $event.target.value"></mglist-dropdown>
+                    </span>
+                </div>
+           </form>

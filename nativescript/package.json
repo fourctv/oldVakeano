@@ -1,9 +1,9 @@
 {
-    "name": "angular-seed-advanced",
+    "name": "vakeano",
     "main": "app.js",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "nativescript": {
-        "id": "com.yourdomain.nativescript",
+        "id": "com.pascal.moviegenome",
         "tns-ios": {
             "version": "2.4.0"
         },
@@ -42,9 +42,13 @@
         "@ngrx/effects": "^2.0.0",
         "@ngrx/store": "^2.2.1",
         "angulartics2": "^1.6.3",
+        "base-64": "^0.1.0",
+        "bootstrap": "^3.3.5",
+        "jquery": "^2.2.0",
         "lodash": "^4.17.4",
         "nativescript-angular": "next",
         "nativescript-dev-webpack": "^0.3.1",
+        "nativescript-telerik-ui": "^1.5.1",
         "nativescript-theme-core": "^1.0.2",
         "ng2-translate": "^5.0.0",
         "ngrx-store-freeze": "0.1.0",
@@ -58,7 +62,10 @@
         "@angular/compiler-cli": "2.4.3",
         "@ngrx/store-devtools": "^3.2.2",
         "@ngtools/webpack": "~1.2.3",
+        "@types/bootstrap": "^3.3.32",
         "@types/jasmine": "^2.5.35",
+        "@types/jquery": "^2.0.32",
+        "@types/kendo-ui": "^2016.3.34",
         "babel-traverse": "6.20.0",
         "babel-types": "6.20.0",
         "babylon": "6.14.1",
