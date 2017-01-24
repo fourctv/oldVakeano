@@ -14,7 +14,7 @@ var rename = require('gulp-rename');
  * Executes the build process, injecting the JavaScript and CSS dependencies into the `webapp.html` for the production
  * environment. And renames resulting file to the proper webapp index.html
  */
-function buildWebappIndex(app) {
+function buildWebappIndex(app:any) {
     // set up web app info
     let myConfig = new ProjectConfig();
     myConfig.WEB_APP_NAME = app.name;
@@ -44,10 +44,10 @@ function inject(...files: Array<string>) {
 /**
  * Injects the bundled JavaScript shims and application bundles for the production environment.
  */
-function injectJs(app) {
+function injectJs(appName:string) {
   return inject(join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE),
                       '/MovieGenome/Vakeano/src/client/assets/kendo-ui/js/kendo.all.min.js', 
-                      join(Config.TMP_DIR, app+'.js'));
+                      join(Config.TMP_DIR, appName+'.js'));
 }
 
 /**
