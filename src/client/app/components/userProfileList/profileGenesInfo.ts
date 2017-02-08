@@ -1,16 +1,18 @@
-import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { DataGrid}  from '../../shared/js44D/index';
-import { TasteProfilesEx, ProfileGenes } from '../../shared/moviegenome/index';
+import { DataGrid }  from '../../shared/js44D/index';
+import { Modal } from '../../shared/js44D/angular2-modal/index';
+import { TasteProfilesEx, ProfileGenes, ProfileGenesEx } from '../../shared/moviegenome/index';
+
+import { ProfileGenesInfoDialog } from './profileGenesInfoInfoDialog';
 
 @Component({
     selector: 'profilegenes-info',
     template: `
         <div style="height:410px;overflow-y:auto;display:block;">
             <datagrid  style="height:350px"
-                [editable]="{mode:'popup'}"
-                  [model]="model"
-              [columns]="columnDefs"
+                [model]="model"
+                [columns]="columnDefs"
                 [useLazyLoading]="false"
                 [pageableRefresh]="false"
                 [pageableSizes]="false"
@@ -19,7 +21,8 @@ import { TasteProfilesEx, ProfileGenes } from '../../shared/moviegenome/index';
         </div>
         <div >
             <button class="regularButton" style="margin:10px;width:90px;" (click)="deleteGene()" [disabled]="!weHaveARecord()">Delete</button>
-        </div>
+            <button class="regularButton" style="margin:10px;width:90px;" (click)="editGene()" [disabled]="!weHaveARecord()">Edit</button>
+       </div>
      `
 
 })
@@ -27,7 +30,9 @@ import { TasteProfilesEx, ProfileGenes } from '../../shared/moviegenome/index';
 
 export class ProfileGenesInfo implements AfterViewInit {
     @Input() public record: TasteProfilesEx;
-    
+
+    @Output() public profileUpdated:EventEmitter<any> = new EventEmitter();
+   
     public get recordCount():string {return (this.record.profileGenesList)?this.record.profileGenesList.length.toString()+' items':'0';}
     
     public model = ProfileGenes; // the record datamodel to use 
@@ -42,14 +47,16 @@ export class ProfileGenesInfo implements AfterViewInit {
         { title: 'Weight.Rating', width:80, field: 'WeightedRating' },
         { title: 'Cum Value', width:80, field: 'CumValue' },
         { title: 'Theme Gene', width:80, field: 'ThemeGeneID'},
-        { title: 'ParentVector', width:150, field: 'ParentVector', filterable: { multi: true }  },
-        { command: "edit" }
+        { title: 'Parent Vector', width:150, field: 'ParentVector', filterable: { multi: true }  }
         
     ];
 
     private initialized:boolean = false;
 
     @ViewChild(DataGrid) private theGrid: DataGrid;
+
+    constructor(private modal: Modal, private viewref:ViewContainerRef) {
+    }
 
     ngAfterViewInit() {
         this.refreshGrid();
@@ -78,11 +85,29 @@ export class ProfileGenesInfo implements AfterViewInit {
                     .then(rec => {
                         profileRec.deleteRecord().then(()=> {                            
                             console.log('delete:',theRecord['RecordID'],', index:',this.theGrid.selectedRowIndex());
-                            this.theGrid.removeRow(this.theGrid.selectedRowIndex());
+                            this.profileUpdated.emit();
                         });
                     });
                 
             }
+        }
+    }
+
+    editGene() {
+        let theRecord = this.theGrid.selectedRow();
+        if (theRecord) {
+            let profileGene:ProfileGenesEx = new ProfileGenesEx();
+            kendo.ui.progress($(this.viewref.element.nativeElement), true); // show loading progress icon
+            profileGene.getRecord(null, theRecord['RecordID'])
+            .then (rec => {
+                kendo.ui.progress($(this.viewref.element.nativeElement), false); // hide loading progress icon
+                let editWindow = ProfileGenesInfoDialog;
+                this.modal.openDialog(editWindow, profileGene)
+                .then(() => {
+                    this.profileUpdated.emit();
+                });
+            })
+            
         }
     }
 

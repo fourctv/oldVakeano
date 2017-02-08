@@ -10,6 +10,8 @@ import { ViewerContentInfo } from './viewerContentInfo';
 import { ProfileRecommendationsInfo } from './profileRecommendationsInfo';
 import { EditTasteProfile } from './editTasteProfile';
 
+import { ProfileGenesInfoDialog } from './profileGenesInfoInfoDialog';
+
 import { UserRatingModule } from '../userRating/userRatingModule';
 import { UserRecommendationsModule } from '../userRecommendations/userRecommendationsModule';
 
@@ -30,10 +32,12 @@ import { MGModule } from '../../shared/moviegenome/mg.module';
       UserProfileInfoDialog, UserProfileInfo,
       ViewerContentInfo,
       ProfileRecommendationsInfo,
-      EditTasteProfile
+      EditTasteProfile,
+      ProfileGenesInfoDialog
       ],
   entryComponents:[
-      UserProfileInfoDialog
+      UserProfileInfoDialog,
+      ProfileGenesInfoDialog
       ]
 })
 

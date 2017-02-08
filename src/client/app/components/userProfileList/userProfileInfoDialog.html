@@ -57,7 +57,7 @@
 
         <tab [title]="'Profile Genes'" *ngIf="currentRecord.isRecordLoaded()">
             <div style="height: 450px;">
-                <profilegenes-info [record]="currentRecord"></profilegenes-info>
+                <profilegenes-info [record]="currentRecord" (profileUpdated)="profileUpdated()"></profilegenes-info>
             </div>
         </tab>
 

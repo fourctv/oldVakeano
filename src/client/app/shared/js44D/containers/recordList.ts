@@ -1,8 +1,8 @@
-import {Component, ContentChild, ElementRef, AfterContentInit, Input } from '@angular/core';
+import { Component, ContentChild, ElementRef, AfterContentInit, Input } from '@angular/core';
 
-import {QueryBand} from './queryBand';
-import {DataGrid} from '../dataGrid/dataGrid';
-import {Modal, ICustomModalComponent} from '../angular2-modal/index';
+import { QueryBand } from './queryBand';
+import { DataGrid } from '../dataGrid/dataGrid';
+import { Modal, ICustomModalComponent } from '../angular2-modal/index';
 
 @Component({
     selector: 'record-list',

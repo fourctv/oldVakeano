@@ -1,0 +1,69 @@
+<div class="formPanel">
+    <fieldset class="titledGroupBox">
+        <legend class="formHeaderSmall">Profile Gene Info</legend>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:80px;">Gene ID</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.GeneID"  size="20" disabled/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold" style="width:90px;">Gene Name</label>
+                <input type="text" class="fieldEntry" size="40" [(ngModel)]="currentRecord.GeneName" disabled/>
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:80px;">Gene Vector</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.Vector"  size="20" disabled/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold" style="width:90px;">Gene Cluster</label>
+                <input type="text" class="fieldEntry" size="40" [(ngModel)]="currentRecord.Cluster" disabled/>
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:80px;">Theme Gene</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.ThemeGeneID"  size="20" disabled/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold" style="width:90px;">Parent Vector</label>
+                <input type="text" class="fieldEntry" size="40" [(ngModel)]="currentRecord.ParentVector" disabled/>
+            </span>
+        </div>
+    </fieldset>
+
+    <fieldset class="titledGroupBox">
+        <legend class="formHeaderSmall">Profile Gene Values</legend>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:80px;">Value</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.CoordinateValue"  size="12"/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold" style="width:98px;">Frequency</label>
+                <input type="text" class="fieldEntry" size="12" [(ngModel)]="currentRecord.Frequency"/>
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold" style="width:80px;">Weight</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.Weight"  size="12"/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold" style="width:98px;">Weight Rating</label>
+                <input type="text" class="fieldEntry" size="12" [(ngModel)]="currentRecord.WeightedRating"/>
+            </span>
+             <span style="padding-left:10px;">
+                <label class="fieldPromptBold" style="width:98px;">Cum Value</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.CumValue"  size="12"/>
+            </span>
+       </div>
+    </fieldset>
+
+
+    <div class="buttonBar">
+        <button class="regularButton" style="width:90px;" (click)="dialog.close('cancel')">Cancel</button>
+        <button class="regularButton" style="margin-left:20px;width:90px;" (click)="saveRecord()">SAVE</button>
+    </div>
+</div>
