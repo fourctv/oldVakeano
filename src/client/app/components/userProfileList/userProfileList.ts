@@ -89,7 +89,7 @@ export class UserProfileListApp {
     public showRatings() {
         if (this.theGrid && this.theGrid.currentRecord && this.theGrid.currentRecord.isRecordLoaded()) {
             let theRec:TasteProfilesEx = <any>this.theGrid.currentRecord; 
-            this.modal.openDialog(UserRatingDialog, {currentUser:theRec.UserID}); // open user recomendations dialog
+            this.modal.openDialog(UserRatingDialog, {currentProfile:theRec.ProfileID}); // open user recomendations dialog
 
         }
     }

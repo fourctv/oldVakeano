@@ -15,7 +15,8 @@ import { Features } from '../../shared/moviegenome/index';
 
 export class UserRating {     
 
-    @Input() currentUser:number;
+    @Input() currentUser:number = 0;
+    @Input() currentProfile:number = 0;
     @Input() controlList:FourDCollection = new FourDCollection();
     
     constructor(private fourD:FourDInterface, private http:Http) {
@@ -25,14 +26,15 @@ export class UserRating {
     userHasLoggedIn() {
         this.controlList.model = Features;
         if (!this.currentUser || this.currentUser <= 0) this.currentUser = FourDInterface.currentUserID;
-        this.controlList.getRecords('<criteria method="MGSEFilterViewerContent" tableName="Features" filter="control" userID="'+this.currentUser.toString()+'"/>',[Features.kFeatureId,Features.kIMDBTitle,Features.kPosterURL]);
+        this.controlList.getRecords('<criteria method="MGSEFilterViewerContent" tableName="Features" filter="control" userID="'+this.currentUser.toString()+'" profileID="'+this.currentProfile.toString()+'"/>',[Features.kFeatureId,Features.kIMDBTitle,Features.kPosterURL]);
     }
     
     rateThis(feature:Features, stars:number) {
         let body = {type: 'Feature', 
                     contentID: feature.FeatureId, 
                     rating: stars, 
-                    viewer: this.currentUser};
+                    viewer: this.currentUser,
+                    profile: this.currentProfile};
         this.fourD.call4DRESTMethod('MGLErestUpdateViewerProfile', body)
         .subscribe(result => {
             let response = result.json();

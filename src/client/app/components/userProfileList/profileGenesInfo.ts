@@ -11,8 +11,7 @@ import { ProfileGenesInfoDialog } from './profileGenesInfoInfoDialog';
     template: `
         <div style="height:410px;overflow-y:auto;display:block;">
             <datagrid  style="height:350px"
-                [model]="model"
-                [columns]="columnDefs"
+                 [columns]="columnDefs"
                 [useLazyLoading]="false"
                 [pageableRefresh]="false"
                 [pageableSizes]="false"
