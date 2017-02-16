@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ElementRef, ViewContainerRef, AfterContentInit,
+import { Component,  ElementRef, ViewContainerRef, AfterContentInit,
     SystemJsNgModuleLoader, Compiler, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 // any operators needed throughout your application
@@ -15,8 +15,7 @@ import { JSAppLoader, LoginCmp, Modal, FourDInterface } from '../../shared/js44D
     selector: 'sd-app',
     providers: [Modal, FourDInterface, SystemJsNgModuleLoader],
     templateUrl: 'app.component.html',
-    styleUrls: ['app.component.css'],
-    changeDetection: ChangeDetectionStrategy.Default
+    styleUrls: ['app.component.css']
 })
 
 

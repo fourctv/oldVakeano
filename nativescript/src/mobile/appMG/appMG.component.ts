@@ -1,5 +1,5 @@
 // angular
-import { Component, Inject, ChangeDetectionStrategy} from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {  Router, Route } from '@angular/router';
 import { Http } from '@angular/http';
 
@@ -32,8 +32,7 @@ export const routes: Route[] = [
     moduleId: module.id,
     selector: 'sd-app',
     templateUrl: 'appMG.component.html',
-    styleUrls: ['appMG.component.css'],
-    changeDetection: ChangeDetectionStrategy.Default 
+    styleUrls: ['appMG.component.css']
 })
 export class NSAppComponent {
   

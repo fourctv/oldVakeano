@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Routes, Router } from '@angular/router';
 import { Http } from '@angular/http';
 // any operators needed throughout your application
@@ -30,8 +30,7 @@ export const routes: Routes = [
     moduleId: module.id,
     selector: 'sd-app',
     templateUrl: 'app.component.html',
-    styleUrls: ['app.component.css'],
-    changeDetection: ChangeDetectionStrategy.Default
+    styleUrls: ['app.component.css']
 })
 
 
