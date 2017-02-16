@@ -27,6 +27,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
     { name: 'userRating', title: 'User Rating', app: 'userRatingMain', selector: 'userrating', path: 'userRating/userRating', bundle: true }
   ];
 
+  
   constructor() {
     super();
     this.APP_TITLE = 'Vakeano';
