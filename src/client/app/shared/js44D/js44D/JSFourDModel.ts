@@ -50,15 +50,15 @@ export class FourDModel {
     // current record number
     private _recnum: number = -3;
     // keeps all attributes for the current model
-    private _attributes:Object = {};
+    private _attributes: Object = {};
     // keep a list of modified fields, to optimize Updates, only modified data is set to 4D
     private _modified: Object = {};
 
     // injected FourDInterface service
-    private fourD:FourDInterface;
+    private fourD: FourDInterface;
 
     // the generic log service
-    private log:LogService;
+    private log: LogService;
 
     /** 
      * constructor: initialize model properties
@@ -79,30 +79,30 @@ export class FourDModel {
     }
 
 
-     /**
-      * get a field value
-      */
-     get(field:string):any {
-         return this._attributes[field];
-     }
+    /**
+     * get a field value
+     */
+    get(field: string): any {
+        return this._attributes[field];
+    }
 
-     /**
-      * set a field value
-      */
-      set(field:string, value:any) {
-         if (this._attributes.hasOwnProperty(field)) {
-             // we are updating an attribute
-             if (this._attributes[field] !== value) {
-                 // make sure value is indeed changing...
-                 this._attributes[field] = value;
-                 this._modified[field] = true; // mark field as modified
-             }
-         } else {
-             // setting a new attribute
-             this._attributes[field] = value;
-             this._modified[field] = true; // mark field as modified
-         }
-     }
+    /**
+     * set a field value
+     */
+    set(field: string, value: any) {
+        if (this._attributes.hasOwnProperty(field)) {
+            // we are updating an attribute
+            if (this._attributes[field] !== value) {
+                // make sure value is indeed changing...
+                this._attributes[field] = value;
+                this._modified[field] = true; // mark field as modified
+            }
+        } else {
+            // setting a new attribute
+            this._attributes[field] = value;
+            this._modified[field] = true; // mark field as modified
+        }
+    }
 
     /**
      * return the description for a given field
@@ -158,23 +158,23 @@ export class FourDModel {
     }
 
     /**
-     * serialize record data into its XML representation as used in 4D
+     * serialize record data into its JSON representation as used in 4D
      *
-     * @return record XML
+     * @return record as JSON string
      *
      */
-    serializeRecord(mode: string, noAudit: boolean) {
-        var recordData: string = '<?xml version="1.0" encoding="ISO-8859-1" standalone="yes" ?><record table="' + this.tableName + '" recnum="' + this.recordNumber + '"';
+    recordToJSON(mode: string, noAudit: boolean):string {
+        let recordData: Object = {table:this.tableName, recnum:this.recordNumber};
         // set callback methods
-        if (this.fourdSaveCallbackMethod_) recordData += ' saveCallback="' + this.fourdSaveCallbackMethod_ + '"'; // set save callback method if set
+        if (this.fourdSaveCallbackMethod_) recordData['saveCallback']= this.fourdSaveCallbackMethod_ ; // set save callback method if set
 
-        if (noAudit) recordData += ' noAudit="true"';				// disable audit log for this record
+        if (noAudit) recordData['noAudit']=true;				// disable audit log for this record
 
         if ((mode === 'update') && this.hasOwnProperty('TimeStamp')) {
-            recordData += ' timeStamp="' + this['TimeStamp'] + '"';
+            recordData['timeStamp']=this['TimeStamp'];
         } // if updating, add current record's timestamp attribute
 
-        recordData += '>';
+        recordData['fields']={}; // initialize fields propriety
         for (let field of this.fields) {
             var fieldName: string = field.name;
             if (!this.isCalculatedField(field) &&
@@ -189,21 +189,30 @@ export class FourDModel {
                     switch (field.type) {
                         case 'Date':
                         case 'date':
-                            let dateValue:Date = this[fieldName];
-                            value = dateValue.getFullYear().toString()+dateValue.getMonth().toString()+dateValue.getDay().toString();
+                            let dateValue: Date = this[fieldName];
+                            value = dateValue.getFullYear().toString() 
+                            if (dateValue.getMonth()<9) value +='0';
+                            value+= (dateValue.getMonth()+1).toString() 
+                            if (dateValue.getDate()<10) value +='0';
+                            value+= dateValue.getDate().toString();
+                            recordData['fields'][field.longname]=value;
                             break;
 
                         case 'time':
-                            value = this[fieldName];
+                            recordData['fields'][field.longname] = this[fieldName];
+                            break;
+
+                        case 'number':
+                            recordData['fields'][field.longname] = Number(this[fieldName]);
                             break;
 
                         case 'boolean':
-                            value = (this[fieldName]) ? 'true' : 'false';
+                            recordData['fields'][field.longname] = this[fieldName];
                             break;
 
                         case 'string':
                         case 'text':
-                            value = '<![CDATA[' + this[fieldName].trim() + ']]>'; // if text, wrap data inside a cdata, triming extra whitespace
+                            recordData['fields'][field.longname] = this[fieldName].trim(); // if text, wrap data inside a cdata, triming extra whitespace
                             break;
 
                         case 'blob':
@@ -218,20 +227,20 @@ export class FourDModel {
                             break;
 
                         default:
-                            value = this[fieldName];
+                            recordData['fields'][field.longname]=this[fieldName];
                             break;
                     }
                 }
-                var col = '<' + field.longname + '>' + value + '</' + field.longname + '>';
-                recordData += col;
+ 
+                
             }
         };
 
-        recordData += '</record>';
-
         //this.log.debug(recordData);
-        return recordData;
+        return JSON.stringify(recordData);
+        
     }
+
 
     /**
      * Retrieve a record from 4D and populate its instance variables.
@@ -253,7 +262,7 @@ export class FourDModel {
             let body: any = { Username: FourDInterface.currentUser };
             body.TableName = this.tableName;
             body.RecordNum = this.recordNumber;
-            body.VariablesList = encode(this.getColumnListXML());
+            body.VariablesList = encode(this.getColumnListJSON());
 
             return new Promise((resolve, reject) => {
                 let me = this;
@@ -267,7 +276,7 @@ export class FourDModel {
                             jsonData = JSON.parse(jsonData);
                         }
                         */
-                       //this.log.debug(jsonData);
+                        //this.log.debug(jsonData);
                         me.clearRecord();
                         me.populateModelData(jsonData);
                         me.clearRecordDirtyFlag();
@@ -299,7 +308,7 @@ export class FourDModel {
         let records: FourDCollection = new FourDCollection();
         records.model = theModel;
         let me = this;
-            
+
         // first we send to query to 4D to get all records that match the query criteria
         // then if at lest 1 record is returned by 4D, we use it's record number to refresh to complete record contents
         return new Promise((resolve, reject) => {
@@ -315,7 +324,7 @@ export class FourDModel {
 
 
     }
-        
+
     /**
      * Refresh current record, grab a fresh copy from 4D
      * 
@@ -323,15 +332,15 @@ export class FourDModel {
      * 
      */
     public refresh(): Promise<FourDModel> {
-        if (this.recordNumber) {
+        if (this.recordNumber >= 0) {
             return this.getRecord(this.recordNumber);
         } else return new Promise((resolve, reject) => {
             reject('No current record number set!');
         });
 
     }
-        
-           
+
+
     /**
      * insert a new record in the database.
      *  
@@ -346,7 +355,7 @@ export class FourDModel {
         body.RecordNum = this.recordNumber;
         if (this.fourdSaveCallbackMethod_) body.CallBackMethod = this.fourdSaveCallbackMethod_;
         body.Action = 'add';
-        body.VariablesList = encode(this.serializeRecord('add', false));
+        body.RecordData = encode(this.recordToJSON('add', false));
 
         return new Promise((resolve, reject) => {
             let me = this;
@@ -376,7 +385,7 @@ export class FourDModel {
 
 
     }
-         
+
     /**
  * update record in the database.
  *  
@@ -384,13 +393,13 @@ export class FourDModel {
  * 
  */
     public updateRecord(): Promise<string> {
-        if (this.recordNumber) {
+        if (this.recordNumber >= 0) {
             let body: any = { Username: FourDInterface.currentUser };
             body.TableName = this.tableName;
             body.RecordNum = this.recordNumber;
             if (this.fourdSaveCallbackMethod_) body.CallBackMethod = this.fourdSaveCallbackMethod_;
             body.Action = 'update';
-            body.VariablesList = encode(this.serializeRecord('update', false));
+            body.RecordData = encode(this.recordToJSON('update', false));
 
             return new Promise((resolve, reject) => {
                 let me = this;
@@ -421,7 +430,7 @@ export class FourDModel {
             reject('No current record number set!');
         });
     }
-        
+
     /**
  * delete current record
  *  
@@ -431,7 +440,7 @@ export class FourDModel {
  * 
  */
     public deleteRecord(cascade: boolean = false): Promise<string> {
-        if (this.recordNumber) {
+        if (this.recordNumber >= 0) {
             let body: any = { Username: FourDInterface.currentUser };
             body.TableName = this.tableName;
             body.RecordNum = this.recordNumber;
@@ -469,7 +478,7 @@ export class FourDModel {
         });
 
     }
-        
+
     /**
      * Populates model from attributes/properties on a json Object
      * 
@@ -484,12 +493,12 @@ export class FourDModel {
         }
 
     }
-        
+
     /**
      * Retrieves a list of records using a query string 
      * 
      * @param query
-     * 	@param columnList custom column list to retrieve, XML listing the columns to retrieve.
+     * 	@param columnList custom column list to retrieve, JSON listing the columns to retrieve.
      * <p>if informed, only the columns listed will be retrieved instead of the whole record</p>
      * 
      * 	@param startRec the starting record number to retrieve, used for paging.
@@ -514,7 +523,7 @@ export class FourDModel {
         });
 
     }
-        
+
     /**
      * @public
        * @return current record number (4D's record number, equivalent to ROWID)
@@ -534,10 +543,10 @@ export class FourDModel {
      *
      */
     public isRecordLoaded(): boolean {
-        return (this.recordNumber && this.recordNumber >= 0);
+        return (this.recordNumber >= 0);
     }
 
-			
+
     /**
      * clear record modified flag. 
      * This can be used when one changes a record programmatically, but does not want to set the record modified flag.
@@ -548,7 +557,7 @@ export class FourDModel {
         this._modified = {};					// clear modified fields list
     }
 
-		
+
     /**
      * test to see if current record has been modified.
      *  
@@ -564,29 +573,26 @@ export class FourDModel {
 
 
     /**
-     * prepares the record's XML field description to send to 4D
+     * prepares the record's JSON field description to send to 4D
      */
-    public getColumnListXML(): string {
-        let cols: string = '<columns>';
+    public getColumnListJSON(): string {
+        let colList: Array<Object> = [];
         let fields: Array<IFieldDescription> = this.fields;
         for (let col of fields) {
             if (col.formula) {
-                cols += '<' + col.name + ' name="' + col.name + '" formula="' + col.formula + '"/>';
+                colList.push({ name: col.name, formula: col.formula });
             } else if (col.subTable) {
-                cols += '<columns name="' +
-                    col.name + '" subTable="' +
-                    col.subTable.tableName +
-                    '" joinFK="' +
-                    col.joinFK + '" joinPK="' +
-                    col.joinPK + '">';
+                let subFields: Array<Object> = [];
                 for (let sub of col.subTable.fields) {
-                    cols += '<column name="' + sub.name + '">' + sub.longname + '</column>';
+                    subFields.push({ name: sub.name, field: sub.longname });
                 };
-                cols += '</columns>';
-            } else cols += '<' + col.longname + ' name="' + col.name + '"/>';
+                colList.push({ name: col.name, subTable: col.subTable.tableName, joinFK: col.joinFK, joinPK: col.joinPK, subFields: subFields });
 
-        };
-        return cols + '</columns>';
+            } else colList.push({ name: col.name, field: col.longname });
+        }
+
+        return JSON.stringify(colList);
+
     }
 
     /**

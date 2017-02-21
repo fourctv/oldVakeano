@@ -70,6 +70,14 @@
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-2.2.1.tgz#316ec1e43aa5a0166e5e6e1aa2c34a4049386510"
 
+"@ngx-translate/core@^6.0.0-beta.1":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-translate/core/-/core-6.0.0.tgz#823dccefcd82bbe29763949e55d2dc60a1735a66"
+
+"@ngx-translate/http-loader@0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@ngx-translate/http-loader/-/http-loader-0.0.3.tgz#8346c8d2d6f630254601029668f17abe2afe8a9b"
+
 "@types/async@^2.0.32":
   version "2.0.38"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.38.tgz#5c369dcb14788da0621daafa8594a053b0edcb21"
@@ -5004,10 +5012,6 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-ng2-translate@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ng2-translate/-/ng2-translate-5.0.0.tgz#0adbb510eb5007a2d6ded5f5d26888c14760aca5"
-
 ngrx-store-freeze@0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/ngrx-store-freeze/-/ngrx-store-freeze-0.1.6.tgz#69acddf0c28172349d6d21a084fd4428235e82b8"
@@ -5859,9 +5863,13 @@ qs@6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.0.tgz#3b7848c03c2dece69a9522b0fae8c4126d745f3b"
 
-qs@6.2.1, "qs@>= 0.4.0":
+qs@6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.1.tgz#ce03c5ff0935bc1d9d69a9f14cbd18e568d67625"
+
+"qs@>= 0.4.0", qs@~6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
 
 qs@~0.6.0:
   version "0.6.6"
@@ -5870,10 +5878,6 @@ qs@~0.6.0:
 qs@~5.2.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-5.2.1.tgz#801fee030e0b9450d6385adc48a4cc55b44aedfc"
-
-qs@~6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
 
 query-string@^4.1.0:
   version "4.3.1"
@@ -6159,7 +6163,7 @@ request-progress@~2.0.1:
   dependencies:
     throttleit "^1.0.0"
 
-request@2, request@2.78.0, request@^2.61.0, request@^2.78.0:
+request@2, request@2.78.0, request@^2.45.0, request@^2.61.0, request@^2.78.0:
   version "2.78.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.78.0.tgz#e1c8dec346e1c81923b24acdb337f11decabe9cc"
   dependencies:
@@ -6184,7 +6188,7 @@ request@2, request@2.78.0, request@^2.61.0, request@^2.78.0:
     tough-cookie "~2.3.0"
     tunnel-agent "~0.4.1"
 
-request@^2.45.0, request@^2.79.0:
+request@^2.79.0:
   version "2.79.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:

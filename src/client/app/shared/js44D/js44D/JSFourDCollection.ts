@@ -47,25 +47,24 @@ export class FourDCollection {
   }
 
     /**
-     * prepares the XML field description to send to 4D, listing all columns to retrieve
+     * prepares the JSON field description to send to 4D, listing all columns to retrieve
      */
-    getColumnListXML(columns:Array<any>): string {
+    public getColumnListJSON(columns:Array<any>): string {
         if (!columns) columns = this.columns;
-        var cols = '<columns>';
-        for (var i in columns) {
-            var col = columns[i];
+        let colList: Array<Object> = [];
+        for (let col of columns) {
             if (typeof (col) === 'string') {
                 if (col.indexOf('.') > 0) { // is this a longname field?
-                    cols += '<column name="' + col.substr(col.indexOf('.') + 1) + '">' + col + '</column>';
+                    colList.push({ name: col.substr(col.indexOf('.') + 1), field: col });
                 } else { // nope, so let's see if we have it in our datamodel
                     let modelDef = <any>(this.model);
                     let theModel: FourDModel = <any>(new modelDef());
                     var fld = theModel.getFieldProperties(col);
                     if (fld) { // field in our datamodel, use its properties
                         if (fld.formula) {
-                            cols += '<column name="' + fld.name + '">[' + fld.formula + ']</column>';
-                        } else cols += '<column name="' + fld.name + '">' + fld.longname + '</column>';
-                    }
+                            colList.push({ name: fld.name, formula: fld.formula });
+                        } else colList.push({ name: fld.name, field: fld.longname });
+                     }
                 }
             } else if (col.field) {
                 let modelDef = <any>(this.model);
@@ -73,23 +72,24 @@ export class FourDCollection {
                 var fld = theModel.getFieldProperties(col.field);
                 if (fld) {
                     if (fld.formula) {
-                        cols += '<column name="' + fld.name + '">[' + fld.formula + ']</column>';
-                    } else cols += '<column name="' + fld.name + '">' + fld.longname + '</column>';
+                        colList.push({ name: fld.name, formula: fld.formula });
+                        } else colList.push({ name: fld.name, field: fld.longname });
                 }
             } else {
                 if (col.formula) {
-                    cols += '<column name="' + col.name + '">[' + col.formula + ']</column>';
-                } else cols += '<column name="' + col.name + '">' + col.longname + '</column>';
+                    colList.push({ name: col.name, formula: col.formula });
+                    } else colList.push({ name: col.name, field: col.longname });
             }
         }
+ 
+        return JSON.stringify(colList);
 
-        return cols + '</columns>';
     }
 
     /**
      * Retrieves a list of records using a query string 
      *  @param query
-     * 	@param columnList custom column list to retrieve, XML listing the columns to retrieve.
+     * 	@param columnList custom column list to retrieve, JSON array of the columns to retrieve.
      * <p>if informed, only the columns listed will be retrieved instead of the whole record</p>
      * 
      * 	@param startRec the starting record number to retrieve, used for paging.
@@ -131,7 +131,7 @@ export class FourDCollection {
         body.NumRecs = numOfRecords;
 
         body.QueryString = query;
-        body.Columns = encode((columns)?this.getColumnListXML(columns):this.getColumnListXML(newModel.getColumnList()));
+        body.Columns = encode((columns)?this.getColumnListJSON(columns):this.getColumnListJSON(newModel.getColumnList()));
 
         if (filter) body.FilterOptions = filter;
         if (orderby) body.OrderBy = orderby;
@@ -143,16 +143,16 @@ export class FourDCollection {
                 response => {
                     me.totalRecordCount = 0;
                     me.models = [];
-                    let jsonData = response.json();
+                    let jsonData:Object = response.json();
                     /*
                     if (Config.IS_MOBILE_NATIVE()) {
                         // on nativescript
                         jsonData = JSON.parse(jsonData);
                     }
                     */
-                    if (jsonData && jsonData.length === 2) {
-                        me.totalRecordCount = jsonData[0].total_entries;
-                        let recList: Array<any> = jsonData[1];
+                    if (jsonData && jsonData['selected'] && jsonData['records']) {
+                        me.totalRecordCount = jsonData['selected'];
+                        let recList: Array<any> = jsonData['records'];
                         recList.forEach(record => {
                             let modelDef = <any>(me.model);
                             let newModel: FourDModel = <any>(new modelDef());
