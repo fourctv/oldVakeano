@@ -32,7 +32,8 @@ export class MGListDropDown implements AfterViewInit {
     ngAfterViewInit() {
         if (this.listName) {
             this.shellList = new ShellLists();
-            this.shellList.getRecords(ShellLists.kListName+';=;'+this.listName)
+            let query = {query:[ShellLists.kListName+';=;'+this.listName]}
+            this.shellList.getRecords(query)
                 .then((recs:FourDCollection) => {
                     this.listOptions = [''];
                     recs.models.forEach((rec:ShellLists) => {

@@ -6,7 +6,7 @@
 import { Component, Injectable, EventEmitter, ViewChild, AfterViewInit, Input } from '@angular/core';
 
 
-import { FourDModel, FourDCollection } from '../index';
+import { FourDModel, FourDCollection, FourDQuery } from '../index';
 
 @Component({
     selector: 'datagrid',
@@ -141,7 +141,7 @@ export class DataGrid implements AfterViewInit {
                 let start = (options.data.pageSize && options.data.pageSize > 0 && this.useLazyLoading) ? options.data.skip : 0;
                 let numrecs = (options.data.pageSize && options.data.pageSize > 0 && this.useLazyLoading) ? options.data.pageSize : -1;
                 // now build filter if set
-                let filter = '';
+                let filter = [];
                 if (options.data.filter) {
 
                     options.data.filter.filters.forEach((item: kendo.data.DataSourceFilterItem) => {
@@ -172,7 +172,7 @@ export class DataGrid implements AfterViewInit {
                                 comparator = <any>item.operator;
                                 break;
                         }
-                        filter += newModel.tableName + '.' + item.field + ';' + comparator + ';' + item.value + ';' + options.data.filter.logic + '%%';
+                        filter.push(newModel.tableName + '.' + item.field + ';' + comparator + ';' + item.value + ';' + options.data.filter.logic);
                     });
                 }
 
@@ -184,18 +184,13 @@ export class DataGrid implements AfterViewInit {
                     });
                 }
 
-                let query = this.dataProvider.queryString;
+                let query:FourDQuery = this.dataProvider.queryString;
 
-                if (filter !== '') {
-                    if (this.dataProvider.queryString && this.dataProvider.queryString !== '' && this.dataProvider.queryString.toLowerCase() !== 'all') {
-                        query = '<criteria method="FLEX_CombinedQuery" table="' + newModel.tableName + '">';
-                        query += '<intersection>';
-                        query += '<query>' + this.dataProvider.queryString + '</query>';
-                        query += '<query>' + filter + '</query>';
-                        query += '</intersection>';
-                        query += '</criteria>';
+                if (filter.length >0) {
+                    if (this.dataProvider.queryString) {
+                        query = {intersection:[query, {query:filter}]};
                     } else {
-                        query = filter;
+                        query = {query:filter};
                     }
                 }
                 let me = this;
@@ -241,7 +236,7 @@ export class DataGrid implements AfterViewInit {
     //
     // Declare data provider properties
     //
-    set queryString(v: string) { if (this.dataProvider) this.dataProvider.queryString = v; }
+    set queryString(v: FourDQuery) { if (this.dataProvider) this.dataProvider.queryString = v; }
     set orderBy(v: string) { if (this.dataProvider) this.dataProvider.orderBy = v; }
     set filterQuery(v: string) { if (this.dataProvider) this.dataProvider.filterQuery = v; }
 
@@ -302,7 +297,7 @@ export class DataGrid implements AfterViewInit {
      * @param filter: filter options to send to 4D, to the applies on the query result
      * @param orderby: order by statement to send to 4D, defining the record sort order
      */
-    loadData(query: string = null, filter: string = null, orderby: string = null) {
+    loadData(query: FourDQuery = null, filter: string = null, orderby: string = null) {
         if (this.dataProvider) {
             this.queryString = query;
             this.filterQuery = filter;

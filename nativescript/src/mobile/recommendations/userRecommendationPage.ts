@@ -70,12 +70,14 @@ export class UserRecommendationPage implements OnInit {
 
  
     recommendationList() {
-        let queryType:string = ' userID="'+FourDInterface.currentUserID.toString()+'"';
-        if (this.profileID && this.profileID > 0) {
-            queryType = ' profileId="'+this.profileID.toString()+'"';
+        let query={custom:"MGSEFilterViewerContent", tableName:"ViewerContent", filter:"recommend"};
+         if (this.profileID && this.profileID > 0) {
+            query['profileId']=this.profileID;
+        } else {
+            query['userID']=FourDInterface.currentUserID;
         }
         //this.log.debug('query:'+queryType);
-        this.controlList.getRecords('<criteria method="MGSEFilterViewerContent" tableName="ViewerContent" filter="recommend"'+queryType+'/>',
+        this.controlList.getRecords(query,
                                     [ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
                                     ViewerContent.kMGPEI, ViewerContent.kMGPAI, ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGNQI,
                                     Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL, 

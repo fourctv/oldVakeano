@@ -26,35 +26,35 @@ export class GenomeMapQueryBand {
     //
     // build 4C-TV query based on items from query band
     //
-    public get currentQuery(): string {
-        let currQuery: string = '';
+    public get currentQuery(): any {
+        let currQuery = [];
 
         // Query based on Gene Name
         if (this.geneName && this.geneName !== '') {
-            currQuery += GenomeMap.kGeneName + ';begins with;' + this.geneName + ';AND%%';
+            currQuery.push(GenomeMap.kGeneName + ';begins with;' + this.geneName + ';AND');
         }
 
         // Query based on Gene Vector
         if (this.selectVector && this.selectVector !== '') {
-            currQuery += GenomeMap.kVector + ';=;' + this.selectVector + ';AND%%';
+            currQuery.push(GenomeMap.kVector + ';=;' + this.selectVector + ';AND');
         }
 
          // Query based on Gene Cluster
         if (this.selectCluster && this.selectCluster !== '') {
-            currQuery += GenomeMap.kCluster+ ';=;' + this.selectCluster + ';AND%%';
+            currQuery.push(GenomeMap.kCluster+ ';=;' + this.selectCluster + ';AND');
         }
  
           // Query based on Narrative Type
         if (this.selectNarrative && this.selectNarrative !== '') {
-            currQuery += GenomeMap.kAppNarrativeType+ ';=;' + this.selectNarrative + ';AND%%';
+            currQuery.push(GenomeMap.kAppNarrativeType+ ';=;' + this.selectNarrative + ';AND');
         }
  
           // Query based on Acting Type
         if (this.selectActingType && this.selectActingType !== '') {
-            currQuery += GenomeMap.kAppActingType+ ';=;' + this.selectActingType + ';AND%%';
+            currQuery.push(GenomeMap.kAppActingType+ ';=;' + this.selectActingType + ';AND');
         }
  
-        return currQuery;
+        return {query:currQuery};
 
     }
 }

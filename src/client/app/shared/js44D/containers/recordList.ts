@@ -23,7 +23,7 @@ export class RecordList implements AfterContentInit {
     @ContentChild(QueryBand) queryBand: QueryBand;
     @ContentChild(DataGrid) theGrid: DataGrid;
 
-    private _previousQuery:string = '';
+    private _previousQuery:Object;
 
     //
     // We need access to a Modal dialog component, to open an associated Record Edit Form 
@@ -38,7 +38,7 @@ export class RecordList implements AfterContentInit {
         // if we have a query band, then subscribe to the query refresh and export to excel buttons
         if (this.queryBand) {
             // if user hits Refresh button, call grid refrech method
-            this.queryBand.queryRefresh.subscribe((query: string) => { this.refreshGrid(query); });
+            this.queryBand.queryRefresh.subscribe((query: Object) => { this.refreshGrid(query); });
             // it used hits Export to Excel, call grid's excel export method
             this.queryBand.queryExportGrid.subscribe(() => { if (this.theGrid) this.theGrid.exportGridToExcel(); });
 
@@ -61,9 +61,9 @@ export class RecordList implements AfterContentInit {
      * Refresh teh Grid, run query on 4D side and get records to display
      * @param query: the query string to send to 4D to select records to display on the grid
      */
-    public refreshGrid(query?: string) {
-        if (!(query && query !== '')) query = this._previousQuery; // if no query given, try previous
-        if (query && query !== '' && this.theGrid) this.theGrid.loadData(query);
+    public refreshGrid(query?: Object) {
+        if (!query) query = this._previousQuery; // if no query given, try previous
+        if (query && this.theGrid) this.theGrid.loadData(query);
         this._previousQuery = query; // save last queryDeleteRecord
     }
 

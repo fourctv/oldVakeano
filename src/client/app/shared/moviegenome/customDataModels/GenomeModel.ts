@@ -11,7 +11,7 @@ export class GenomeModel {
 
     constructor() {
         let rec:GenomeMap = new GenomeMap();
-        rec.getRecords('all').then((genes) => {
+        rec.getRecords({query:['all']}).then((genes) => {
             // now sort them genes by their coordinate position...
             genes.models.sort((a,b) => {
                 if (a.Cluster < b.Cluster) return -1; else if (a.Cluster > b.Cluster) return 1;
@@ -24,7 +24,7 @@ export class GenomeModel {
                 if (gene.AcceptedValuesList && gene.AcceptedValuesList !== '' && !this.rateListCache[gene.AcceptedValuesList]) {
                     this.rateListCache[gene.AcceptedValuesList] = [];
                     let list:ShellLists = new ShellLists();
-                    list.getRecords(ShellLists.kListName+';=;'+gene.AcceptedValuesList)
+                    list.getRecords({query:[ShellLists.kListName+';=;'+gene.AcceptedValuesList]})
                     .then (items => {this.rateListCache[gene.AcceptedValuesList] = items.models;});
                 }
                 

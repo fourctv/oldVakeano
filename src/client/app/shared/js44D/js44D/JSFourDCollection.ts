@@ -4,7 +4,7 @@ import { encode } from 'base-64';
 import { LogService } from '../../core/services/log.service';
 //import { Config } from '../../core/utils/config';
 
-import { FourDInterface } from './JSFourDInterface';
+import { FourDInterface, FourDQuery } from './JSFourDInterface';
 import { FourDModel } from './JSFourDModel';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class FourDCollection {
     public model:any; // the model this collection is based on
     public models:Array<any> = []; // array of models in the collection
     public orderBy: string;    // default order by string
-    public queryString: string = 'All'; // default query string 
+    public queryString: FourDQuery = {query:['All']}; // default query string 
     public filterQuery: string; // default filter to be applied on all queries
 
     public columns: any[] = []; // columns to be populated on the Collection
@@ -103,8 +103,8 @@ export class FourDCollection {
      * 
      * @return returns a Promise for the database operation
      */
-    public getRecords(query: string = null, columns: Array<string> = null, startRec: number = 0, numOfRecords: number = -1, filter: string = null, orderby: string = null): Promise<FourDCollection> {
-        if (!query || query === '') {
+    public getRecords(query: FourDQuery = null, columns: Array<string> = null, startRec: number = 0, numOfRecords: number = -1, filter: string = null, orderby: string = null): Promise<FourDCollection> {
+        if (!query) {
             query = this.queryString;
         }
         if (columns) {
@@ -130,7 +130,7 @@ export class FourDCollection {
         body.StartRec = startRec;
         body.NumRecs = numOfRecords;
 
-        body.QueryString = query;
+        body.QueryString = JSON.stringify(query);
         body.Columns = encode((columns)?this.getColumnListJSON(columns):this.getColumnListJSON(newModel.getColumnList()));
 
         if (filter) body.FilterOptions = filter;

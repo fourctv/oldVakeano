@@ -24,24 +24,28 @@ export class FeatureQueryBand {
     //
     // build 4C-TV query based on items from query band
     //
-    public get currentQuery(): string {
-        let currQuery: string = '';
- 
+    public get currentQuery(): Object {
+        let query:any;
+
+         // Query based on Feature title
+        if (this.programTitle && this.programTitle !== '') {
+            query={query:[Features.kIMDBTitle+ ';contains;' + this.programTitle + ';OR', Features.kProductionTitle+ ';contains;' + this.programTitle + ';OR']};
+        }
+
         // query based on to be curated flag
         if (this.toBeCurated) {
-            currQuery += Features.kContentVector+ ';=;;OR%%';
-            currQuery += Features.kExecutionVector+ ';=;;OR%%';
-            currQuery += Features.kNarrativeVector+ ';=;;OR%%';
-            currQuery += Features.kStyleVector+ ';=;;OR%%';
-            currQuery += Features.kThemeVector+ ';=;;OR%%';
+            let curated = [];
+            curated.push(Features.kContentVector+ ';=;;OR');
+            curated.push(Features.kExecutionVector+ ';=;;OR');
+            curated.push(Features.kNarrativeVector+ ';=;;OR');
+            curated.push(Features.kStyleVector+ ';=;;OR');
+            curated.push(Features.kThemeVector+ ';=;;OR');
+            if (query) query = {intersection:[query,{query:curated}]} 
+            else query ={query:curated};
+
        }
-         // Query based on Channel
-        if (this.programTitle && this.programTitle !== '') {
-            currQuery += Features.kIMDBTitle+ ';contains;' + this.programTitle + ';OR%%';
-            currQuery += Features.kProductionTitle+ ';contains;' + this.programTitle + ';OR%%';
-        }
-        
-        return currQuery;
+         
+        return query;
 
     }
 }

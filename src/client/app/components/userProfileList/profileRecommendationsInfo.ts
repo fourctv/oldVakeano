@@ -58,12 +58,15 @@ export class ProfileRecommendationsInfo implements AfterViewInit {
     }
 
     refreshGrid() {
-            let queryType: string = ' userID="' + FourDInterface.currentUserID.toString() + '"';
+            let query={custom:"MGSEFilterViewerContent", tableName:"ViewerContent", filter:"recommend"};
             if (this.record.ProfileID && this.record.ProfileID > 0) {
-                queryType = ' profileId="' + this.record.ProfileID.toString() + '"';
+                query['profileID']=this.record.ProfileID;
+            } else {
+                query['userID']=FourDInterface.currentUserID;
             }
+
             //this.log.debug('query:'+queryType);
-            this.controlList.getRecords('<criteria method="MGSEFilterViewerContent" tableName="ViewerContent" filter="recommend"' + queryType + '/>',
+            this.controlList.getRecords(query,
                 [ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
                 Features.kIMDBTitle, Features.kPosterURL,
                 ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGPAI,

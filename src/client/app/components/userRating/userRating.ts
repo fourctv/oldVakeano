@@ -26,7 +26,7 @@ export class UserRating {
     userHasLoggedIn() {
         this.controlList.model = Features;
         if (!this.currentUser || this.currentUser <= 0) this.currentUser = FourDInterface.currentUserID;
-        this.controlList.getRecords('<criteria method="MGSEFilterViewerContent" tableName="Features" filter="control" userID="'+this.currentUser.toString()+'" profileID="'+this.currentProfile.toString()+'"/>',[Features.kFeatureId,Features.kIMDBTitle,Features.kPosterURL]);
+        this.controlList.getRecords(<any>{custom:"MGSEFilterViewerContent", tableName:"Features", filter:"control", userID:this.currentUser, profileID:this.currentProfile},[Features.kFeatureId,Features.kIMDBTitle,Features.kPosterURL]);
     }
     
     rateThis(feature:Features, stars:number) {

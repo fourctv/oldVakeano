@@ -526,3 +526,14 @@ export class MD5 {
     }
 
 }
+
+export class FourDQuery {
+    query?:Array<any>;
+    union?:Array<any>;
+    intersection?:Array<any>;
+    custom?:string;
+    joinTable?:string;
+    joinPK?:string;
+    joinFK?:string;
+    join?:Array<any>;
+}

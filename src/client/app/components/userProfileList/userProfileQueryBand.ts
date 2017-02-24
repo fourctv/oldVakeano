@@ -32,25 +32,25 @@ export class UserProfileQueryBand {
     //
     // build 4C-TV query based on items from query band
     //
-    public get currentQuery(): string {
-        let currQuery: string = '';
+    public get currentQuery(): any {
+        let currQuery = [];
 
         // Query based on User Name
         if (this.userName && this.userName !== '') {
-            currQuery += ShellUsers.kUserName + ';begins with;' + this.userName + ';AND%%';
+            currQuery.push(ShellUsers.kUserName + ';begins with;' + this.userName + ';AND');
         }
  
         // Query based on Profile Name
         if (this.profileName && this.profileName !== '') {
-            currQuery += TasteProfiles.kName + ';begins with;' + this.profileName + ';AND%%';
+            currQuery.push(TasteProfiles.kName + ';begins with;' + this.profileName + ';AND');
         }
 
         // Query on Profile Originl
         if (this.profileOrigin && this.profileOrigin !== '') {
-            currQuery += TasteProfiles.kOrigin + ';=;' + this.profileOrigin + ';AND%%';
+            currQuery.push(TasteProfiles.kOrigin + ';=;' + this.profileOrigin + ';AND');
         }
 
-        return currQuery;
+        return {query:currQuery};
 
     }
 }

@@ -4,7 +4,7 @@ import { encode } from 'base-64';
 import { LogService } from '../../core/services/log.service';
 //import { Config } from '../../core/utils/config';
 
-import { FourDInterface } from './JSFourDInterface';
+import { FourDInterface, FourDQuery } from './JSFourDInterface';
 import { FourDCollection } from './JSFourDCollection';
 
 interface IFieldDescription {
@@ -254,7 +254,7 @@ export class FourDModel {
      * 
      * 
      */
-    public getRecord(recordNumber: number = null, recordID: string = null, query: string = null): Promise<FourDModel> {
+    public getRecord(recordNumber: number = null, recordID: string = null, query: FourDQuery = null): Promise<FourDModel> {
         if (recordNumber || this.recordNumber >= 0) {
             if (recordNumber) this.recordNumber = recordNumber;
 
@@ -294,7 +294,7 @@ export class FourDModel {
                 alert('No Primary Key specified for ' + this.tableName);
             } else {
                 // getting a record based on its primary key
-                query = this.tableName + '.' + this.primaryKey_ + ';=;' + recordID; // build query on record id
+                query = {query:[this.tableName + '.' + this.primaryKey_ + ';=;' + recordID]}; // build query on record id
             }
 
         } else if (!query) { // get record based on a query string
@@ -512,7 +512,7 @@ export class FourDModel {
      * 
      * @return returns a Promise for the database operation
      */
-    public getRecords(query: string = null, columns: Array<string> = null, startRec: number = 0, numOfRecords: number = -1, filter: string = null, orderby: string = null): Promise<FourDCollection> {
+    public getRecords(query: FourDQuery = null, columns: Array<string> = null, startRec: number = 0, numOfRecords: number = -1, filter: string = null, orderby: string = null): Promise<FourDCollection> {
         let theModel: any = this.constructor.valueOf();
         let records: FourDCollection = new FourDCollection();
         records.model = theModel;

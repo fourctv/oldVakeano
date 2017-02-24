@@ -50,6 +50,15 @@ export function cons() {
   return console;
 }
 
+let DEV_IMPORTS: any[] = [];
+
+if (String('<%= BUILD_TYPE %>') === 'dev') {
+  DEV_IMPORTS = [
+    ...DEV_IMPORTS,
+    //StoreDevtoolsModule.instrumentOnlyWithExtension()
+  ];
+}
+
 @NgModule({
   imports: [
     BrowserModule,

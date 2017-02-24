@@ -71,7 +71,7 @@ export class ProfileBuildingPage implements OnInit {
 
  
     ratingList() {
-        this.controlList.getRecords('<criteria method="MGSEFilterViewerContent" tableName="Features" filter="control" userID="'+this.currentUser.toString()+'"/>',
+        this.controlList.getRecords(<any>{custom:"MGSEFilterViewerContent", tableName:"Features", filter:"control", userID:this.currentUser},
             [Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL, Features.kFeatureId,
             Features.kProdYear, Features.kFeatureCast, Features.kDirectorsList])
             .then(recs => {
