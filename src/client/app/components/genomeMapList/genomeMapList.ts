@@ -1,7 +1,7 @@
 import {Component } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { FourDInterface } from '../../shared/js44D/index';
+import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
 
 import {GenomeMap} from '../../shared/moviegenome/index';
 

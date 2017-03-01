@@ -5,7 +5,7 @@ import { ModalDialogParams } from "nativescript-angular";
 import { openUrl } from "utils/utils";
 import { SwipeGestureEventData, SwipeDirection } from "ui/gestures";
 
-import { FourDInterface } from '../../app/shared/js44D/index';
+import { FourDInterface } from '../../app/shared/js44D/js44D/JSFourDInterface';
 
 import { Features } from '../../app/shared/moviegenome/index';
 

@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 
 import {ModalDialogInstance, ModalConfig, ICustomModal, ICustomModalComponent} from '../angular2-modal/index';
 
-import { fourDUrl, FourDInterface } from '../index';
+import { fourDUrl, FourDInterface } from '../js44D/JSFourDInterface';
 
 @Component({
     selector: 'flexapp-loader',

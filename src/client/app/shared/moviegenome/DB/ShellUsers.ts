@@ -1,4 +1,4 @@
-import { FourDModel } from '../../js44D/index';
+import { FourDModel } from '../../js44D/js44D/JSFourDModel';
 
 export class ShellUsers extends FourDModel {
 

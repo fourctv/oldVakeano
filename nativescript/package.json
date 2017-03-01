@@ -1,17 +1,17 @@
 {
-    "name": "vakeano",
-    "main": "app.js",
-    "version": "0.1.0",
-    "nativescript": {
-        "id": "com.pascal.moviegenome",
-        "tns-ios": {
-            "version": "2.5.0"
-        },
-        "tns-android": {
-            "version": "2.5.0"
-        }
+  "name": "vakeano",
+  "main": "app.js",
+  "version": "0.1.0",
+  "nativescript": {
+    "id": "com.pascal.moviegenome",
+    "tns-ios": {
+      "version": "2.5.0"
     },
-    "scripts": {
+    "tns-android": {
+      "version": "2.5.0"
+    }
+  },
+  "scripts": {
     "preinstall": "mkdirp app",
     "clean": "rimraf platforms node_modules lib hooks app && mkdirp app",
     "clean-android": "tns clean-app android",
@@ -22,14 +22,14 @@
     "webpack-ios": "webpack --config=webpack.ios.js --progress",
     "prestart-android-bundle": "npm run webpack-android",
     "prestart-ios-bundle": "npm run webpack-ios",
-    "start-android-bundle": "tns run android --bundle --disable-npm-install",
+    "start-android-bundle": "tns run android --bundle --disable-npm-install --key-store-path moviegenome.pks --key-store-password Fronteira --key-store-alias moviegenome --key-store-alias-password Fronteira",
     "start-ios-bundle": "tns run ios --bundle --disable-npm-install",
     "prebuild-android-bundle": "npm run webpack-android",
     "prebuild-ios-bundle": "npm run webpack-ios",
     "build-android-bundle": "tns build android --bundle --disable-npm-install",
     "build-ios-bundle": "tns build ios --bundle --disable-npm-install"
-    },
-    "dependencies": {
+  },
+  "dependencies": {
     "@angular/common": "~2.4.3",
     "@angular/compiler": "~2.4.3",
     "@angular/core": "~2.4.3",
@@ -50,6 +50,7 @@
     "lodash": "^4.17.4",
     "nativescript-angular": "next",
     "nativescript-dev-webpack": "^0.3.1",
+    "nativescript-telerik-ui": "^1.6.1",
     "nativescript-theme-core": "^1.0.2",
     "ngrx-store-freeze": "0.1.6",
     "reflect-metadata": "^0.1.8",
@@ -79,5 +80,5 @@
     "typescript": "~2.1.4",
     "webpack": "2.2.0-rc.3",
     "webpack-sources": "~0.1.3"
-    }
+  }
 }

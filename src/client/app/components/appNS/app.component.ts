@@ -7,7 +7,8 @@ import '../operators';
 import { LogService } from '../../shared/core/services/log.service';
 import { Config } from '../../shared/core/utils/config';
 
-import { LoginNSCmp,  FourDInterface } from '../../shared/js44D/index';
+import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
+import { LoginNSCmp } from '../../shared/js44D/login/loginNS';
 
 import { UserRating } from '../userRating/userRating'; 
 import { UserRecommendations } from '../userRecommendations/userRecommendations'; 

@@ -4,13 +4,22 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule }      from '@angular/common';
 
 import { QueryBand, CustomButtonBarDirective, QueryBandDirective } from './containers/queryBand';
-import { RecordEditWindow, RecordList, Tabs, Tab, WebAppContainer } from './index';
-import { FourDDropDown, QuickFindInput  } from './index';
-import { DataGrid } from './index';
-import { LoginCmp  } from './index';
-import { JSAppLoader, FlexAppLoader  } from './index';
-import { Modal, ModalDialogInstance, ICustomModal } from './index';
-import { FourDInterface, FourDModel, FourDCollection } from './index';
+import { RecordList } from './containers/recordList';
+import { RecordEditWindow } from './containers/recordEditWindow';
+import { Tabs, Tab } from './containers/tabs';
+import { WebAppContainer } from './containers/webAppContainer';
+import { FourDDropDown  } from './controls/fourDDropDown';
+import { QuickFindInput  } from './controls/quickFindInput';
+import { DataGrid } from './dataGrid/dataGrid';
+import { LoginCmp  } from './login/login';
+import { JSAppLoader  } from './services/jsAppLoader';
+import { FlexAppLoader  } from './services/flexAppLoader';
+import { ICustomModal } from './angular2-modal/models/ICustomModal';
+import { Modal } from './angular2-modal/providers/Modal';
+import { ModalDialogInstance } from './angular2-modal/models/ModalDialogInstance';
+//import { FourDInterface } from './js44D/JSFourDInterface';
+//import { FourDModel } from './js44D/JSFourDModel';
+//import { FourDCollection } from './js44D/JSFourDCollection';
 
 @NgModule({
       imports: [ FormsModule, CommonModule ],
@@ -31,7 +40,7 @@ import { FourDInterface, FourDModel, FourDCollection } from './index';
             LoginCmp,
             JSAppLoader, FlexAppLoader
             ], 
-      entryComponents: [ RecordEditWindow, LoginCmp ],
-      providers:[ Modal, ModalDialogInstance, ICustomModal, FourDInterface, FourDModel, FourDCollection ]
+      entryComponents: [ RecordEditWindow, LoginCmp, JSAppLoader, FlexAppLoader ],
+      providers:[ Modal, ModalDialogInstance, ICustomModal, /*FourDInterface, FourDModel, FourDCollection*/ ]
 })
 export class JS44DModule { }

@@ -3,8 +3,8 @@ import { Component, ViewEncapsulation, ViewContainerRef, EventEmitter, AfterCont
 import { WindowService } from '../../core/index';
 
 import { LoginCmp } from '../login/login';
-import { Modal } from '../angular2-modal/index';
-import { FourDInterface } from '../index';
+import { Modal } from '../angular2-modal/providers/Modal';
+import { FourDInterface } from '../js44D/JSFourDInterface';
 
 @Component({
     selector: 'web-application',

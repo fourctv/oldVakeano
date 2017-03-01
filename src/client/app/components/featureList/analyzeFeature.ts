@@ -1,13 +1,16 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 
-import { ModalConfig, DataGrid, ICustomModal, FourDInterface } from '../../shared/js44D/index';
+import { ModalConfig } from '../../shared/js44D/angular2-modal/models/ModalConfig';
+import { ICustomModal } from '../../shared/js44D/angular2-modal/models/ICustomModal';
+import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
+import { DataGrid } from '../../shared/js44D/dataGrid/dataGrid';
 import { TasteProfilesEx } from '../../shared/moviegenome/index';
 
 @Component({
     selector: 'analyze-feature',
     template: `
     <div class="formPanel">
-        <h1>Movie Genome Feature Analyzer</h1>
+        <h1>Vakeano Feature Analyzer</h1>
         <br/>
         <div class="row" style="padding-left:10px;">
             <h4>Select the Taste Profile to use for analyzing: <span style="color:green;">{{inputData.featureName}}</span></h4>
@@ -68,7 +71,7 @@ export class AnalyzeFeatureComponent implements AfterViewInit {
     constructor(private fourD:FourDInterface) { }
 
     ngAfterViewInit() {
-        this.theGrid.loadData('All');
+        this.theGrid.loadData({query:['All']});
     }
 
     public checkFeature() {

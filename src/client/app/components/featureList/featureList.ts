@@ -1,7 +1,10 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { DataGrid, ModalConfig, Modal, FourDInterface } from '../../shared/js44D/index';
+import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
+import { DataGrid } from '../../shared/js44D/dataGrid/dataGrid';
+import { ModalConfig } from '../../shared/js44D/angular2-modal/models/ModalConfig';
+import { Modal } from '../../shared/js44D/angular2-modal/providers/Modal';
 
 import {FeatureInfoDialog} from './featureInfoDialog';
 import { AnalyzeFeatureComponent } from './analyzeFeature';

@@ -8,7 +8,7 @@ import { LogService} from '../../app/shared/core/index';
 import {ActionBarUtil} from '../core/utils/actionbar.util';
 
 
-import { FourDInterface } from '../../app/shared/js44D/index';
+import { FourDInterface } from '../../app/shared/js44D/js44D/JSFourDInterface';
 import { LoginNSCmp } from '../login/login';
 import { SignUp } from '../login/signUp';
 
@@ -16,6 +16,7 @@ import { UserRecommendations } from '../recommendations/userRecommendations';
 import { UserRating } from '../userrating/userRating'; 
 import { UserRecommendationPage } from '../recommendations/userRecommendationPage'; 
 import { ProfileBuildingPage } from '../userrating/profileBuildingPage'; 
+import { CuratedProfiles } from '../recommendations/curatedProfile';
 
 export const routes: Route[] = [
     {path: 'login', component: LoginNSCmp},
@@ -23,6 +24,8 @@ export const routes: Route[] = [
     {path: 'userRating', component: UserRating},
     {path: 'userRecommendations', component: UserRecommendations},
     {path: 'userRecommendationPage', component: UserRecommendationPage},
+    {path: 'curatedRecommendationPage/:profileID', component: UserRecommendationPage},
+    {path: 'curatedProfile', component: CuratedProfiles},
     {path: 'profileBuildingPage', component: ProfileBuildingPage},
     {path: '**',  component: LoginNSCmp}
 ];

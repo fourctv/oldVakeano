@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { Http } from '@angular/http';
 
-import { FourDCollection, FourDInterface } from '../../shared/js44D/index';
+import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
+import { FourDCollection } from '../../shared/js44D/js44D/JSFourDCollection';
 
 import { Features } from '../../shared/moviegenome/index';
 

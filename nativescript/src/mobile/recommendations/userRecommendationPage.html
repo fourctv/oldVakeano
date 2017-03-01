@@ -1,14 +1,14 @@
 
-<preferencepanel pageTitle="Recommendation" (onSwipe)="onSwipe($event)">
+<preferencepanel pageTitle="Recommendations" (onSwipe)="onSwipe($event)">
         <ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'" row="1" horizontalAlignment="center"
             verticalAlignment="center" class="activity-indicator" style="color: red;"></ActivityIndicator>
 
-        <GridLayout rows="*,auto" [visibility]="isLoading ? 'collapse' : 'visible'" marginTop="5">
+        <GridLayout rows="*,auto" [visibility]="isLoading ? 'collapse' : 'visible'" marginTop="5" (onSwipe)="onSwipe($event)">
             <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
                 <Image [src]='currentFeature.FullResPosterURL' (tap)="showIMDB()"></Image>
             </StackLayout>
 
-            <GridLayout rows="auto,*,auto,auto" row="0" (longPress)="showIMDB()">
+            <GridLayout rows="auto,*,auto,auto" row="0" (longPress)="showIMDB()" (onSwipe)="onSwipe($event)">
                 <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
                     <Label [text]="thumbsUp" class="icon" (tap)="rateThis(3)"></Label>
                 </StackLayout>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {  Router } from '@angular/router';
 
-import { FourDInterface,  MD5 } from '../index';
+import { FourDInterface,  MD5 } from '../js44D/JSFourDInterface';
 import { LogService } from '../../core/services/log.service';
 import { Config } from '../../core/utils/config';
 

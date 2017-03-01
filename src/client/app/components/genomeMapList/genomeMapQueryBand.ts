@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { FourDInterface } from '../../shared/js44D/index';
+import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
 
 import { GenomeMap } from '../../shared/moviegenome/index';
 

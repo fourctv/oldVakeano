@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { ModalDialogInstance, ICustomModal, ICustomModalComponent, FourDModel } from '../index';
+import { FourDModel } from '../js44D/JSFourDModel';
+import { ICustomModal, ICustomModalComponent } from '../angular2-modal/models/ICustomModal';
+import { ModalDialogInstance } from '../angular2-modal/models/ModalDialogInstance';
 
 @Component({
     selector: 'record-edit-window',

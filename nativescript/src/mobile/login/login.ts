@@ -4,7 +4,7 @@ import { Config } from '../../app/shared/core/utils/config';
 import { RouterExtensions } from 'nativescript-angular';
 import { NavigationTransition } from 'ui/frame';
 
-import { FourDInterface,  MD5 } from '../../app/shared/js44D/index';
+import { FourDInterface,  MD5 } from '../../app/shared/js44D/js44D/JSFourDInterface';
 
 
 @Component({

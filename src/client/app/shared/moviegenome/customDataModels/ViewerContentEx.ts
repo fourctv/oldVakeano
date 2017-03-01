@@ -27,10 +27,13 @@ export class ViewerContentEx extends ViewerContent {
 
     // calculated fields
     get FullResPosterURL(): string {
+        return this.get('PosterURL');
+        /* for now didsable this, there seems to be some problems with IMDB 
         let poster:string = this.get('PosterURL');
-        if (poster) {
+        if (poster && poster.indexOf('imdb.com')>0) {
             let marker = poster.indexOf("._");
             return (marker>0)?poster.substr(0,marker)+ '._V1_UX512_.jpg':poster;
         } else return poster;
+        */
     }
 }

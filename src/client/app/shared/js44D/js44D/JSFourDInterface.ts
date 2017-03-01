@@ -8,8 +8,8 @@ import { LogService } from '../../core/services/log.service';
 //import { Config } from '../../core/utils/config';
 
 // for testing only, for production this URL must be blank
-//export const fourDUrl: string = 'http://54.191.46.243:8080';  // to use in development
-export const fourDUrl: string = 'http://localhost:8080';  // to use in development
+export const fourDUrl: string = 'http://54.191.46.243:8080';  // to use in development
+//export const fourDUrl: string = 'http://localhost:8080';  // to use in development
 //export const fourDUrl:string = window.location.protocol + '//' + window.location.host; // to use in production
 
 

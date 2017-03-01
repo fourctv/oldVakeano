@@ -19,7 +19,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
   WEB_APP_SELECTOR = '';
 
   WEB_APPS_CONFIG = [
-    { name: 'nsApp', title: 'Movie Genome', app: 'mainNS.web', selector: 'sd-app', path: 'appNS/app.component', bundle: false },
+    { name: 'nsApp', title: 'Vakeano Genome', app: 'mainNS.web', selector: 'sd-app', path: 'appNS/app.component', bundle: false },
     { name: 'featureList', title: 'Features', app: 'featureListMain', selector: 'feature-list', path: 'featureList/featureList', bundle: true  },
     { name: 'genomeMapList', title: 'Genome Map', app: 'genomeMapListMain', selector: 'genomemap-list', path: 'genomeMapList/genomeMapList', bundle: true },
     { name: 'userProfileList', title: 'User Profiles', app: 'userProfileListMain', selector: 'userprofile-list', path: 'userProfileList/userProfileList', bundle: true },

@@ -3,7 +3,7 @@ import { Config } from '../../core/utils/config';
 
 import { ModalConfig, ModalDialogInstance, ICustomModalComponent } from '../angular2-modal/index';
 
-import { FourDInterface, MD5 } from '../index';
+import { FourDInterface, MD5 } from '../js44D/JSFourDInterface';
 
 
 @Component({

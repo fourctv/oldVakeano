@@ -11,6 +11,9 @@ import { CommonModule }      from '@angular/common';
 //import { EffectsModule } from '@ngrx/effects';
 //import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 //import { TranslateLoader } from 'ng2-translate';
+import { FourDInterface } from './app/shared/js44D/js44D/JSFourDInterface';
+import { FourDModel } from './app/shared/js44D/js44D/JSFourDModel';
+import { FourDCollection } from './app/shared/js44D/js44D/JSFourDCollection';
 
 // app
 import { AppComponent } from './app/components/appMG/app.component';
@@ -22,7 +25,8 @@ import { JS44DModule } from './app/shared/js44D/js44D.module';
 import { MGModule } from './app/shared/moviegenome/mg.module';
 
 // lazyloading components
-import { JSAppLoader, FlexAppLoader } from './app/shared/js44D/index';
+import { JSAppLoader } from './app/shared/js44D/services/jsapploader';
+import { FlexAppLoader } from './app/shared/js44D/services/flexapploader';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/shared/core/index';
@@ -72,13 +76,13 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
     JS44DModule,
     MGModule,
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent,JSAppLoader, FlexAppLoader],
   entryComponents: [ JSAppLoader, FlexAppLoader ],
   providers: [
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'
-    }
+    }, FourDInterface, FourDModel, FourDCollection
   ],
   exports: [
       FormsModule, 

@@ -6,7 +6,9 @@
 import { Component, Injectable, EventEmitter, ViewChild, AfterViewInit, Input } from '@angular/core';
 
 
-import { FourDModel, FourDCollection, FourDQuery } from '../index';
+import { FourDModel } from '../js44D/JSFourDModel';
+import { FourDCollection } from '../js44D/JSFourDCollection';
+import { FourDQuery } from '../js44D/JSFourDInterface';
 
 @Component({
     selector: 'datagrid',

@@ -1,0 +1,22 @@
+    <ActionBar class="action-bar" title="Curated Profile Selector"> 
+        <NavigationButton text=""></NavigationButton>
+    </ActionBar>
+
+    <StackLayout class="container-content" padding="10" width="100%" height="100%">
+            <StackLayout margin="24">
+                <Label class="body" text="Here is a list of prepared Curated Profiles." textWrap="true"></Label>
+                <Label class="body" text="Each Curated Profile yields a specific list of Recommendations." textWrap="true"></Label>
+                <Label class="body" text="Select the one you want to see today." textWrap="true"></Label>
+                <Label class="body" text="The recommendations will exclude titles you have already rated." textWrap="true"></Label>
+            </StackLayout>
+
+            <ListView class="list-group" [items]="profileList.models" (itemTap)="onItemTap($event)" separatorColor="white" width="100%" height="100%">
+                <template let-item="item">
+                    <FlexboxLayout flexDirection="row" class="list-group-item" marginLeft="5" marginRight="5">
+                        <Label class="list-group-item-heading"  [text]='item.Name'></Label>
+                   </FlexboxLayout>
+                </template>
+            </ListView>
+
+
+    </StackLayout>

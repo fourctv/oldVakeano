@@ -3,7 +3,8 @@ import { Http } from '@angular/http';
 
 import { LogService } from '../../shared/core/services/log.service';
 
-import { FourDCollection, FourDInterface } from '../../shared/js44D/index';
+import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
+import { FourDCollection } from '../../shared/js44D/js44D/JSFourDCollection';
 
 import { ViewerContent, ViewerContentEx, Features, TasteProfiles } from '../../shared/moviegenome/index';
 

@@ -7,7 +7,8 @@ import { ModalDialogService, ModalDialogOptions } from "nativescript-angular";
 
 import { FeatureRating} from './featureRating';
 
-import { FourDCollection, FourDInterface } from '../../app/shared/js44D/index';
+import { FourDInterface } from '../../app/shared/js44D/js44D/JSFourDInterface';
+import { FourDCollection } from '../../app/shared/js44D/js44D/JSFourDCollection';
 
 import { Features } from '../../app/shared/moviegenome/index';
 

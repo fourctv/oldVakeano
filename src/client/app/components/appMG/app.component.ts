@@ -7,7 +7,10 @@ import '../operators';
 import { LogService } from '../../shared/core/services/log.service';
 import { Config } from '../../shared/core/utils/config';
 
-import { JSAppLoader, LoginCmp, Modal, FourDInterface } from '../../shared/js44D/index';
+import { JSAppLoader } from '../../shared/js44D/services/jsapploader';
+import { LoginCmp } from '../../shared/js44D/login/login';
+import { Modal } from '../../shared/js44D/angular2-modal/providers/modal';
+import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
 
 
 @Component({

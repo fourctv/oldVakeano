@@ -1,7 +1,7 @@
 import {Component, Input, Injectable, AfterViewInit} from '@angular/core';
 
 
-import { FourDInterface } from '../index';
+import { FourDInterface } from '../js44D/JSFourDInterface';
 
 @Component({
     selector: 'fourd-dropdown',
