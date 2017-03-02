@@ -29,7 +29,7 @@ export class YesNoModalContent {
         <div class="modal-body">{{context.body}}</div>
         <div class="modal-footer">
             <button class="btn btn-primary" (click)="ok($event)">{{context.yesText}}</button>
-            <button *ngIf="!context.hideNo" class="btn btn-warning" (click)="cancel()">{{context.noText}}</button>
+            <button [hidden]="context.hideNo" class="btn btn-warning" (click)="cancel()">{{context.noText}}</button>
         </div>`
 })
 export class YesNoModal implements ICustomModalComponent {

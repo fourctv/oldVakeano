@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, ReflectiveInjector } from '@angular/core';
 import { Config } from '../../core/utils/config';
 
 import { ModalConfig, ModalDialogInstance, ICustomModalComponent } from '../angular2-modal/index';
@@ -7,7 +7,7 @@ import { FourDInterface, MD5 } from '../js44D/JSFourDInterface';
 
 
 @Component({
-    selector: 'login',
+    selector: 'log-in',
     moduleId: module.id,
     templateUrl: 'login.html',
     styleUrls : ['login.css']
@@ -20,16 +20,15 @@ export class LoginCmp implements ICustomModalComponent {
             isBlocking: true,
             title:'Login',
             width:1063, height:667};
-    dialog: ModalDialogInstance;
 
-    username:string = '';
-    password:string = '';
-    showError:boolean = false;
-    fourDVersion:string = '';
-    webAppVersion:string = Config.APP_VERSION();
+    @Input() public username:string = '';
+    @Input() public password:string = '';
+    @Input() public showError:boolean = false;
+    @Input() public fourDVersion:string = '';
+    @Input() public webAppVersion:string = Config.APP_VERSION();
 
-    constructor(_dialog: ModalDialogInstance, private fourD:FourDInterface) {
-        this.dialog = _dialog;
+
+    constructor(public dialog: ModalDialogInstance, private fourD:FourDInterface) {
         this.fourD.call4DRESTMethod('REST_GetApplicationVersion',{})
             .subscribe((v) => {this.fourDVersion = v.text();});
     }

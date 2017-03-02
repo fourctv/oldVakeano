@@ -29,7 +29,7 @@ export class FeatureQueryBand {
 
          // Query based on Feature title
         if (this.programTitle && this.programTitle !== '') {
-            query={query:[Features.kIMDBTitle+ ';contains;' + this.programTitle + ';OR', Features.kProductionTitle+ ';contains;' + this.programTitle + ';OR']};
+            query = {query:[Features.kIMDBTitle+ ';contains;' + this.programTitle + ';OR', Features.kProductionTitle+ ';contains;' + this.programTitle + ';OR']};
         }
 
         // query based on to be curated flag
@@ -40,8 +40,7 @@ export class FeatureQueryBand {
             curated.push(Features.kNarrativeVector+ ';=;;OR');
             curated.push(Features.kStyleVector+ ';=;;OR');
             curated.push(Features.kThemeVector+ ';=;;OR');
-            if (query) query = {intersection:[query,{query:curated}]} 
-            else query ={query:curated};
+            if (query) {query = {intersection:[query,{query:curated}]};} else {query = {query:curated};}
 
        }
          

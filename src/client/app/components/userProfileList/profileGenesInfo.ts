@@ -105,10 +105,10 @@ export class ProfileGenesInfo implements AfterViewInit {
                 .then(() => {
                     this.profileUpdated.emit();
                 });
-            })
+            });
             
         }
     }
 
-    nonEditable(x) {return false}
+    nonEditable(x) {return false;}
 }

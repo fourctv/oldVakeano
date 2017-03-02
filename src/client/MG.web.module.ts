@@ -22,6 +22,7 @@ import { AppComponent } from './app/components/appMG/app.component';
 // feature modules
 import { CoreModule } from './app/shared/core/core.module';
 import { JS44DModule } from './app/shared/js44D/js44D.module';
+import { ModalModule } from './app/shared/js44D/modal.module';
 import { MGModule } from './app/shared/moviegenome/mg.module';
 
 // lazyloading components
@@ -73,7 +74,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
       { provide: ConsoleService, useFactory: (cons) }
     ]),
     //routerModule,
-    JS44DModule,
+    JS44DModule, ModalModule,
     MGModule,
   ],
   declarations: [AppComponent,JSAppLoader, FlexAppLoader],

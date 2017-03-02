@@ -14,9 +14,7 @@ import { DataGrid } from './dataGrid/dataGrid';
 import { LoginCmp  } from './login/login';
 import { JSAppLoader  } from './services/jsAppLoader';
 import { FlexAppLoader  } from './services/flexAppLoader';
-import { ICustomModal } from './angular2-modal/models/ICustomModal';
-import { Modal } from './angular2-modal/providers/Modal';
-import { ModalDialogInstance } from './angular2-modal/models/ModalDialogInstance';
+
 //import { FourDInterface } from './js44D/JSFourDInterface';
 //import { FourDModel } from './js44D/JSFourDModel';
 //import { FourDCollection } from './js44D/JSFourDCollection';
@@ -40,7 +38,6 @@ import { ModalDialogInstance } from './angular2-modal/models/ModalDialogInstance
             LoginCmp,
             JSAppLoader, FlexAppLoader
             ], 
-      entryComponents: [ RecordEditWindow, LoginCmp, JSAppLoader, FlexAppLoader ],
-      providers:[ Modal, ModalDialogInstance, ICustomModal, /*FourDInterface, FourDModel, FourDCollection*/ ]
+      entryComponents: [ RecordEditWindow, LoginCmp, JSAppLoader, FlexAppLoader ]
 })
 export class JS44DModule { }

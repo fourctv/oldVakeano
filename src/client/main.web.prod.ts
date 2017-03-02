@@ -5,7 +5,7 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowser } from '@angular/platform-browser';
 
-import { WebModuleNgFactory } from './web.module.ngfactory';
+import { WebModuleNgFactory } from './MG.web.module.ngfactory';
 
 enableProdMode();
 

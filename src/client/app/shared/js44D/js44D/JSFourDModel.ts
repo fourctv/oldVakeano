@@ -67,11 +67,13 @@ export class FourDModel {
      * @param primaryKey: table's primary key field name
      * @param tableNumber: 4D's table number
     */
-    constructor(tableName?: string, fields?: Array<IFieldDescription>, primaryKey?: string, tableNumber?: number) {
+    constructor(/*tableName?: string, fields?: Array<IFieldDescription>, primaryKey?: string, tableNumber?: number*/) {
+        /*
         if (tableName) this.tableName = tableName;
         if (fields) this.fields = fields;
         if (primaryKey) this.primaryKey_ = primaryKey;
         if (tableNumber) this.tableNumber = tableNumber;
+        */
         // inject FourDInterface
         let injector = ReflectiveInjector.resolveAndCreate([FourDInterface]);
         this.fourD = injector.get(FourDInterface);
@@ -174,7 +176,7 @@ export class FourDModel {
             recordData['timeStamp']=this['TimeStamp'];
         } // if updating, add current record's timestamp attribute
 
-        recordData['fields']={}; // initialize fields propriety
+        recordData['fields'] = {}; // initialize fields propriety
         for (let field of this.fields) {
             var fieldName: string = field.name;
             if (!this.isCalculatedField(field) &&
@@ -190,9 +192,9 @@ export class FourDModel {
                         case 'Date':
                         case 'date':
                             let dateValue: Date = this[fieldName];
-                            value = dateValue.getFullYear().toString() 
+                            value = dateValue.getFullYear().toString();
                             if (dateValue.getMonth()<9) value +='0';
-                            value+= (dateValue.getMonth()+1).toString() 
+                            value+= (dateValue.getMonth()+1).toString();
                             if (dateValue.getDate()<10) value +='0';
                             value+= dateValue.getDate().toString();
                             recordData['fields'][field.longname]=value;

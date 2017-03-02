@@ -35,11 +35,11 @@ export class ProfileRecommendationsInfo implements AfterViewInit {
         { title: 'ID', width: 50, field: 'FeatureID' },
         { title: 'Title', width: 250, field: 'IMDBTitle' },
         { title: 'e-Score', width: 80, field: 'EScore' },
-        { title: 'Feedback Content', width: 350, field: 'Feedback_Content', attributes: { style: "vertical-align: top; font-size: 9px" } },
-        { title: 'Feedback Style', width: 350, field: 'Feedback_Style', attributes: { style: "vertical-align: top; font-size: 9px" } },
-        { title: 'Feedback Theme', width: 350, field: 'Feedback_Theme', attributes: { style: "vertical-align: top; font-size: 9px" } },
-        { title: 'Feedback Narrative', width: 350, field: 'Feedback_Narrative', attributes: { style: "vertical-align: top; font-size: 9px" } },
-        { title: 'Feedback Execution', width: 350, field: 'Feedback_Execution', attributes: { style: "vertical-align: top; font-size: 9px" } }
+        { title: 'Feedback Content', width: 350, field: 'Feedback_Content', attributes: { style: 'vertical-align: top; font-size: 9px' } },
+        { title: 'Feedback Style', width: 350, field: 'Feedback_Style', attributes: { style: 'vertical-align: top; font-size: 9px' } },
+        { title: 'Feedback Theme', width: 350, field: 'Feedback_Theme', attributes: { style: 'vertical-align: top; font-size: 9px' } },
+        { title: 'Feedback Narrative', width: 350, field: 'Feedback_Narrative', attributes: { style: 'vertical-align: top; font-size: 9px' } },
+        { title: 'Feedback Execution', width: 350, field: 'Feedback_Execution', attributes: { style: 'vertical-align: top; font-size: 9px' } }
 
     ];
 
@@ -59,7 +59,7 @@ export class ProfileRecommendationsInfo implements AfterViewInit {
     }
 
     refreshGrid() {
-            let query={custom:"MGSEFilterViewerContent", tableName:"ViewerContent", filter:"recommend"};
+            let query = {custom:'MGSEFilterViewerContent', tableName:'ViewerContent', filter:'recommend'};
             if (this.record.ProfileID && this.record.ProfileID > 0) {
                 query['profileID']=this.record.ProfileID;
             } else {

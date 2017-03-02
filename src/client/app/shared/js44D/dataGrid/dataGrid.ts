@@ -233,7 +233,7 @@ export class DataGrid implements AfterViewInit {
     });
 
 
-    @ViewChild('theGrid') private theGrid: any;
+    @ViewChild('theGrid') public theGrid: any;
 
     //
     // Declare data provider properties

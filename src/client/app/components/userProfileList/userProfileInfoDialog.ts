@@ -40,7 +40,7 @@ export class UserProfileInfoDialog extends RecordEditWindow implements AfterView
     profileUpdated() {
         if (this.currentRecord) {
             kendo.ui.progress($(this.elementRef.nativeElement), true); // show loading progress icon
-            this.currentRecord.refresh().then((rec)=>{
+            this.currentRecord.refresh().then((rec) => {
                 kendo.ui.progress($(this.elementRef.nativeElement), false); // hide loading progress icon
                 if (this.profileGenesInfo) this.profileGenesInfo.refreshGrid();
                 if (this.viewerContentInfo) this.viewerContentInfo.refreshGrid();

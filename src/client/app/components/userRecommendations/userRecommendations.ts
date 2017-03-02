@@ -33,12 +33,10 @@ export class UserRecommendations  {
      */
     userHasLoggedIn() {
         this.controlList.model = ViewerContentEx;
-        let query={custom:"MGSEFilterViewerContent", tableName:"ViewerContent", filter:"recommend"};
+        let query = {custom:'MGSEFilterViewerContent', tableName:'ViewerContent', filter:'recommend', userID:FourDInterface.currentUserID};
          if (this.profileID && this.profileID > 0) {
-            query['profileId']=this.profileID;
-        } else {
-            query['userID']=FourDInterface.currentUserID;
-        }
+            query['profileID']=this.profileID;
+        } 
 
         //this.log.debug('query:'+queryType);
         this.controlList.getRecords(query,
