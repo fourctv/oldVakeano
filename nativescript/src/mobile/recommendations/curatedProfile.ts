@@ -11,7 +11,7 @@ import { TasteProfiles } from '../../app/shared/moviegenome/index';
 @Component({
     moduleId: module.id,
     selector: 'curatedprofile',
-    templateUrl : 'curatedprofile.html' ,
+    templateUrl : 'curatedProfile.html' ,
     changeDetection: ChangeDetectionStrategy.Default
 })
 

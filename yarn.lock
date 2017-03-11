@@ -70,7 +70,7 @@
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-2.2.1.tgz#316ec1e43aa5a0166e5e6e1aa2c34a4049386510"
 
-"@ngx-translate/core@^6.0.0-beta.1":
+"@ngx-translate/core@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@ngx-translate/core/-/core-6.0.0.tgz#823dccefcd82bbe29763949e55d2dc60a1735a66"
 
