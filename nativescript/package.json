@@ -18,6 +18,7 @@
     "start-android-bundle": "npm run ns-bundle --android --start-app",
     "start-ios-bundle": "npm run ns-bundle --ios --start-app",
     "build-android-bundle": "npm run ns-bundle --android --build-app",
+    "build-android-release": "npm run ns-bundle --android --build-app --release --key-store-path ./moviegenome.jks --key-store-password Fronteira --key-store-alias moviegenome --key-store-alias-password Fronteira",
     "build-ios-bundle": "npm run ns-bundle --ios --build-app"
   },
   "dependencies": {

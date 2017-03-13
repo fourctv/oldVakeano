@@ -15,6 +15,7 @@
     "build.docs": "npm run gulp -- build.docs --color",
     "build.e2e": "gulp build.e2e --color",
     "build.android": "gulp build.prod.tns && cd nativescript && npm run start-android-bundle",
+    "release.android": "gulp build.prod.tns && cd nativescript && npm run build-android-release",
     "build.ios": "gulp build.prod.tns && cd nativescript && npm run start-ios-bundle",
     "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
     "build.prod.lazy": "gulp build.prod.lazy --color --env-config prod --build-type prod",
