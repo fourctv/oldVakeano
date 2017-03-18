@@ -6,7 +6,7 @@ import { ModalDialogInstance } from '../../shared/js44D/angular2-modal/models/Mo
 
 @Component({
     selector: 'userrecommendations-dialog',
-    template : '<user-recommendations [profileID]="profileID"></user-recommendations>'
+    template : '<user-recommendations [profileID]="profileID" [profileName]="profileName"></user-recommendations>'
 })
 
 export class UserRecommendationsDialog implements ICustomModalComponent {
@@ -19,12 +19,14 @@ export class UserRecommendationsDialog implements ICustomModalComponent {
     public dialog: ModalDialogInstance;
          
     @Input() public profileID:number;
- 
+    @Input() public profileName:string;
+
     public set modelContentData(v:ICustomModal) {
         if (v) {
             let parms:Object = v;
             if (parms.hasOwnProperty('profileID')) {
                 this.profileID = parms['profileID'];
+                this.profileName = parms['profileName'];
                 }
             }
     }

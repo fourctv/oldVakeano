@@ -83,7 +83,7 @@ export class UserProfileListApp {
     public showRecommendations() {
         if (this.theGrid && this.theGrid.currentRecord && this.theGrid.currentRecord.isRecordLoaded()) {
             let theRec:TasteProfilesEx = <any>this.theGrid.currentRecord; 
-            this.modal.openDialog(UserRecommendationsDialog, {profileID:theRec.ProfileID}); // open user recomendations dialog
+            this.modal.openDialog(UserRecommendationsDialog, {profileID:theRec.ProfileID, profileName:theRec.Name}); // open user recomendations dialog
 
         }
     }

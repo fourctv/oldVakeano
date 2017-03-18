@@ -18,12 +18,15 @@ import { ViewerContent, ViewerContentEx, Features, TasteProfiles } from '../../s
 export class UserRecommendations  {
            
     @Input() currentUser:number = FourDInterface.currentUserID;
-    @Input() currentRecommendation:string = '';
-    
-    @Input() profileID:number;
-    
+    @Input() currentRecommendation:string = 'your viewer/rating profile';
+      
     @Input() controlList:FourDCollection = new FourDCollection();
- 
+   
+    @Input() curatedProfiles:Array<any> = [];
+    @Input() profileID:number;
+    @Input() profileName:string = '';
+    @Input() showCuratedList:Boolean = false;
+
     constructor(private fourD:FourDInterface, private http:Http, private log:LogService) {
         if (!FourDInterface.http) FourDInterface.http = http;
     }
@@ -33,27 +36,7 @@ export class UserRecommendations  {
      */
     userHasLoggedIn() {
         this.controlList.model = ViewerContentEx;
-        let query = {custom:'MGSEFilterViewerContent', tableName:'ViewerContent', filter:'recommend', userID:FourDInterface.currentUserID};
-         if (this.profileID && this.profileID > 0) {
-            query['profileID']=this.profileID;
-        } 
-
-        //this.log.debug('query:'+queryType);
-        this.controlList.getRecords(query,
-                                    [ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
-                                    Features.kIMDBTitle,Features.kPosterURL, 
-                                    ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGPAI, 
-                                    ViewerContent.kMGPEI, ViewerContent.kMGPVR, ViewerContent.kMGNQI, 
-                                    ViewerContent.kFeedback_Content, ViewerContent.kFeedback_Style, ViewerContent.kFeedback_Theme,
-                                    ViewerContent.kFeedback_Narrative, ViewerContent.kFeedback_Execution,
-                                    TasteProfiles.kDescription],
-                                    0, -1, '','<'+ViewerContent.kMGPVR)
-            .then(recs => {
-                //this.log.debug('length:'+recs.length);
-                if (recs.length > 0) {
-                    this.currentRecommendation = 'Recommended for you based on: '+recs[0].Description;
-                }
-             });
+        this.refreshList();
     }
 
     /**
@@ -80,5 +63,52 @@ export class UserRecommendations  {
      */
     cleanUpText(text:string):string {
         return text.replace(/\n/g,'<br/>');
+    }
+
+    /**
+     * Refresh Recommendations list
+     */
+        refreshList() {
+        this.currentRecommendation = 'your viewer/rating profile';
+        let query = {custom:'MGSEFilterViewerContent', tableName:'ViewerContent', filter:'recommend', userID:FourDInterface.currentUserID};
+        if (this.profileID && this.profileID > 0) {
+            query['profileID']=this.profileID;
+            this.currentRecommendation = this.profileName;
+        } 
+
+        //this.log.debug('query:'+queryType);
+        this.controlList.getRecords(query,
+                                    [ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
+                                    Features.kIMDBTitle,Features.kPosterURL, 
+                                    ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGPAI, 
+                                    ViewerContent.kMGPEI, ViewerContent.kMGPVR, ViewerContent.kMGNQI, 
+                                    ViewerContent.kFeedback_Content, ViewerContent.kFeedback_Style, ViewerContent.kFeedback_Theme,
+                                    ViewerContent.kFeedback_Narrative, ViewerContent.kFeedback_Execution],
+                                    0, -1, '','<'+ViewerContent.kMGPVR)
+
+
+    }
+
+    /**
+     * let user select a curated profile 
+     */
+    useCurated() {
+        var profs:FourDCollection = new FourDCollection();
+        profs.model = TasteProfiles;
+        profs.getRecords({query:[TasteProfiles.kOrigin + ';=;Curator']}, [TasteProfiles.kProfileID, TasteProfiles.kName])
+        .then(recs => {
+            this.curatedProfiles = [{ProfileID:0, Name:'Your Viewer Profile'}].concat(profs.models);
+            this.showCuratedList = true;
+        });
+    }
+
+    /**
+     * Show Curated Profile Recommendations
+     */
+    selectCurated(itemIndex) {
+        this.profileID = this.curatedProfiles[itemIndex].ProfileID;
+        this.profileName = this.curatedProfiles[itemIndex].Name;
+        this.showCuratedList = false;
+        this.refreshList();
     }
 }

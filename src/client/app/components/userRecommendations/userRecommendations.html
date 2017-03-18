@@ -4,12 +4,19 @@
         <br/>
         <div class="row" style="padding-left:10px;">
             <h4>Here is a list of Recommended Features.<br/>For each picture, if you have seen it please give it 1-5 stars,<br/>or if you have not seen it, leave it on your recommendation list.</h4>
-            <h4>{{currentRecommendation}}</h4>
+            <h4>Recommended for you based on: <span style="color: red">{{currentRecommendation}}</span>
+                <span style="margin-left:20px;">
+                    <button style="width: 240px; font-style: italic;" (click)="useCurated()" [hidden]="showCuratedList">Select a Curated Profile</button>
+                    <select (change)='selectCurated($event.target.selectedIndex)' [hidden]="!showCuratedList">
+                        <option *ngFor='let item of curatedProfiles' value='{{item.Name}}' [selected]='(item.Name === profileName)?"selected":""'>{{item.Name}}</option>
+                    </select>
+               </span>
+            </h4>
         </div>
         
         <hr style="margin-top:0;width:1100px;" />
         
-        <div style="display:block;float:left;width:1100px;height:600px;padding-top:15px;overflow:scroll;">
+        <div style="display:block;float:left;width:1100px;height:540px;padding-top:15px;overflow:scroll;">
             <fieldset *ngFor="let currentFeature of controlList.models" class="product">
                 <label style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size: 16px !important;">{{currentFeature.IMDBTitle}}</label>
                 <img src="http://54.191.46.243:8080/4DAction/REST_GetWebImage?image={{currentFeature.PosterURL}}" alt="Image preview"/>
