@@ -15,7 +15,7 @@ var rename = require('gulp-rename');
  * Executes the build process, injecting the shims and libs into the `webapp.hml` for the development environment.
  * and saves it as the individual webapp index.html
  */
-function buildWebappIndex(app) {
+function buildWebappIndex(app:any) {
     // set up web app info
     let myConfig = new ProjectConfig();
     myConfig.WEB_APP_NAME = app.name;

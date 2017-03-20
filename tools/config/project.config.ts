@@ -23,8 +23,8 @@ export class ProjectConfig extends SeedAdvancedConfig {
     { name: 'featureList', title: 'Features', app: 'featureListMain', selector: 'feature-list', path: 'featureList/featureList', bundle: true  },
     { name: 'genomeMapList', title: 'Genome Map', app: 'genomeMapListMain', selector: 'genomemap-list', path: 'genomeMapList/genomeMapList', bundle: true },
     { name: 'userProfileList', title: 'User Profiles', app: 'userProfileListMain', selector: 'userprofile-list', path: 'userProfileList/userProfileList', bundle: true },
-    { name: 'userRecommendations', title: 'User Recommendations', app: 'userRecommendationsMain', selector: 'userRecommendations', path: 'userRecommendations/userRecommendations', bundle: true },
-    { name: 'userRating', title: 'User Rating', app: 'userRatingMain', selector: 'userrating', path: 'userRating/userRating', bundle: true }
+    { name: 'userRecommendations', title: 'User Recommendations', app: 'userRecommendationsMain', selector: 'user-recommendations', path: 'userRecommendations/userRecommendations', bundle: true },
+    { name: 'userRating', title: 'User Rating', app: 'userRatingMain', selector: 'user-rating', path: 'userRating/userRating', bundle: true }
   ];
 
   

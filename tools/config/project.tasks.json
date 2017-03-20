@@ -1,5 +1,15 @@
 {
   
+  "build.dev": [
+    "initialize",
+    "clean.once",
+    "build.assets.dev",
+    "build.html_css",
+    "build.js.dev",
+    "build.index.dev",
+    "build.index.webapps.dev"
+  ],
+
   "build.prod.lazy": [
     "check.tools",
     "clean.prod",
