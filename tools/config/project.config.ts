@@ -37,12 +37,13 @@ export class ProjectConfig extends SeedAdvancedConfig {
      // My libraries
       { src: 'base-64/base64.js', inject: 'libs' },
       { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
-      { src: '/MovieGenome/Vakeano/src/client/assets/kendo-ui/js/kendo.all.min.js', inject: 'libs', env: 'dev' },
+     // { src: 'http://kendo.cdn.telerik.com/2017.1.118/js/jszip.min.js', inject: 'libs', env: 'dev' },
+     // { src: 'http://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js', inject: 'libs', env: 'dev' },
  //     { src: 'backbone/backbone-min.js', inject: 'libs' },
       //   { src: 'bootstrap/dist/js/bootstrap.js', inject: 'libs'},
 
-      { src: '/MovieGenome/Vakeano/src/client/assets/kendo-ui/styles/kendo.common.min.css', inject: true },
-      { src: '/MovieGenome/Vakeano/src/client/assets/kendo-ui/styles/kendo.default.min.css', inject: true },
+     // { src: '/MovieGenome/Vakeano/src/client/assets/kendo-ui/styles/kendo.common.min.css', inject: true },
+     // { src: '/MovieGenome/Vakeano/src/client/assets/kendo-ui/styles/kendo.default.min.css', inject: true },
       { src: 'bootstrap/dist/css/bootstrap.css', inject: true }
     ];
 
@@ -62,6 +63,13 @@ export class ProjectConfig extends SeedAdvancedConfig {
         // Fix up paths for base-64
     this.SYSTEM_CONFIG.paths['base-64'] = `${this.APP_BASE}node_modules/base-64/base64`;
 
+    // add kendo-ui for angular2
+    this.SYSTEM_CONFIG.paths['@progress/kendo-angular-grid'] = `${this.APP_BASE}node_modules/@progress/kendo-angular-grid/dist/cdn/js/kendo-angular-grid.js`;
+    this.SYSTEM_CONFIG.paths['@progress/kendo-angular-intl'] = `${this.APP_BASE}node_modules/@progress/kendo-angular-intl/dist/cdn/js/kendo-angular-intl.js`;
+    this.SYSTEM_CONFIG.paths['@progress/kendo-angular-l10n'] = `${this.APP_BASE}node_modules/@progress/kendo-angular-l10n/dist/cdn/js/kendo-angular-l10n.js`;
+    this.SYSTEM_CONFIG.paths['@progress/kendo-data-query'] = `${this.APP_BASE}node_modules/@progress/kendo-data-query/dist/cdn/js/kendo-data-query.js`;
+
+    // our bootstrap app 
     this.BOOTSTRAP_PROD_MODULE = 'mainMG.web';
 
 
