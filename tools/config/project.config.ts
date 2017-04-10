@@ -57,7 +57,11 @@ export class ProjectConfig extends SeedAdvancedConfig {
       ...additional_deps
     ];
 
-    this.SYSTEM_CONFIG.paths[this.BOOTSTRAP_MODULE] = `${this.APP_BASE}mainMG.web`;
+    if (this.TARGET_DESKTOP) {
+      this.SYSTEM_CONFIG.paths[this.BOOTSTRAP_MODULE] = `${this.APP_BASE}mainNS.web`;
+    } else {
+      this.SYSTEM_CONFIG.paths[this.BOOTSTRAP_MODULE] = `${this.APP_BASE}mainMG.web`;
+    }
     this.SYSTEM_BUILDER_CONFIG.paths['base-64']=`${this.APP_BASE}node_modules/base-64/base64.js`;
 
         // Fix up paths for base-64
