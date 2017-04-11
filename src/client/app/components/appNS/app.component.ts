@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 // any operators needed throughout your application
 import '../operators';
 
-import { LogService } from '../../shared/core/services/log.service';
+import { LogService } from '../../shared/core/services/logging/log.service';
 import { Config } from '../../shared/core/utils/config';
 
 import { LoginCmp } from '../../shared/js44D/login/login';

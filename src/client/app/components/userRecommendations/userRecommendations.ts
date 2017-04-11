@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { LogService } from '../../shared/core/services/log.service';
+import { LogService } from '../../shared/core/services/logging/log.service';
 
 import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
 import { FourDCollection } from '../../shared/js44D/js44D/JSFourDCollection';

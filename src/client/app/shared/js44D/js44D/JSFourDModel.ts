@@ -1,7 +1,7 @@
 import { Injectable, ReflectiveInjector } from '@angular/core';
 import { encode } from 'base-64';
 
-import { LogService } from '../../core/services/log.service';
+import { LogService } from '../../core/services/logging/log.service';
 //import { Config } from '../../core/utils/config';
 
 import { FourDInterface, FourDQuery } from './JSFourDInterface';

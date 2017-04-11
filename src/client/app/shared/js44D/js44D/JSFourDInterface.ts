@@ -4,7 +4,7 @@ import { Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { encode } from 'base-64';
 
-import { LogService } from '../../core/services/log.service';
+import { LogService } from '../../core/services/logging/log.service';
 //import { Config } from '../../core/utils/config';
 
 // for testing only, for production this URL must be blank

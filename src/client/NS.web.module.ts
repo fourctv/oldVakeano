@@ -34,7 +34,7 @@ import { UserProfileListModule } from './app/components/userProfileList/userProf
 import { GenomeMapListModule } from './app/components/genomeMapList/genomeMapListModule'; 
 
 // config
-import { Config, WindowService, ConsoleService } from './app/shared/core/index';
+import { Config, WindowService, ConsoleService, createConsoleTarget, provideConsoleTarget, LogTarget, LogLevel, ConsoleTarget } from './app/shared/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 if (String('<%= BUILD_TYPE %>') === 'dev') {
   // only output console logging in dev mode
@@ -59,6 +59,10 @@ export function cons() {
   return console;
 }
 
+export function consoleLogTarget(consoleService: ConsoleService) {
+  return new ConsoleTarget(consoleService, { minLogLevel: LogLevel.Debug });
+}
+
 let DEV_IMPORTS: any[] = [];
 
 if (String('<%= BUILD_TYPE %>') === 'dev') {
@@ -75,7 +79,8 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
     CommonModule,
     CoreModule.forRoot([
       { provide: WindowService, useFactory: (win) },
-      { provide: ConsoleService, useFactory: (cons) }
+      { provide: ConsoleService, useFactory: (cons) },
+      { provide: LogTarget, useFactory: (consoleLogTarget), deps: [ConsoleService], multi: true }
     ]),
     routerModule,
     JS44DModule, ModalModule,

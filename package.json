@@ -1,6 +1,6 @@
 {
   "name": "vakeano",
-  "version": "1.17.03.23a",
+  "version": "1.17.04.10a",
   "description": "The Vakeano web/mobile app",
   "repository": {
     "url": "https://github.com/NathanWalker/angular-seed-advanced"
@@ -86,7 +86,7 @@
     "@types/gulp-rename": "0.0.31",
     "@types/gulp-sass": "^0.0.29",
     "@types/gulp-util": "^3.0.29",
-    "@types/jasmine": "^2.5.41",
+    "@types/jasmine": "^2.5.47",
     "@types/jquery": "^2.0.32",
     "@types/kendo-ui": "^2016.3.34",
     "@types/lodash": "^4.14.37",

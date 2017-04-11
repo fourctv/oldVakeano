@@ -1,8 +1,10 @@
-import { Component, ContentChild, ElementRef, AfterContentInit, Input } from '@angular/core';
+import { Component, ContentChild, ElementRef, ViewContainerRef, AfterContentInit, Input } from '@angular/core';
 
 import { QueryBand } from './queryBand';
 import { DataGrid } from '../dataGrid/dataGrid';
-import { Modal, ICustomModalComponent } from '../angular2-modal/index';
+import { Modal } from '../angular2-modal/providers/Modal';
+import { ICustomModalComponent } from '../angular2-modal/models/ICustomModal';
+import { ModalConfig } from '../angular2-modal/models/ModalConfig';
 
 @Component({
     selector: 'record-list',
@@ -23,12 +25,17 @@ export class RecordList implements AfterContentInit {
     @ContentChild(QueryBand) queryBand: QueryBand;
     @ContentChild(DataGrid) theGrid: DataGrid;
 
+    /**
+     * Save Edit Window Configuration
+     */
+    private _editWindowConfig: ModalConfig;
+
     private _previousQuery:Object;
 
     //
     // We need access to a Modal dialog component, to open an associated Record Edit Form 
     //
-    constructor(private modal: Modal, private elementRef: ElementRef) {
+    constructor(private modal: Modal, private elementRef: ElementRef, private viewRef:ViewContainerRef) {
     }
 
     /**
@@ -55,6 +62,10 @@ export class RecordList implements AfterContentInit {
         if (this.theGrid && this.editWindow) {
             this.theGrid.recordSelected.subscribe((record: any) => { this.showEditWindow('edit'); });
         }
+
+        if (this.editWindow && this.editWindow['dialogConfig']) {
+            this._editWindowConfig = this.editWindow['dialogConfig'];
+        }
     }
 
     /**
@@ -77,12 +88,12 @@ export class RecordList implements AfterContentInit {
                 kendo.ui.progress($(this.elementRef.nativeElement), true); // show loading progress icon
                 this.theGrid.currentRecord.refresh().then(() => { // refresh current record
                     kendo.ui.progress($(this.elementRef.nativeElement), false); // clear loading progress icon
-                    this.modal.openDialog(this.editWindow, this.theGrid.currentRecord)
+                    this.modal.openInside(<any>this.editWindow, this.viewRef, this.theGrid.currentRecord, this._editWindowConfig)
                         .then(result => {this.editWindowHandler(result);}); // open edit dialog
                 });
             } else {
                 // if not optimizing the grid loading, then we have a complete record loaded already
-                this.modal.openDialog(this.editWindow, this.theGrid.currentRecord)
+                this.modal.openInside(<any>this.editWindow, this.viewRef, this.theGrid.currentRecord, this._editWindowConfig)
                     .then(result => {this.editWindowHandler(result);}); // open edit dialog
             }
         }
@@ -91,7 +102,7 @@ export class RecordList implements AfterContentInit {
             // if we are adding a new record
             let modelDef = <any>(this.theGrid.model);
             let newModel = <any>(new modelDef());
-            this.modal.openDialog(this.editWindow, newModel); // open edit dialog
+            this.modal.openInside(<any>this.editWindow, this.viewRef, newModel, this._editWindowConfig); // open edit dialog
         }
     }
 

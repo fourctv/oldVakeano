@@ -1,6 +1,9 @@
 // nativescript
-import { NativeScriptModule, NativeScriptFormsModule, NativeScriptHttpModule, NativeScriptRouterModule, RouterExtensions as TNSRouterExtensions } from 'nativescript-angular';
-// import { RouterExtensions as TNSRouterExtensions } from 'nativescript-angular/router';
+import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
+import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { NativeScriptHttpModule } from 'nativescript-angular/http';
+import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { RouterExtensions as TNSRouterExtensions } from 'nativescript-angular/router';
 
 // angular
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -15,7 +18,7 @@ import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui/sidedraw
 // app
 import {
   WindowService,
-  ConsoleService,
+  ConsoleService, ConsoleTarget, LogLevel,
   RouterExtensions,
   AppService
 } from './app/shared/core/index';
@@ -51,7 +54,7 @@ import { NS_ANALYTICS_PROVIDERS } from './mobile/analytics/index';
  * Config
  * Seed provided configuration options
  */
-import { Config } from './app/shared/core/index';
+import { Config, LogTarget } from './app/shared/core/index';
 import { Page } from 'ui/page';
 Config.PageClass = Page;
 
@@ -108,11 +111,16 @@ export function cons() {
   return console;
 }
 
+export function consoleLogTarget(service: ConsoleService) {
+  return new ConsoleTarget(service, { minLogLevel: LogLevel.Debug });
+}
+
 @NgModule({
   imports: [
     CoreModule.forRoot([
       { provide: WindowService, useClass: WindowNative },
-      { provide: ConsoleService, useFactory: (cons) }
+      { provide: ConsoleService, useFactory: (cons) },
+      { provide: LogTarget, multi: true, deps: [ConsoleService], useFactory: (consoleLogTarget) }
     ]),
     ComponentsModule,
     NativeScriptRouterModule.forRoot(<any>routes)
