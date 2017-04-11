@@ -62,13 +62,14 @@ export class SeedAdvancedConfig extends SeedConfig {
     this.BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}${bootstrap}.prod`;
 
     this.APP_TITLE = 'Angular Seed Advanced';
-    this.APP_BASE = ''; // paths must remain relative
+    this.APP_BASE = this.TARGET_DESKTOP ? '' // paths must remain relative for desktop build
+      : '/';
 
     // Advanced seed packages
     let additionalPackages: ExtendPackages[] = [
       {
         name: 'lodash',
-        path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
+        path: 'node_modules/lodash/lodash.js',
         packageMeta: {
           main: 'index.js',
           defaultExtension: 'js'
@@ -97,7 +98,7 @@ export class SeedAdvancedConfig extends SeedConfig {
       },
       {
         name: '@ngrx/effects/testing',
-        path: `${this.APP_BASE}node_modules/@ngrx/effects/testing/index.js`
+        path: 'node_modules/@ngrx/effects/testing/index.js'
       },
       {
         name: '@ngrx/store-devtools',
@@ -136,11 +137,11 @@ export class SeedAdvancedConfig extends SeedConfig {
       },
       {
         name: 'ngrx-store-freeze',
-        path: `${this.APP_BASE}node_modules/ngrx-store-freeze/dist/index.js`
+        path: 'node_modules/ngrx-store-freeze/dist/index.js'
       },
       {
         name: 'deep-freeze-strict',
-        path: `${this.APP_BASE}node_modules/deep-freeze-strict/index.js`
+        path: 'node_modules/deep-freeze-strict/index.js'
       }
     ];
 
