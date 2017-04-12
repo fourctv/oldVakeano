@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule }      from '@angular/common';
 
 // kendo
-import { GridModule } from '@progress/kendo-angular-grid';
+//import { GridModule } from '@progress/kendo-angular-grid';
 
 // libs
 //import { StoreModule } from '@ngrx/store';
@@ -83,7 +83,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
     //routerModule,
     JS44DModule, ModalModule,
     MGModule,
-    GridModule
+    //GridModule
   ],
   declarations: [AppComponent,JSAppLoader, FlexAppLoader],
   entryComponents: [ JSAppLoader, FlexAppLoader ],

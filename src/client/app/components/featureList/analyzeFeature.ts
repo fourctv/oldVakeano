@@ -27,7 +27,6 @@ import { TasteProfilesEx } from '../../shared/moviegenome/index';
                     [useLazyLoading]="false"
                     [pageableRefresh]="false"
                     [pageableSizes]="false"
-                    [pageableMessage]="recordCount"
                 ></datagrid>
         </div>
     </div>
@@ -64,7 +63,7 @@ export class AnalyzeFeatureComponent implements AfterViewInit {
         this.inputData = v;
     }
 
-    private inputData: ICustomModal;
+    public inputData: any;
 
     @ViewChild(DataGrid) private theGrid: DataGrid;
 

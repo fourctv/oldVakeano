@@ -21,6 +21,18 @@
   <!-- endinject -->
   <% } %>
 
+     <% if (BUILD_TYPE === 'prod') { %>    
+      <style>
+       @font-face {
+        font-family: 'Glyphicons Halflings';
+
+        src: url('css/fonts/glyphicons-halflings-regular.eot');
+        src: url('css/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('css/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('css/fonts/glyphicons-halflings-regular.woff') format('woff'), url('css/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('css/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+      }
+      </style>
+
+   <% } %>
+
   <% if (BUILD_TYPE === 'prod') { %>
   <!-- segment.io -->
   <script type="text/javascript">

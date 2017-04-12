@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { LogService } from '../../shared/core/services/logging/log.service';
@@ -15,7 +15,7 @@ import { ViewerContent, ViewerContentEx, Features, TasteProfiles } from '../../s
     styleUrls : ['userRecommendations.css']
 })
 
-export class UserRecommendations  {
+export class UserRecommendations implements AfterViewInit {
            
     @Input() currentUser:number = FourDInterface.currentUserID;
     @Input() currentRecommendation:string = 'your viewer/rating profile';
@@ -34,7 +34,7 @@ export class UserRecommendations  {
     /**
      * Starting up... load all Recommendations for the current User or Profile
      */
-    userHasLoggedIn() {
+    ngAfterViewInit() {
         this.controlList.model = ViewerContentEx;
         this.refreshList();
     }
@@ -84,7 +84,7 @@ export class UserRecommendations  {
                                     ViewerContent.kMGPEI, ViewerContent.kMGPVR, ViewerContent.kMGNQI, 
                                     ViewerContent.kFeedback_Content, ViewerContent.kFeedback_Style, ViewerContent.kFeedback_Theme,
                                     ViewerContent.kFeedback_Narrative, ViewerContent.kFeedback_Execution],
-                                    0, -1, '','<'+ViewerContent.kMGPVR)
+                                    0, -1, '','<'+ViewerContent.kMGPVR);
 
 
     }

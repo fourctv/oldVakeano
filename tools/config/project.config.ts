@@ -63,7 +63,8 @@ export class ProjectConfig extends SeedAdvancedConfig {
     } else {
       this.SYSTEM_CONFIG.paths[this.BOOTSTRAP_MODULE] = `${this.APP_BASE}mainMG.web`;
     }
-    this.SYSTEM_BUILDER_CONFIG.paths['base-64']=`${this.APP_BASE}node_modules/base-64/base64.js`;
+    this.SYSTEM_BUILDER_CONFIG.paths['base-64']='node_modules/base-64/base64.js';
+    this.SYSTEM_BUILDER_CONFIG.paths['jQuery']='node_modules/jquery/dist/jquery.min.js';
 
         // Fix up paths for base-64
     this.SYSTEM_CONFIG.paths['base-64'] = `${this.APP_BASE}node_modules/base-64/base64`;
@@ -75,7 +76,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
     this.SYSTEM_CONFIG.paths['@progress/kendo-data-query'] = `${this.APP_BASE}node_modules/@progress/kendo-data-query/dist/cdn/js/kendo-data-query.js`;
 
     // our bootstrap app 
-    this.BOOTSTRAP_PROD_MODULE = 'mainMG.web';
+    this.BOOTSTRAP_PROD_MODULE = 'mainNS.web';
 
 
     // Add `local` third-party libraries to be injected/bundled.

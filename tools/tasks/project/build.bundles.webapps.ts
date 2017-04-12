@@ -47,7 +47,7 @@ export = (done: any) => {
     .then(() => done())
     .catch((e: any) => done(e));
     */
-  Promise.all(config.map(buildBundle.bind(config)))
+  Promise.all(config.map(buildStaticBundle.bind(config)))
     .then(() => done())
     .catch((e: any) => done(e));
 };

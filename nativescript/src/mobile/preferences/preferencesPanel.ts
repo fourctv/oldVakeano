@@ -14,7 +14,7 @@ import { isAndroid, isIOS } from 'platform';
         <ActionItem (tap)="preferences()" icon="~/assets/icons/mobile_menu.png" ios.position="left" android.position="actionBar" android.systemIcon="ic_menu_manage"></ActionItem>
     </ActionBar>
     <RadSideDrawer [drawerLocation]="currentLocation">
-        <StackLayout tkDrawerContent class="sideStackLayout" style="background-color: lightgray;" (swipe)="doSwipe($event)" verticalAlignment="top" marginTop="5" height="185" width="250" padding="10">
+        <StackLayout tkDrawerContent class="sideStackLayout" style="background-color: lightgray;" verticalAlignment="top" marginTop="5" height="185" width="250" padding="10">
             <StackLayout class="sideTitleStackLayout">
                 <Label text="Vakeano" class="text-center h2"></Label>
             </StackLayout>
@@ -37,7 +37,7 @@ import { isAndroid, isIOS } from 'platform';
             </StackLayout>
         </StackLayout>
 
-        <StackLayout tkMainContent style="background-color: deepskyblue;" (swipe)="doSwipe($event)" width="100%" height="100%">
+        <StackLayout tkMainContent style="background-color: deepskyblue;" width="100%" height="100%">
                 <ng-content></ng-content>
          </StackLayout>
     </RadSideDrawer>        

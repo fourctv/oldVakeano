@@ -38,7 +38,7 @@ export class UserRecommendationPage implements OnInit {
 
     private currentFeatureIndex:number = 0;
 
-
+    private swipeCount:number = 0;
     constructor(private fourD:FourDInterface, private log:LogService, private router:RouterExtensions, private route: ActivatedRoute) {
        
     }
@@ -110,7 +110,7 @@ export class UserRecommendationPage implements OnInit {
     // handle user swipe on a title
     //
     onSwipe(event:SwipeGestureEventData) {
-        this.log.debug('swipe:'+event.direction);
+        this.log.debug('swipe:'+(++this.swipeCount));
         switch (event.direction) {
             case SwipeDirection.left:
                 this.nextFeature();

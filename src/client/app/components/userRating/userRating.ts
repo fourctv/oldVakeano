@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 
 import { Http } from '@angular/http';
 
@@ -14,7 +14,7 @@ import { Features } from '../../shared/moviegenome/index';
     styleUrls : ['userRating.css']
 })
 
-export class UserRating {     
+export class UserRating implements AfterViewInit {     
 
     @Input() currentUser:number = 0;
     @Input() currentProfile:number = 0;
@@ -24,7 +24,7 @@ export class UserRating {
         if (!FourDInterface.http) FourDInterface.http = <any>http;
     }
 
-    userHasLoggedIn() {
+    ngAfterViewInit() {
         this.controlList.model = Features;
         if (!this.currentUser || this.currentUser <= 0) this.currentUser = FourDInterface.currentUserID;
         this.controlList.getRecords(<any>{custom:'MGSEFilterViewerContent', tableName:'Features', filter:'control', userID:this.currentUser, profileID:this.currentProfile},[Features.kFeatureId,Features.kIMDBTitle,Features.kPosterURL]);

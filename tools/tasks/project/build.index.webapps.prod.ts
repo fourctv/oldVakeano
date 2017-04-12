@@ -45,16 +45,14 @@ function inject(...files: Array<string>) {
  * Injects the bundled JavaScript shims and application bundles for the production environment.
  */
 function injectJs(appName:string) {
-  return inject(join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE),
-                      '/MovieGenome/Vakeano/src/client/assets/kendo-ui/js/kendo.all.min.js', 
-                      join(Config.TMP_DIR, appName+'.js'));
+  return inject(join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE),join(Config.TMP_DIR, appName+'.js'));
 }
 
 /**
  * Injects the bundled CSS files for the production environment.
  */
 function injectCss() {
-  return inject(join(Config.CSS_DEST, Config.CSS_PROD_BUNDLE));
+  return inject(join(Config.CSS_DEST, `${Config.CSS_BUNDLE_NAME}.css`));
 }
 
 /**
@@ -70,13 +68,17 @@ function transformPath() {
     } else {
       slice_after = 3;
     }
-    arguments[0] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep) + `?${Date.now()}`;
+    arguments[0] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep);
+    const queryString = Config.QUERY_STRING_GENERATOR();
+    if (queryString) {
+      arguments[0] += `?${queryString}`;
+    }
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
 }
 
 export = () => {
-    gulp.src('/MovieGenome/Vakeano/node_modules/kendo-ui/styles/Default/*').pipe(gulp.dest(join(Config.CSS_DEST,'Default')));
+    //gulp.src('/MovieGenome/Vakeano/node_modules/kendo-ui/styles/Default/*').pipe(gulp.dest(join(Config.CSS_DEST,'Default')));
     return Config.WEB_APPS_CONFIG.map(theapp => { buildWebappIndex(theapp); });
    
 };
