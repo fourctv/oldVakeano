@@ -2,7 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { encode } from 'base-64';
+import * as base64 from 'base-64';
+import * as utf8 from 'utf8/utf8';
 
 import { LogService } from '../../core/services/logging/log.service';
 //import { Config } from '../../core/utils/config';
@@ -113,7 +114,7 @@ export class FourDInterface {
         FourDInterface.currentUser = user;
         FourDInterface.currentUserPassword = pwd;
 
-        let body = { username: encode(user), password: encode(pwd) };
+        let body = { username: base64.encode(utf8.encode(user)), password: base64.encode(utf8.encode(pwd)) };
 
         return new Promise((resolve, reject) => {
             this.call4DRESTMethod('REST_Authenticate', body)

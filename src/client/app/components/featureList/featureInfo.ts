@@ -31,6 +31,7 @@ export class FeatureInfo {
                 'top': (e.pageY - yOffset) + 'px',
                 'left': (e.pageX + xOffset) + 'px',
                 'display': 'block',
+                'width': '400px',
                 'position': 'relative',
                 'z-index': 25000
             });

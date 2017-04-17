@@ -1,5 +1,6 @@
 import { Injectable, ReflectiveInjector } from '@angular/core';
-import { encode } from 'base-64';
+import * as base64 from 'base-64';
+import * as utf8 from 'utf8/utf8';
 
 import { LogService } from '../../core/services/logging/log.service';
 //import { Config } from '../../core/utils/config';
@@ -264,7 +265,7 @@ export class FourDModel {
             let body: any = { Username: FourDInterface.currentUser };
             body.TableName = this.tableName;
             body.RecordNum = this.recordNumber;
-            body.VariablesList = encode(this.getColumnListJSON());
+            body.VariablesList = base64.encode(utf8.encode(this.getColumnListJSON()));
 
             return new Promise((resolve, reject) => {
                 let me = this;
@@ -357,7 +358,7 @@ export class FourDModel {
         body.RecordNum = this.recordNumber;
         if (this.fourdSaveCallbackMethod_) body.CallBackMethod = this.fourdSaveCallbackMethod_;
         body.Action = 'add';
-        body.RecordData = encode(this.recordToJSON('add', false));
+        body.RecordData = base64.encode(utf8.encode(this.recordToJSON('add', false)));
 
         return new Promise((resolve, reject) => {
             let me = this;
@@ -401,7 +402,7 @@ export class FourDModel {
             body.RecordNum = this.recordNumber;
             if (this.fourdSaveCallbackMethod_) body.CallBackMethod = this.fourdSaveCallbackMethod_;
             body.Action = 'update';
-            body.RecordData = encode(this.recordToJSON('update', false));
+            body.RecordData = base64.encode(utf8.encode(this.recordToJSON('update', false)));
 
             return new Promise((resolve, reject) => {
                 let me = this;

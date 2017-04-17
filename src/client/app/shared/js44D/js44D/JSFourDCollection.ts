@@ -1,5 +1,6 @@
 import { Injectable, ReflectiveInjector } from '@angular/core';
-import { encode } from 'base-64';
+import * as base64 from 'base-64';
+import * as utf8 from 'utf8/utf8';
 
 import { LogService } from '../../core/services/logging/log.service';
 //import { Config } from '../../core/utils/config';
@@ -131,7 +132,7 @@ export class FourDCollection {
         body.NumRecs = numOfRecords;
 
         body.QueryString = JSON.stringify(query);
-        body.Columns = encode((columns)?this.getColumnListJSON(columns):this.getColumnListJSON(newModel.getColumnList()));
+        body.Columns = base64.encode(utf8.encode((columns)?this.getColumnListJSON(columns):this.getColumnListJSON(newModel.getColumnList())));
 
         if (filter) body.FilterOptions = filter;
         if (orderby) body.OrderBy = orderby;

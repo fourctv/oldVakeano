@@ -24,6 +24,8 @@ export =
         'app/**/*.ts',
         '!**/*.spec.ts',
         '!app/**/*.spec.ts',
+        '!app/components/appMG/**/*',
+        '!app/components/appNS/**/*',
         '!**/*.e2e-spec.ts',
         '!app/**/*.e2e-spec.ts',
         '!app/shared/test/**/*',
