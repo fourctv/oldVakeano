@@ -37,7 +37,7 @@ export class FourDModel {
 
     public idAttribute: string = '_recnum';
 
-    protected fields: Array<IFieldDescription> = [];
+    public fields: Array<IFieldDescription> = [];
 
     /**
      * callback methods to be executed on 4D side before a Save or Delete operation

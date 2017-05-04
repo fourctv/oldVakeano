@@ -13,7 +13,7 @@ import {GenomeMapInfoDialog} from './genomeMapInfoDialog';
     template: `
     <web-application>
         <record-list [editWindow]="editWindow">
-            <query-band [enableSort]="true" [enableQBE]="false" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true">
+            <query-band [enableSort]="true" [enableQBE]="true" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true">
                 <queryband class="form-group">
                     <genomemap-queryband #customQueryBand class="form-group"></genomemap-queryband>
                 </queryband>

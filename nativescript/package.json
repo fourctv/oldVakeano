@@ -43,7 +43,6 @@
     "lodash": "^4.17.4",
     "nativescript-angular": "1.5.0",
     "nativescript-dev-webpack": "^0.3.1",
-    "nativescript-hockey-sdk": "0.0.1",
     "nativescript-telerik-ui": "^1.6.1",
     "nativescript-theme-core": "^1.0.3",
     "ngrx-store-freeze": "0.1.9",

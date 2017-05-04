@@ -1,7 +1,9 @@
 import { Component, Input, ReflectiveInjector } from '@angular/core';
 import { Config } from '../../core/utils/config';
 
-import { ModalConfig, ModalDialogInstance, ICustomModalComponent } from '../angular2-modal/index';
+import { ModalDialogInstance } from '../angular2-modal/models/ModalDialogInstance';
+import { ICustomModalComponent } from '../angular2-modal/models/ICustomModal';
+import { ModalConfig } from '../angular2-modal/models/ModalConfig';
 
 import { FourDInterface, MD5 } from '../js44D/JSFourDInterface';
 

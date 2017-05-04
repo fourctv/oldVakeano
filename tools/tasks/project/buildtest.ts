@@ -10,13 +10,13 @@ interface Bundle {
    module: string;
    selector: string; 
    path: string;
-   bundle: boolean; };
+  };
 
 
 const BUNDLER_OPTIONS = {
-    format: 'umd',
-    minify: false, uglify: false,
-    mangle: false
+    format: 'cjs',
+    minify: true,
+    mangle: true
 };
 
 const addExtensions = `
@@ -34,7 +34,7 @@ const MG_DIR = join(Config.TMP_DIR, 'app/components');
 const ModuleDir = join(Config.PROD_DEST,'js');
 
 
-const buildBundle = (theapp) => {
+const buildBundle = (theapp:any) => {
     console.log(join(MG_DIR,`${theapp.path}Module.js`)+ ' -> ' + join(ModuleDir,`${theapp.name}Module.js`));
     let builder = new Builder(Config.SYSTEM_BUILDER_CONFIG);
     return builder.buildStatic(join(MG_DIR,`${theapp.path}Module.js`), 
@@ -58,17 +58,16 @@ const bundleMain = () => {
       });
 };
 
-const bundleModule = (config: Bundle[], exclude: string[], bundle: Bundle) => {
+const bundleModule = (bundle: Bundle) => {
   let builder = new Builder(Config.SYSTEM_BUILDER_CONFIG);
-  let all = join(Config.TMP_DIR, Config.BOOTSTRAP_DIR);
-  let bootstrap = join(Config.TMP_DIR, Config.BOOTSTRAP_DIR, bundle.path, bundle.module);
-  let bootstrapDir = join(Config.TMP_DIR, Config.BOOTSTRAP_DIR, bundle.path);
-  let expression = `${bootstrap} - (${all}/**/*.js - ${bootstrapDir}/**/*.js) - ${exclude.join(' - ')}`;
-  console.log('bundling', join(ModuleDir, bundle.module + '.js'));
+  let module = join(Config.TMP_DIR, Config.BOOTSTRAP_DIR, bundle.path, bundle.module);
+  let main = join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE);
+  let expression = `${module} - ${main}`;
+  console.log('bundling', expression);
   return builder
-    .buildStatic(
+    .bundle(
       expression,
-      join(ModuleDir, bundle.module + '.js'),
+      join(Config.JS_DEST, 'lazy', bundle.module + '.js'),
       BUNDLER_OPTIONS)
       .then((res: any) => {
         console.log(res.modules);
@@ -84,10 +83,9 @@ export = (done: any) => {
   const config = [
     { name: 'userRating', title: 'User Rating', module: 'userRatingModule', selector: 'userrating', path: 'app/components/userRating' }
   ];
-  bundleMain()
-    .then((bundled: string[]) => Promise.all(config.map(bundleModule.bind(null, config, bundled))))
-    .then(() => done())
-    .catch((e: any) => done(e));
+  Config.SYSTEM_BUILDER_CONFIG.paths['dist/prod/*']='dist/prod/*';
+  console.log(Config.SYSTEM_BUILDER_CONFIG);
+  bundleModule(config[0]);
 };
 
 

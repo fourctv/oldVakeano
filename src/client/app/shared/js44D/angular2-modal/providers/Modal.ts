@@ -83,6 +83,7 @@ export class Modal {
         } else me.theDialog.open(); 
         
         dialogInstance.contentRef = dialogComponentRef;
+        dialogInstance.kendoDialog = this.theDialog;
         
         // trick to avoid angular2 error "Expression has changed after it was checked"
         dialogComponentRef.changeDetectorRef.detectChanges(); // need this to avoid NG2 error/warning

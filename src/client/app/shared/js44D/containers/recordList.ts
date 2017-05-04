@@ -1,6 +1,7 @@
 import { Component, ContentChild, ElementRef, ViewContainerRef, AfterContentInit, Input } from '@angular/core';
 
 import { QueryBand } from './queryBand';
+import { AdvancedQueryComponent } from './advancedQuery';
 import { DataGrid } from '../dataGrid/dataGrid';
 import { Modal } from '../angular2-modal/providers/Modal';
 import { ICustomModalComponent } from '../angular2-modal/models/ICustomModal';
@@ -31,6 +32,7 @@ export class RecordList implements AfterContentInit {
     private _editWindowConfig: ModalConfig;
 
     private _previousQuery:Object;
+    private _previousAdvancedQuery:any;
 
     //
     // We need access to a Modal dialog component, to open an associated Record Edit Form 
@@ -46,6 +48,8 @@ export class RecordList implements AfterContentInit {
         if (this.queryBand) {
             // if user hits Refresh button, call grid refrech method
             this.queryBand.queryRefresh.subscribe((query: Object) => { this.refreshGrid(query); });
+            // if user hits Advanced Query button, call grid refrech method
+            if (this.queryBand.enableQBE) this.queryBand.queryFromQBE.subscribe((query: Object) => { this.showAdvancedQuery(); });
             // it used hits Export to Excel, call grid's excel export method
             this.queryBand.queryExportGrid.subscribe(() => { if (this.theGrid) this.theGrid.exportGridToExcel(); });
 
@@ -120,9 +124,26 @@ export class RecordList implements AfterContentInit {
     }
 
     /**
-     * private method to deal with edit windoe close
+     * private method to deal with edit window close
      */
     private editWindowHandler(result:string) {
         if (result === 'recordSaved') this.refreshGrid();
+    }
+
+    /**
+     * deal with advanced Query dialog
+     */
+    private showAdvancedQuery() {
+        let advancedQuery = AdvancedQueryComponent;
+        let modelDef = <any>(this.theGrid.model);
+        let newModel = <any>(new modelDef());
+        this.modal.openInside(AdvancedQueryComponent, this.viewRef, {previousQuery: this._previousAdvancedQuery, model:(newModel.tableName !== '')?newModel:(<any>this.theGrid.model).prototype}, advancedQuery['dialogConfig'])
+            .then((result:any) => {
+                if (result.query.length > 0) {
+                    this._previousAdvancedQuery = result.queryFields;
+                    this.refreshGrid({query:result.query}); // open edit dialog
+                }
+            });
+
     }
 }

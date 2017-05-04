@@ -20,6 +20,8 @@ class Deferred<T> {
 @Injectable()
 export class ModalDialogInstance {
     contentRef: ComponentRef<any>;
+
+    kendoDialog: any;
     /**
      * States if the modal is inside a specific element.
      */

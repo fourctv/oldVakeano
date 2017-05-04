@@ -16,7 +16,7 @@ import {FeaturesEx} from '../../shared/moviegenome/index';
     template: `
     <web-application>
         <record-list [editWindow]="editWindow">
-            <query-band [enableSort]="true" [enableQBE]="false" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true">
+            <query-band [enableSort]="true" [enableQBE]="true" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true">
                 <queryband class="form-group">
                     <features-queryband #customQueryBand class="form-group"></features-queryband>
                 </queryband>

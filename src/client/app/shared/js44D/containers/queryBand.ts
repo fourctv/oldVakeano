@@ -143,7 +143,7 @@ export class QueryBand   {
     }
     
     public doQBE() {
-        this.queryFromQBE.emit(null);
+        this.queryFromQBE.emit();
     }
     
     public doQFF() {

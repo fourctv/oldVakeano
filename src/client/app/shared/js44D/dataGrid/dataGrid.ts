@@ -247,6 +247,10 @@ export class DataGrid implements AfterViewInit {
      */
     get currentRecord(): FourDModel {
         if (this.dataProvider && this.dataProvider.currentRecord) {
+            if (this.dataProvider.currentRecord.tableName === '') {
+                this.dataProvider.currentRecord.tableName = (<any>this.model).prototype.tableName;
+                this.dataProvider.currentRecord.tableNumber = (<any>this.model).prototype.tableNumber;
+            }
             return this.dataProvider.currentRecord;
         } else return null;
     }
@@ -414,4 +418,27 @@ export class DataGrid implements AfterViewInit {
             this.gridObject.refresh();
         }
     }
+
+    setColumnConfig(columns) {
+        this.gridObject.destroy();
+        $(this.theGrid.nativeElement).empty();
+       // $(this.theGrid.nativeElement).remove();
+
+        this.dataProvider.columns = this.columns;
+        this.columns = columns;
+        this.ngAfterViewInit();
+    }
+
+    setExternalDataSource(dataSource, columns) {
+        this.gridObject.destroy();
+        $(this.theGrid.nativeElement).empty();
+       // $(this.theGrid.nativeElement).remove();
+
+        //this.dataProvider.columns = this.columns;
+        this.dataSource = dataSource;
+        this.columns = columns;
+        this.ngAfterViewInit();
+    }
+
+    getDataProvider() {return this.dataProvider;}
 }
