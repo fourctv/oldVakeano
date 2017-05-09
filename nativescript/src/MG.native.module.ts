@@ -2,8 +2,7 @@
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
-import { RouterExtensions as TNSRouterExtensions } from 'nativescript-angular/router';
+import { NativeScriptRouterModule, RouterExtensions as TNSRouterExtensions } from 'nativescript-angular/router';
 
 // angular
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -50,6 +49,10 @@ import { CuratedProfiles } from './mobile/recommendations/curatedProfile';
 import { WindowNative, NSAppService } from './mobile/core/index';
 import { NS_ANALYTICS_PROVIDERS } from './mobile/analytics/index';
 
+// lazyloading components (not used)
+import { JSAppLoader } from './app/shared/js44D/services/jsapploader';
+import { FlexAppLoader } from './app/shared/js44D/services/flexapploader';
+
 /**
  * Config
  * Seed provided configuration options
@@ -88,7 +91,8 @@ Config.DEBUG.LEVEL_4 = true;
     LoginNSCmp, SignUp,
     PreferencePanel,
     UserRecommendationPage, UserRecommendations, FeatureRecommendation, 
-    UserRating, FeatureRating, ProfileBuildingPage, CuratedProfiles
+    UserRating, FeatureRating, ProfileBuildingPage, CuratedProfiles,
+    JSAppLoader, FlexAppLoader
   ],
   entryComponents: [FeatureRecommendation, FeatureRating],
   schemas: [
