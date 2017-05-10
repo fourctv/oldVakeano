@@ -250,6 +250,7 @@ export class DataGrid implements AfterViewInit {
             if (this.dataProvider.currentRecord.tableName === '') {
                 this.dataProvider.currentRecord.tableName = (<any>this.model).prototype.tableName;
                 this.dataProvider.currentRecord.tableNumber = (<any>this.model).prototype.tableNumber;
+                this.dataProvider.currentRecord.fields = (<any>this.model).prototype.fields;
             }
             return this.dataProvider.currentRecord;
         } else return null;
@@ -266,34 +267,8 @@ export class DataGrid implements AfterViewInit {
      * after our view gets initialized, instantiate the grid and its dataProvider
      */
     ngAfterViewInit() {
-        if (this._model) {
-            this.dataProvider = new FourDCollection(); // this is the Backbone model used to bring in records
-            this.dataProvider.model = this._model;
-            this.dataProvider.columns = this.columns;
-        }
+        this.initializeGrid();
 
-        $(this.theGrid.nativeElement).kendoGrid({
-            dataSource: (this.dataProvider) ? this.dataSource : null,
-            excel: { allPages: true, filterable: true },
-            change: ($event) => { this.rowClicked($event); },
-            autoBind: false,
-            pageable:{  refresh: this.pageableRefresh, 
-                        pageSize: this.pageSize,
-                        pageSizes: this.pageableSizes,  
-                        buttonCount: this.pageableButtonCount,
-                        messages: {display: this.pageableMessage}},
-            //scrollable: { virtual: this.useLazyLoading },
-            resizable: true,
-            selectable: this.selectionMode,
-            editable: this.editable,
-            filterable: this.filterable,
-            sortable: this.sortable,
-            height: this.height,
-            columnMenu: this.columnMenu,
-            columns: this.columns
-        });
-
-        this.gridObject = $(this.theGrid.nativeElement).data('kendoGrid');
         $(this.theGrid.nativeElement).on('dblclick', 'tr.k-state-selected', ($event) => { this.dblClickRow($event); });
     }
 
@@ -327,7 +302,7 @@ export class DataGrid implements AfterViewInit {
     }
 
     rowClicked(event) {
-        //console.log(event);
+        //console.log('click',event);
         if (this.dataProvider) {
             let item = this.gridObject.dataItem(this.gridObject.select());
             this.dataProvider.currentRecord = this.findRecordForThisItem(item);
@@ -426,7 +401,7 @@ export class DataGrid implements AfterViewInit {
 
         this.dataProvider.columns = this.columns;
         this.columns = columns;
-        this.ngAfterViewInit();
+        this.initializeGrid();
     }
 
     setExternalDataSource(dataSource, columns) {
@@ -437,8 +412,41 @@ export class DataGrid implements AfterViewInit {
         //this.dataProvider.columns = this.columns;
         this.dataSource = dataSource;
         this.columns = columns;
-        this.ngAfterViewInit();
+        this.initializeGrid();
     }
 
     getDataProvider() {return this.dataProvider;}
+
+
+    private initializeGrid() {
+        if (this._model) {
+            this.dataProvider = new FourDCollection(); // this is the Backbone model used to bring in records
+            this.dataProvider.model = this._model;
+            this.dataProvider.columns = this.columns;
+        }
+
+        $(this.theGrid.nativeElement).kendoGrid({
+            dataSource: (this.dataProvider) ? this.dataSource : null,
+            excel: { allPages: true, filterable: true },
+            change: ($event) => { this.rowClicked($event); },
+            autoBind: false,
+            pageable:{  refresh: this.pageableRefresh, 
+                        pageSize: this.pageSize,
+                        pageSizes: this.pageableSizes,  
+                        buttonCount: this.pageableButtonCount,
+                        messages: {display: this.pageableMessage}},
+            //scrollable: { virtual: this.useLazyLoading },
+            resizable: true,
+            selectable: this.selectionMode,
+            editable: this.editable,
+            filterable: this.filterable,
+            sortable: this.sortable,
+            height: this.height,
+            columnMenu: this.columnMenu,
+            columns: this.columns
+        });
+
+        this.gridObject = $(this.theGrid.nativeElement).data('kendoGrid');
+
+    }
 }
