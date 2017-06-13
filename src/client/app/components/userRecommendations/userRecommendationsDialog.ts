@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
-import { ICustomModal } from '../../shared/js44D/angular2-modal/models/ICustomModal';
-import { ICustomModalComponent } from '../../shared/js44D/angular2-modal/models/ICustomModalComponent';
-import { ModalConfig } from '../../shared/js44D/angular2-modal/models/ModalConfig';
-import { ModalDialogInstance } from '../../shared/js44D/angular2-modal/models/ModalDialogInstance';
+import { ICustomModal } from '../../modules/js44D/angular2-modal/models/ICustomModal';
+import { ICustomModalComponent } from '../../modules/js44D/angular2-modal/models/ICustomModalComponent';
+import { ModalConfig } from '../../modules/js44D/angular2-modal/models/ModalConfig';
+import { ModalDialogInstance } from '../../modules/js44D/angular2-modal/models/ModalDialogInstance';
 
 @Component({
     selector: 'userrecommendations-dialog',

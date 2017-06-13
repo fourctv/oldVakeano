@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { LogService } from '../../app/shared/core/index';
+import { LogService } from '../../app/modules/core/index';
 import { ModalDialogParams } from "nativescript-angular";
 
 import { openUrl } from "utils/utils";
 import { SwipeGestureEventData, SwipeDirection } from "ui/gestures";
 
-import { FourDInterface } from '../../app/shared/js44D/js44D/JSFourDInterface';
+import { FourDInterface } from '../../app/modules/js44D/js44D/JSFourDInterface';
 
-import { Features } from '../../app/shared/moviegenome/index';
+import { Features } from '../../app/modules/moviegenome/index';
 
 @Component({
      moduleId: module.id,

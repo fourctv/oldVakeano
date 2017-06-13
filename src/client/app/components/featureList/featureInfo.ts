@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { FeaturesEx } from '../../shared/moviegenome/index';
+import { FeaturesEx } from '../../modules/moviegenome/index';
 
 @Component({
     moduleId: module.id,

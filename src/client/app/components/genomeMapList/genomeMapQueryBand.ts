@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
 
-import { GenomeMap } from '../../shared/moviegenome/index';
+import { GenomeMap } from '../../modules/moviegenome/index';
 
 @Component({
     moduleId: module.id,

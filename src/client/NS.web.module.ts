@@ -11,19 +11,19 @@ import { CommonModule }      from '@angular/common';
 //import { EffectsModule } from '@ngrx/effects';
 //import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 //import { TranslateLoader } from 'ng2-translate';
-import { FourDInterface } from './app/shared/js44D/js44D/JSFourDInterface';
-import { FourDModel } from './app/shared/js44D/js44D/JSFourDModel';
-import { FourDCollection } from './app/shared/js44D/js44D/JSFourDCollection';
+import { FourDInterface } from './app/modules/js44D/js44D/JSFourDInterface';
+import { FourDModel } from './app/modules/js44D/js44D/JSFourDModel';
+import { FourDCollection } from './app/modules/js44D/js44D/JSFourDCollection';
 
 // app
 import { AppComponent } from './app/components/appNS/app.component';
 import { routes } from './app/components/appNS/app.component';
 
 // feature modules
-import { CoreModule } from './app/shared/core/core.module';
-import { JS44DModule } from './app/shared/js44D/js44D.module';
-import { ModalModule } from './app/shared/js44D/modal.module';
-import { MGModule } from './app/shared/moviegenome/mg.module';
+import { CoreModule } from './app/modules/core/core.module';
+import { JS44DModule } from './app/modules/js44D/js44D.module';
+import { ModalModule } from './app/modules/js44D/modal.module';
+import { MGModule } from './app/modules/moviegenome/mg.module';
 
 // applets
 import { BlankPage } from './app/components/appNS/blankPage';
@@ -34,7 +34,7 @@ import { UserProfileListModule } from './app/components/userProfileList/userProf
 import { GenomeMapListModule } from './app/components/genomeMapList/genomeMapListModule'; 
 
 // config
-import { Config, WindowService, ConsoleService, createConsoleTarget, provideConsoleTarget, LogTarget, LogLevel, ConsoleTarget } from './app/shared/core/index';
+import { Config, WindowService, ConsoleService, createConsoleTarget, provideConsoleTarget, LogTarget, LogLevel, ConsoleTarget } from './app/modules/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 if (String('<%= BUILD_TYPE %>') === 'dev') {
   // only output console logging in dev mode

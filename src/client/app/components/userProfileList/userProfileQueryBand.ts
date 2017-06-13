@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import { ShellUsers, TasteProfiles } from '../../shared/moviegenome/index';
+import { ShellUsers, TasteProfiles } from '../../modules/moviegenome/index';
 
 @Component({
     selector: 'userprofile-queryband',

@@ -1,8 +1,8 @@
 import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 
 
-import { DataGrid } from '../../shared/js44D/dataGrid/dataGrid';
-import { FeaturesEx } from '../../shared/moviegenome/index';
+import { DataGrid } from '../../modules/js44D/dataGrid/dataGrid';
+import { FeaturesEx } from '../../modules/moviegenome/index';
 
 @Component({
     selector: 'contentprofile-info',

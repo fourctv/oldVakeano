@@ -2,10 +2,10 @@ import { Component, Input, AfterViewInit } from '@angular/core';
 
 import { Http } from '@angular/http';
 
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
-import { FourDCollection } from '../../shared/js44D/js44D/JSFourDCollection';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
+import { FourDCollection } from '../../modules/js44D/js44D/JSFourDCollection';
 
-import { Features } from '../../shared/moviegenome/index';
+import { Features } from '../../modules/moviegenome/index';
 
 @Component({
     moduleId: module.id,

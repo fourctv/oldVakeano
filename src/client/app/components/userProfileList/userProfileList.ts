@@ -2,11 +2,11 @@ import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { Http } from '@angular/http';
 import {NgModel} from '@angular/forms';
 
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
-import { Modal } from '../../shared/js44D/angular2-modal/providers/Modal';
-import { DataGrid } from '../../shared/js44D/dataGrid/dataGrid';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
+import { Modal } from '../../modules/js44D/angular2-modal/providers/Modal';
+import { DataGrid } from '../../modules/js44D/dataGrid/dataGrid';
 
-import {TasteProfilesEx} from '../../shared/moviegenome/index';
+import {TasteProfilesEx} from '../../modules/moviegenome/index';
 
 import {UserProfileInfoDialog} from './userProfileInfoDialog';
 import {UserRecommendationsDialog} from '../userRecommendations/userRecommendationsDialog';

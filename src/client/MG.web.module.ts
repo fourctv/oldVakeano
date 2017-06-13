@@ -14,26 +14,26 @@ import { CommonModule }      from '@angular/common';
 //import { EffectsModule } from '@ngrx/effects';
 //import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 //import { TranslateLoader } from 'ng2-translate';
-import { FourDInterface } from './app/shared/js44D/js44D/JSFourDInterface';
-import { FourDModel } from './app/shared/js44D/js44D/JSFourDModel';
-import { FourDCollection } from './app/shared/js44D/js44D/JSFourDCollection';
+import { FourDInterface } from './app/modules/js44D/js44D/JSFourDInterface';
+import { FourDModel } from './app/modules/js44D/js44D/JSFourDModel';
+import { FourDCollection } from './app/modules/js44D/js44D/JSFourDCollection';
 
 // app
 import { AppComponent } from './app/components/appMG/app.component';
 //import { routes } from './app/components/app.routes';
 
 // feature modules
-import { CoreModule } from './app/shared/core/core.module';
-import { JS44DModule } from './app/shared/js44D/js44D.module';
-import { ModalModule } from './app/shared/js44D/modal.module';
-import { MGModule } from './app/shared/moviegenome/mg.module';
+import { WindowService, StorageService, ConsoleService, createConsoleTarget, provideConsoleTarget, LogTarget, LogLevel, ConsoleTarget } from './app/modules/core/services/index';
+import { CoreModule, Config } from './app/modules/core/index';
+import { JS44DModule } from './app/modules/js44D/js44D.module';
+import { ModalModule } from './app/modules/js44D/modal.module';
+import { MGModule } from './app/modules/moviegenome/mg.module';
 
 // lazyloading components
-import { JSAppLoader } from './app/shared/js44D/services/jsapploader';
-import { FlexAppLoader } from './app/shared/js44D/services/flexapploader';
+import { JSAppLoader } from './app/modules/js44D/services/jsapploader';
+import { FlexAppLoader } from './app/modules/js44D/services/flexapploader';
 
 // config
-import { Config, WindowService, ConsoleService, createConsoleTarget, provideConsoleTarget, LogTarget, LogLevel, ConsoleTarget } from './app/shared/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 if (String('<%= BUILD_TYPE %>') === 'dev') {
   // only output console logging in dev mode
@@ -48,11 +48,14 @@ if (String('<%= TARGET_DESKTOP %>') === 'true') {
   //routerModule = RouterModule.forRoot(routes, {useHash: true});
 }
 
-declare var window, console;
+declare var window, console, localStorage;
 
 // For AoT compilation to work:
 export function win() {
   return window;
+}
+export function storage() {
+  return localStorage;
 }
 export function cons() {
   return console;
@@ -77,6 +80,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
     CommonModule,
     CoreModule.forRoot([
       { provide: WindowService, useFactory: (win) },
+      { provide: StorageService, useFactory: (storage) },
       { provide: ConsoleService, useFactory: (cons) },
       { provide: LogTarget, useFactory: (consoleLogTarget), deps: [ConsoleService], multi: true }
     ]),

@@ -1,7 +1,7 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
-import { TasteProfilesEx } from '../../shared/moviegenome/index';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
+import { TasteProfilesEx } from '../../modules/moviegenome/index';
 
 @Component({
     moduleId: module.id,

@@ -1,8 +1,8 @@
 import { Component, ViewChild, AfterViewInit, ElementRef, Input } from '@angular/core';
 
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
-import { DataGrid } from '../../shared/js44D/dataGrid/dataGrid';
-import { TasteProfilesEx, ViewerContent } from '../../shared/moviegenome/index';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
+import { DataGrid } from '../../modules/js44D/dataGrid/dataGrid';
+import { TasteProfilesEx, ViewerContent } from '../../modules/moviegenome/index';
 
 @Component({
     selector: 'viewercontent-info',

@@ -14,22 +14,22 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 //import { EffectsModule } from '@ngrx/effects';
 //import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 //import { TranslateLoader } from 'ng2-translate';
-import { FourDInterface } from './app/shared/js44D/js44D/JSFourDInterface';
-import { FourDModel } from './app/shared/js44D/js44D/JSFourDModel';
-import { FourDCollection } from './app/shared/js44D/js44D/JSFourDCollection';
+import { FourDInterface } from './app/modules/js44D/js44D/JSFourDInterface';
+import { FourDModel } from './app/modules/js44D/js44D/JSFourDModel';
+import { FourDCollection } from './app/modules/js44D/js44D/JSFourDCollection';
 
 // app
 import { UserRatingModule } from './app/components/userRating/userRatingModule';
 import { UserRating } from './app/components/userRating/userRating';
 
 // feature modules
-import { CoreModule } from './app/shared/core/core.module';
-import { JS44DModule } from './app/shared/js44D/js44D.module';
-import { ModalModule } from './app/shared/js44D/modal.module';
-import { MGModule } from './app/shared/moviegenome/mg.module';
+import { CoreModule } from './app/modules/core/core.module';
+import { JS44DModule } from './app/modules/js44D/js44D.module';
+import { ModalModule } from './app/modules/js44D/modal.module';
+import { MGModule } from './app/modules/moviegenome/mg.module';
 
 // config
-import { Config, WindowService, ConsoleService } from './app/shared/core/index';
+import { Config, WindowService, ConsoleService } from './app/modules/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 
 //let routerModule = RouterModule.forRoot(routes);

@@ -1,10 +1,10 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 
-import { ModalConfig } from '../../shared/js44D/angular2-modal/models/ModalConfig';
-import { ICustomModal } from '../../shared/js44D/angular2-modal/models/ICustomModal';
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
-import { DataGrid } from '../../shared/js44D/dataGrid/dataGrid';
-import { TasteProfilesEx } from '../../shared/moviegenome/index';
+import { ModalConfig } from '../../modules/js44D/angular2-modal/models/ModalConfig';
+import { ICustomModal } from '../../modules/js44D/angular2-modal/models/ICustomModal';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
+import { DataGrid } from '../../modules/js44D/dataGrid/dataGrid';
+import { TasteProfilesEx } from '../../modules/moviegenome/index';
 
 @Component({
     selector: 'analyze-feature',

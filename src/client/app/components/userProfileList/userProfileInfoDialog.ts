@@ -1,9 +1,9 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
-import { ModalConfig } from '../../shared/js44D/angular2-modal/models/ModalConfig';
-import { RecordEditWindow } from '../../shared/js44D/containers/recordEditWindow';
-import { TasteProfilesEx } from '../../shared/moviegenome/index';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
+import { ModalConfig } from '../../modules/js44D/angular2-modal/models/ModalConfig';
+import { RecordEditWindow } from '../../modules/js44D/containers/recordEditWindow';
+import { TasteProfilesEx } from '../../modules/moviegenome/index';
 import { ProfileGenesInfo } from './profileGenesInfo';
 import { ViewerContentInfo } from './viewerContentInfo';
 import { ProfileRecommendationsInfo } from './profileRecommendationsInfo';

@@ -1,16 +1,16 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { ActivatedRoute }     from '@angular/router';
 import { Observable }         from 'rxjs/Observable';
-import { LogService } from '../../app/shared/core/index';
+import { LogService } from '../../app/modules/core/index';
 import { RouterExtensions } from 'nativescript-angular';
 
 import { openUrl } from "utils/utils";
 import { SwipeGestureEventData, SwipeDirection } from "ui/gestures";
 
-import { FourDInterface } from '../../app/shared/js44D/js44D/JSFourDInterface';
-import { FourDCollection } from '../../app/shared/js44D/js44D/JSFourDCollection';
+import { FourDInterface } from '../../app/modules/js44D/js44D/JSFourDInterface';
+import { FourDCollection } from '../../app/modules/js44D/js44D/JSFourDCollection';
 
-import { ViewerContent, ViewerContentEx, Features } from '../../app/shared/moviegenome/index';
+import { ViewerContent, ViewerContentEx, Features } from '../../app/modules/moviegenome/index';
 
 
 @Component({

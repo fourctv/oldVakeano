@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { LogService } from '../../app/shared/core/index';
+import { LogService } from '../../app/modules/core/index';
 import { RouterExtensions } from 'nativescript-angular';
 
-import { FourDInterface,  MD5 } from '../../app/shared/js44D/js44D/JSFourDInterface';
-import { ShellUsers } from  '../../app/shared/moviegenome/index';
+import { FourDInterface,  MD5 } from '../../app/modules/js44D/js44D/JSFourDInterface';
+import { ShellUsers } from  '../../app/modules/moviegenome/index';
 
 @Component({
     selector: 'signup',

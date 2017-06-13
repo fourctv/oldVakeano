@@ -1,12 +1,12 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { LogService } from '../../shared/core/services/logging/log.service';
+import { LogService } from '../../modules/core/services/logging/log.service';
 
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
-import { FourDCollection } from '../../shared/js44D/js44D/JSFourDCollection';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
+import { FourDCollection } from '../../modules/js44D/js44D/JSFourDCollection';
 
-import { ViewerContent, ViewerContentEx, Features, TasteProfiles } from '../../shared/moviegenome/index';
+import { ViewerContent, ViewerContentEx, Features, TasteProfiles } from '../../modules/moviegenome/index';
 
 @Component({
     moduleId: module.id,

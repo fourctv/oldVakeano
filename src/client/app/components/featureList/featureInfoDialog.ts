@@ -1,9 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core';
 
-import { RecordEditWindow } from '../../shared/js44D/containers/recordEditWindow';
-import { ModalConfig } from '../../shared/js44D/angular2-modal/models/ModalConfig';
+import { RecordEditWindow } from '../../modules/js44D/containers/recordEditWindow';
+import { ModalConfig } from '../../modules/js44D/angular2-modal/models/ModalConfig';
 
-import {FeaturesEx} from '../../shared/moviegenome/index';
+import {FeaturesEx} from '../../modules/moviegenome/index';
 
 
 @Component({

@@ -4,12 +4,12 @@ import { Http } from '@angular/http';
 // any operators needed throughout your application
 import '../operators';
 
-import { LogService } from '../../shared/core/services/logging/log.service';
-import { Config } from '../../shared/core/utils/config';
+import { LogService } from '../../modules/core/services/logging/log.service';
+import { Config } from '../../modules/core/utils/config';
 
-import { LoginCmp } from '../../shared/js44D/login/login';
-import { Modal } from '../../shared/js44D/angular2-modal/providers/modal';
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
+import { LoginCmp } from '../../modules/js44D/login/login';
+import { Modal } from '../../modules/js44D/angular2-modal/providers/modal';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
 
 import { BlankPage } from './blankPage';
 import { UserRating } from '../userRating/userRating'; 

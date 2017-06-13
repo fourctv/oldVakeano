@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {Features} from '../../shared/moviegenome/index';
+import {Features} from '../../modules/moviegenome/index';
 
 @Component({
     selector: 'features-queryband',

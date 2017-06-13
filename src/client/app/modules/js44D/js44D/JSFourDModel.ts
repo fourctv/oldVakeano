@@ -377,7 +377,7 @@ export class FourDModel {
                         me.recordNumber = jsonData['_recnum'];
                         if (me.primaryKey_ && me.primaryKey_ !== '') me[me.primaryKey_] = jsonData['recordID'];
                         me.clearRecordDirtyFlag(); // clean up modified fields
-                        resolve(me);
+                        resolve(<any>me);
                     } else reject(jsonData.returnCode);
                 },
                 error => {
@@ -419,7 +419,7 @@ export class FourDModel {
                         if (jsonData.returnCode === 'OK') {
                             // update record went OK
                             me.clearRecordDirtyFlag(); // clean up modified fields
-                            resolve(me);
+                            resolve(<any>me);
                         } else reject(jsonData.returnCode);
                     },
                     error => {
@@ -465,7 +465,7 @@ export class FourDModel {
                         */
                         if (jsonData.returnCode === 'OK') {
                             // delete record went OK
-                            resolve(me);
+                            resolve(<any>me);
                         } else reject(jsonData.returnCode);
                     },
                     error => {

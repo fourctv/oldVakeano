@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
-import { LogService } from '../../app/shared/core/index';
+import { LogService } from '../../app/modules/core/index';
 
 import { openUrl } from "utils/utils";
 import { SwipeGestureEventData, SwipeDirection } from "ui/gestures";
@@ -7,10 +7,10 @@ import { ModalDialogService, ModalDialogOptions } from "nativescript-angular";
 
 import { FeatureRating} from './featureRating';
 
-import { FourDInterface } from '../../app/shared/js44D/js44D/JSFourDInterface';
-import { FourDCollection } from '../../app/shared/js44D/js44D/JSFourDCollection';
+import { FourDInterface } from '../../app/modules/js44D/js44D/JSFourDInterface';
+import { FourDCollection } from '../../app/modules/js44D/js44D/JSFourDCollection';
 
-import { Features } from '../../app/shared/moviegenome/index';
+import { Features } from '../../app/modules/moviegenome/index';
 
 @Component({
     moduleId: module.id,

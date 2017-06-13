@@ -1,8 +1,8 @@
 import { Component, Input, EventEmitter, Output, ElementRef } from '@angular/core';
 
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
 
-import {  GenomeModel, GenomeMap, TasteProfiles, TasteProfilesEx, ProfileGenes, ProfileGenesEx } from '../../shared/moviegenome/index';
+import {  GenomeModel, GenomeMap, TasteProfiles, TasteProfilesEx, ProfileGenes, ProfileGenesEx } from '../../modules/moviegenome/index';
 
 @Component({
     moduleId: module.id,

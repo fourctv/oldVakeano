@@ -1,10 +1,10 @@
 import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 
-import { FourDCollection } from '../../shared/js44D/js44D/JSFourDCollection';
-import { FourDInterface } from '../../shared/js44D/js44D/JSFourDInterface';
+import { FourDCollection } from '../../modules/js44D/js44D/JSFourDCollection';
+import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
 
-import { DataGrid } from '../../shared/js44D/dataGrid/dataGrid';
-import { TasteProfilesEx, ViewerContent, ViewerContentEx, Features } from '../../shared/moviegenome/index';
+import { DataGrid } from '../../modules/js44D/dataGrid/dataGrid';
+import { TasteProfilesEx, ViewerContent, ViewerContentEx, Features } from '../../modules/moviegenome/index';
 
 @Component({
     selector: 'profilerecommendations-info',

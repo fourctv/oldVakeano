@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { LogService } from '../../app/shared/core/index';
-import { Config } from '../../app/shared/core/utils/config';
+import { LogService } from '../../app/modules/core/index';
+import { Config } from '../../app/modules/core/utils/config';
 import { RouterExtensions } from 'nativescript-angular';
 import { NavigationTransition } from 'ui/frame';
 
-import { FourDInterface,  MD5 } from '../../app/shared/js44D/js44D/JSFourDInterface';
+import { FourDInterface,  MD5 } from '../../app/modules/js44D/js44D/JSFourDInterface';
 
 
 @Component({

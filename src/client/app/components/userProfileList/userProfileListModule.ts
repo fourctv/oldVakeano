@@ -15,8 +15,8 @@ import { ProfileGenesInfoDialog } from './profileGenesInfoInfoDialog';
 import { UserRatingModule } from '../userRating/userRatingModule';
 import { UserRecommendationsModule } from '../userRecommendations/userRecommendationsModule';
 
-import { JS44DModule } from '../../shared/js44D/js44D.module';
-import { MGModule } from '../../shared/moviegenome/mg.module';
+import { JS44DModule } from '../../modules/js44D/js44D.module';
+import { MGModule } from '../../modules/moviegenome/mg.module';
 
 @NgModule({
   imports: [

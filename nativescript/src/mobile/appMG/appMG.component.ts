@@ -4,11 +4,11 @@ import {  Router, Route } from '@angular/router';
 import { Http } from '@angular/http';
 
 // app
-import { LogService} from '../../app/shared/core/index';
+import { LogService} from '../../app/modules/core/index';
 import {ActionBarUtil} from '../core/utils/actionbar.util';
 
 
-import { FourDInterface } from '../../app/shared/js44D/js44D/JSFourDInterface';
+import { FourDInterface } from '../../app/modules/js44D/js44D/JSFourDInterface';
 import { LoginNSCmp } from '../login/login';
 import { SignUp } from '../login/signUp';
 

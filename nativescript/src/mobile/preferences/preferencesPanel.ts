@@ -1,5 +1,5 @@
 import { Component, Input, Output, ChangeDetectionStrategy, ViewChild, EventEmitter, OnInit } from '@angular/core';
-import { LogService } from '../../app/shared/core/index';
+import { LogService } from '../../app/modules/core/index';
 import { RouterExtensions } from 'nativescript-angular';
 
 import { RadSideDrawerComponent } from "nativescript-telerik-ui/sidedrawer/angular";

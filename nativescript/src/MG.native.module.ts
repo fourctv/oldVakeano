@@ -20,17 +20,17 @@ import {
   ConsoleService, ConsoleTarget, LogLevel,
   RouterExtensions,
   AppService
-} from './app/shared/core/index';
+} from './app/modules/core/index';
 import { NSAppComponent } from './mobile/appMG/appMG.component';
 import { routes } from './mobile/appMG/appMG.component';
 
 // feature modules
-import { CoreModule } from './app/shared/core/core.module';
-import { JS44DModule } from './app/shared/js44D/js44D.module';
-import { FourDInterface } from './app/shared/js44D/js44D/JSFourDInterface';
-import { FourDModel } from './app/shared/js44D/js44D/JSFourDModel';
-import { FourDCollection } from './app/shared/js44D/js44D/JSFourDCollection';
-import { MGModule } from './app/shared/moviegenome/mg.module';
+import { CoreModule } from './app/modules/core/core.module';
+import { JS44DModule } from './app/modules/js44D/js44D.module';
+import { FourDInterface } from './app/modules/js44D/js44D/JSFourDInterface';
+import { FourDModel } from './app/modules/js44D/js44D/JSFourDModel';
+import { FourDCollection } from './app/modules/js44D/js44D/JSFourDCollection';
+import { MGModule } from './app/modules/moviegenome/mg.module';
 import { LoginNSCmp } from './mobile/login/login';
 import { SignUp } from './mobile/login/signUp';
 
@@ -50,14 +50,14 @@ import { WindowNative, NSAppService } from './mobile/core/index';
 import { NS_ANALYTICS_PROVIDERS } from './mobile/analytics/index';
 
 // lazyloading components (not used)
-import { JSAppLoader } from './app/shared/js44D/services/jsapploader';
-import { FlexAppLoader } from './app/shared/js44D/services/flexapploader';
+import { JSAppLoader } from './app/modules/js44D/services/jsapploader';
+import { FlexAppLoader } from './app/modules/js44D/services/flexapploader';
 
 /**
  * Config
  * Seed provided configuration options
  */
-import { Config, LogTarget } from './app/shared/core/index';
+import { Config, LogTarget } from './app/modules/core/index';
 import { Page } from 'ui/page';
 Config.PageClass = Page;
 
