@@ -2,7 +2,8 @@ import { Component, ComponentFactoryResolver, ElementRef, ViewContainerRef, Afte
 
 import {ModalDialogInstance} from '../angular2-modal/models/ModalDialogInstance';
 import {ModalConfig} from '../angular2-modal/models/ModalConfig';
-import {ICustomModal, ICustomModalComponent} from '../angular2-modal/models/ICustomModal';
+import { ICustomModal } from '../angular2-modal/models/ICustomModal';
+import { ICustomModalComponent } from '../angular2-modal/models/ICustomModalComponent';
 
 @Component({
     selector: 'jsapp-loader',

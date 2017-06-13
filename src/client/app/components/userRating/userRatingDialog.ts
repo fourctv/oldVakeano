@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { ICustomModal, ICustomModalComponent } from '../../shared/js44D/angular2-modal/models/ICustomModal';
+import { ICustomModal } from '../../shared/js44D/angular2-modal/models/ICustomModal';
+import { ICustomModalComponent } from '../../shared/js44D/angular2-modal/models/ICustomModalComponent';
 import { ModalConfig } from '../../shared/js44D/angular2-modal/models/ModalConfig';
 import { ModalDialogInstance } from '../../shared/js44D/angular2-modal/models/ModalDialogInstance';
 

@@ -167,7 +167,7 @@ export class AppComponent implements AfterContentInit {
                     .then(cmpFactory => { 
                         let modRef = modFac.create(this.viewref.parentInjector);
                         kendo.ui.progress($(this.elementRef.nativeElement), false); // hide loading progress icon
-                            this.modal.openDialog(JSAppLoader, { title: menu.title, provider: cmpFactory, injector: modRef });
+                            this.modal.openDialog(JSAppLoader, { title: menu.title, provider: cmpFactory, injector: modRef }, true);
                     });
 
             });

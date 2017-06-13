@@ -4,13 +4,14 @@ import { QueryBand } from './queryBand';
 import { AdvancedQueryComponent } from './advancedQuery';
 import { DataGrid } from '../dataGrid/dataGrid';
 import { Modal } from '../angular2-modal/providers/Modal';
-import { ICustomModalComponent } from '../angular2-modal/models/ICustomModal';
+import { ICustomModalComponent } from '../angular2-modal/models/ICustomModalComponent';
 import { ModalConfig } from '../angular2-modal/models/ModalConfig';
+import { ListSelectorDialog } from '../dialogs/listSelectorDialog';
 
 @Component({
     selector: 'record-list',
     template: '<div class="recordList"><ng-content></ng-content></div>',
-    providers: [Modal]
+    providers: [ListSelectorDialog, Modal]
 })
 
 export class RecordList implements AfterContentInit {
@@ -35,9 +36,9 @@ export class RecordList implements AfterContentInit {
     private _previousAdvancedQuery:any;
 
     //
-    // We need access to a Modal dialog component, to open an associated Record Edit Form 
+    // We need access to a Modal dialog component, to open an associated Record Edit Form
     //
-    constructor(private modal: Modal, private elementRef: ElementRef, private viewRef:ViewContainerRef) {
+    constructor(private modal: Modal, private elementRef: ElementRef, private viewRef:ViewContainerRef, private selectList:ListSelectorDialog) {
     }
 
     /**
@@ -46,10 +47,12 @@ export class RecordList implements AfterContentInit {
     ngAfterContentInit() {
         // if we have a query band, then subscribe to the query refresh and export to excel buttons
         if (this.queryBand) {
-            // if user hits Refresh button, call grid refrech method
+            // if user hits Refresh button, call grid refresh method
             this.queryBand.queryRefresh.subscribe((query: Object) => { this.refreshGrid(query); });
-            // if user hits Advanced Query button, call grid refrech method
+            // if user hits Advanced Query button, call advanced query method
             if (this.queryBand.enableQBE) this.queryBand.queryFromQBE.subscribe((query: Object) => { this.showAdvancedQuery(); });
+            // if user hits Set Management button, call corresponding method method
+            if (this.queryBand.enableSETS) this.queryBand.queryManageSets.subscribe((action: string) => { this.doManageSets(action); });
             // it used hits Export to Excel, call grid's excel export method
             this.queryBand.queryExportGrid.subscribe(() => { if (this.theGrid) this.theGrid.exportGridToExcel(); });
 
@@ -92,12 +95,12 @@ export class RecordList implements AfterContentInit {
                 kendo.ui.progress($(this.elementRef.nativeElement), true); // show loading progress icon
                 this.theGrid.currentRecord.refresh().then(() => { // refresh current record
                     kendo.ui.progress($(this.elementRef.nativeElement), false); // clear loading progress icon
-                    this.modal.openInside(<any>this.editWindow, this.viewRef, this.theGrid.currentRecord, this._editWindowConfig)
+                    this.modal.openInside(<any>this.editWindow, this.viewRef, this.theGrid.currentRecord, this._editWindowConfig, true)
                         .then(result => {this.editWindowHandler(result);}); // open edit dialog
                 });
             } else {
                 // if not optimizing the grid loading, then we have a complete record loaded already
-                this.modal.openInside(<any>this.editWindow, this.viewRef, this.theGrid.currentRecord, this._editWindowConfig)
+                this.modal.openInside(<any>this.editWindow, this.viewRef, this.theGrid.currentRecord, this._editWindowConfig, true)
                     .then(result => {this.editWindowHandler(result);}); // open edit dialog
             }
         }
@@ -106,11 +109,11 @@ export class RecordList implements AfterContentInit {
             // if we are adding a new record
             let modelDef = <any>(this.theGrid.model);
             let newModel = <any>(new modelDef());
-            this.modal.openInside(<any>this.editWindow, this.viewRef, newModel, this._editWindowConfig); // open edit dialog
+            this.modal.openInside(<any>this.editWindow, this.viewRef, newModel, this._editWindowConfig, true); // open edit dialog
         }
     }
 
-    /** 
+    /**
      * Delete Selected Record(s)
      */
     public deleteRecord() {
@@ -121,6 +124,14 @@ export class RecordList implements AfterContentInit {
                     .catch((reason) => { alert(reason); });
             }
         }
+    }
+
+    /**
+     * Clear all previous queries
+     */
+    public clearQuery() {
+        this._previousAdvancedQuery = null;
+        this._previousQuery = null;
     }
 
     /**
@@ -146,4 +157,118 @@ export class RecordList implements AfterContentInit {
             });
 
     }
+
+    /**
+     * Handle Manage Sets dropdown menu and act upon user selected action
+     */
+    private doManageSets(action:string) {
+        let modelDef = <any>(this.theGrid.model);
+        let newModel = <any>(new modelDef());
+        let tableName = (newModel.tableName !== '')?newModel.tableName:(<any>this.theGrid.model).prototype.tableName;
+        let pk = (newModel.tableName !== '')?newModel.primaryKey_:(<any>this.theGrid.model).prototype.primaryKey_;
+        let gridRows = this.theGrid.getDataProvider().models;
+
+        switch (action) {
+            case 'selectHighlited':
+                if (pk && pk !== '') {
+                    let selectedRows = this.theGrid.selectedRows();
+                    let selectedRecords = [];
+                    for (var index = 0; index < selectedRows.length; index++) {
+                        let rowIndex:any = selectedRows[index];
+                        selectedRecords.push(gridRows[rowIndex][pk]);
+                    };
+                    this.restoreSet(selectedRecords);
+                }
+
+                break;
+
+            case 'saveSearch':
+                kendo.prompt("Please, enter a name for this Search:", "").then((searchName) => {
+                    if (searchName !== '') {
+                        let savedSearches = JSON.parse(localStorage.getItem(tableName+'_savedSearches')) || [];
+                        savedSearches.push({name:searchName, search:this._previousQuery});
+                        localStorage.setItem(tableName+'_savedSearches', JSON.stringify(savedSearches));
+                    }
+                }, function () {
+                    // cancelled...
+                })
+                 break;
+
+            case 'saveSet':
+                if (pk && pk !== '' && gridRows.length > 0) {
+                    kendo.prompt("Please, enter a name for this Record Set:", "").then((setName) => {
+                        if (setName !== '') {
+                            let savedSets = JSON.parse(localStorage.getItem(tableName+'_savedSets')) || [];
+
+                            let gridRows = this.theGrid.getDataProvider().models;
+                            let selectedRecords = [];
+                            for (var index = 0; index < gridRows.length; index++) {
+                                selectedRecords.push(gridRows[index][pk]);
+                            };
+
+                            savedSets.push({name:setName, set:selectedRecords});
+                            localStorage.setItem(tableName+'_savedSets', JSON.stringify(savedSets));
+                        }
+                    }, function () {
+                        // cancelled...
+                    })
+                }
+                break;
+
+            case 'reuseSearch':
+                let savedSearches = JSON.parse(localStorage.getItem(tableName+'_savedSearches')) || [];
+                let searchList = [];
+                savedSearches.forEach(element => {
+                    searchList.push(element.name);
+                });
+                this.selectList.show(searchList)
+                .then(result => {
+                    let query = savedSearches[result].search;
+                    this.refreshGrid(query);
+                }); // open list selector dialog
+
+                break;
+
+            case 'restoreSet':
+                let savedSets = JSON.parse(localStorage.getItem(tableName+'_savedSets')) || [];
+                let setList = [];
+                savedSets.forEach(element => {
+                    setList.push(element.name);
+                });
+                this.selectList.show(setList)
+                .then(result => {
+                    let set = savedSets[result].set;
+                    this.restoreSet(set);
+                }); // open list selector dialog
+
+                break;
+
+            case 'combineSearches':
+
+                break;
+
+            case 'manageSearches':
+
+                break;
+
+            case 'manageSets':
+
+                break;
+        }
+    }
+
+    private restoreSet(records:Array<number>) {
+        let modelDef = <any>(this.theGrid.model);
+        let newModel = <any>(new modelDef());
+        let tableName = (newModel.tableName !== '')?newModel.tableName:(<any>this.theGrid.model).prototype.tableName;
+        let pkField = (newModel.tableName !== '')?newModel.primaryKey_:(<any>this.theGrid.model).prototype.primaryKey_;
+        if (pkField && pkField !== '' && tableName && tableName !== '') {
+            let queryItems = [];
+            records.forEach(id => {
+                queryItems.push(tableName+'.'+pkField+';=;'+id+';OR');
+            });
+            this.refreshGrid({query:queryItems});
+         }
+
+   }
 }

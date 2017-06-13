@@ -1,5 +1,5 @@
 //****************************
-// Datagrid Directive 
+// Datagrid Directive
 //    based on kendoui-grid: http://demos.telerik.com/kendo-ui/grid/index
 //****************************
 
@@ -26,37 +26,37 @@ export class DataGrid implements AfterViewInit {
      * Grid columns definition, follows kendo-ui format
      */
     @Input() public columns: any[] = [];
-    
+
     /**
      * defined how grid selection should work (defaults to single, row)
      */
     @Input() public selectionMode: string = 'single,row';
-    
+
     /**
      * flag to indicate if grid is editable, individual columns can have their own setting (defaults to false)
      */
     @Input() public editable: string = 'false';
-    
+
     /**
      * flag to indicate if grid is filterable, individual columns can have their own setting (defaults to true)
      */
     @Input() public filterable: boolean = true;
-    
+
     /**
      * flag to indicate if grid is sortable, individual columns can have their own setting (defaults to true)
      */
     @Input() public sortable: boolean = true;
-       
+
     /**
      * flag to indicate if the column menu should be active for all columns on the grid (defaults to true)
      */
     @Input() public columnMenu: boolean = true;
- 
+
     /**
      * Grid height
      */
     @Input() public height: string = '100%';
-    
+
     /**
      * Filename to use when exporting to Excel
      */
@@ -69,23 +69,23 @@ export class DataGrid implements AfterViewInit {
      * enable refresh button on the paging bar (default true)
      */
     @Input() public pageableRefresh:boolean = true;
-    
+
     /**
      * to display page sizes drop down on the paging toolbar (default true)
      */
     @Input() public pageableSizes:boolean = true;
-    
+
     /**
-     * defines max number of buttons to display on the pahing toolbar (default 5) 
+     * defines max number of buttons to display on the pahing toolbar (default 5)
      */
     @Input() public pageableButtonCount:number = 5;
-    
+
     /**
      * defines message to display on the paging toolbar
      */
     @Input() public pageableMessage:string = '{0} - {1} of {2} items';
 
-    /**    
+    /**
     * the associated data model for the records to be retrieved
     */
     @Input() set model(v: FourDModel) { this._model = v; if (this.dataProvider) this.dataProvider.model = <any>v; }
@@ -95,8 +95,8 @@ export class DataGrid implements AfterViewInit {
      * option to use lazyloading, leavig paging to be done on server side (defaults to true)
      */
     @Input() public useLazyLoading: boolean = true; // defaults to true
-    
-    		
+
+
     /**
      * if using a dataClass, this flag will optimize the loading of data, by bringing only the columns used on the grid
      * thus avoiding bringing data that is not used on the grid
@@ -108,7 +108,7 @@ export class DataGrid implements AfterViewInit {
      * if using lazyloading, define the # of records to retrieve from 4D
      */
     @Input() public pageSize: number = 50;
-    
+
     //
     // events emitted by the DataGrid
     //
@@ -129,7 +129,7 @@ export class DataGrid implements AfterViewInit {
     // this is the kendoui grid object
     //
     private gridObject: kendo.ui.Grid;
-    
+
     //
     // define the dataSource used to populate/handle the grid's interface to 4D
     //
@@ -326,8 +326,8 @@ export class DataGrid implements AfterViewInit {
         if (this.gridObject.table) {
             if (this.gridObject.select()) {
                 return this.gridObject.dataItem(this.gridObject.select());
-            } else return null; 
-        } else return null; 
+            } else return null;
+        } else return null;
     }
 
     /**
@@ -349,10 +349,23 @@ export class DataGrid implements AfterViewInit {
                 }
 
                 return ret;
-            } else return -1;    
-        } else return -1;    
+            } else return -1;
+        } else return -1;
     }
-    
+
+    /**
+     * return currently selected rows indices, if multiple selection allowed
+     */
+    selectedRows():Array<number> {
+        let rows = this.gridObject.select();
+        let selectedRecords = [];
+        for (var index = 0; index < rows.length; index++) {
+            selectedRecords.push(rows[index]['rowIndex']);
+        };
+
+        return selectedRecords;
+    }
+
     /**
      * Export gird data to Excel
      */
@@ -362,11 +375,13 @@ export class DataGrid implements AfterViewInit {
         }
         this.gridObject.saveAsExcel();
     }
-    
+
     /**
      * Find grid item in the data provider
      */
     findRecordForThisItem(item: any): FourDModel {
+        if (!item) return null; // nothing selected...
+
         let ret = null;
         if (this.dataProvider) {
             this.dataProvider.models.forEach(element => {
@@ -386,7 +401,7 @@ export class DataGrid implements AfterViewInit {
      */
     removeRow(row:number) {
         if (this.dataProvider && this.dataProvider.models.length > row) {
-            // if we have a data provider and a valid row index 
+            // if we have a data provider and a valid row index
             this.dataProvider.models.splice(row,1);
         } else if ((<any>this.gridObject).dataItems().length > row) {
             (<any>this.gridObject).dataItems().splice(row,1);
@@ -430,9 +445,9 @@ export class DataGrid implements AfterViewInit {
             excel: { allPages: true, filterable: true },
             change: ($event) => { this.rowClicked($event); },
             autoBind: false,
-            pageable:{  refresh: this.pageableRefresh, 
+            pageable:{  refresh: this.pageableRefresh,
                         pageSize: this.pageSize,
-                        pageSizes: this.pageableSizes,  
+                        pageSizes: this.pageableSizes,
                         buttonCount: this.pageableButtonCount,
                         messages: {display: this.pageableMessage}},
             //scrollable: { virtual: this.useLazyLoading },

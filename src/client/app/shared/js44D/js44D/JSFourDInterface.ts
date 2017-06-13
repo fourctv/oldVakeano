@@ -63,41 +63,41 @@ export class FourDInterface {
      * current session key used in all http requests
      */
     public static sessionKey: string = '';
- 
+
     /**
      * indicates if web app is running standalone or inside workspace
      */
     public static runningInsideWorkspace: boolean = false;
-    
+
    /**
      * point to the HTTP service we'll use
      */
     public static http:Http;
-    
+
    /**
      * point to the LOG service we'll use
      */
     public static log:LogService;
 
     //
-    // cache variables 
+    // cache variables
     //
     private static _listCache: any = {};
     private static _registryCache: Array<any> = [];
 
 
-/* 
+/*
     constructor (@Inject(Http) _http:Http) {
          this.http = _http;
     }
- /**/    
+ /**/
 
     /**
-     * Generic function to call 4D backend using Angular2 HTTP 
-     * 
+     * Generic function to call 4D backend using Angular2 HTTP
+     *
      * 	@param fourdMethod: 4D's method name
      * 	@param body: the request body to send to 4D, an object that will be converted to URLSearchParams
-     * 
+     *
      * @return returns a Promise for the database operation
      */
     public call4DRESTMethod(fourdMethod: string, body: any): Observable<any> {
@@ -107,10 +107,18 @@ export class FourDInterface {
         body.hash = calculateHash(body);
 
         return FourDInterface.http.post(fourDUrl + '/4DAction/' + fourdMethod, convertObjectToURL(body), { headers: contentHeaders });
- 
+
     }
 
-        public signIn(user, pwd) {
+
+    /**
+     * Sign into 4D backend
+     *
+     * 	@param user: user name
+     * 	@param pwd: MD5 password digest
+     *
+     */
+    public signIn(user, pwd) {
         FourDInterface.currentUser = user;
         FourDInterface.currentUserPassword = pwd;
 
@@ -134,7 +142,7 @@ export class FourDInterface {
                         resolve(FourDInterface.authentication);
 
                     } else {
-                        reject('Invalid username or password! ==> '+response.json());
+                        reject('Invalid username or password! ==> ' + response.json());
                     }
                 },
                 error => {
@@ -149,13 +157,13 @@ export class FourDInterface {
 
     /**
      * Gets the values of a 4D Choice List.
-     * 
+     *
      * 	@param listName the 4D Choice List name
-     * 
+     *
      * @return returns a Promise for the database operation
-     * 
+     *
      * <p><b>4D lists are cached to optimize traffic to/from 4D</b></p>
-     * 
+     *
      **/
     public get4DList(listName: string): Promise<Array<string>> {
         if (FourDInterface._listCache[listName]) {
@@ -186,21 +194,21 @@ export class FourDInterface {
 
         });
 
-    } 
-    
+    }
+
     /**
      * Retrieve a filtered 4D List from 4C-TV. Used to access a single level of a hierarchical 4D List.
-     * 
-      * 
+     *
+      *
      * @param listName 4D list name
      * @param selector the hierarchical selector, only items under that selector in the hierarchy will be returned
      * @return returns a Promise for the database operation
-     * 
+     *
      */
     public getFiltered4DList(listName: string, selector:string ): Promise<Array<string>> {
- 
+
         let body: any = { Listname: listName, Selector:selector };
-        
+
         return new Promise((resolve, reject) => {
             this.call4DRESTMethod('REST_GetFiltered4DList', body)
                 .subscribe(
@@ -223,19 +231,19 @@ export class FourDInterface {
         });
 
     }
-        
+
     /**
      * Function getRegistryValue: get current registry value
-     * 
+     *
      * @param theClass the Registry Class to retrieve
      * @param theParameter the Registry Parameter to retrieve (optional, if blank gets all values for the Registry Class)
      * @param theDefaultValue a default value to return, in case the Registry entry is not defined in 4D
      * @param theSelector the Registry Selector to retrieve (optional, if blank gets all values for the Registry Class/Parameter)
-     * 
+     *
      * @return returns a Promise for the database operation
-     * 
+     *
      * <b>Retrieved Registry entries are cached in to optimize traffic to/from 4D </b>
-     * 
+     *
      */
     public getRegistryValue(theClass: string, theParameter: string, theDefaultValue: string = '', theSelector: string = ''): Promise<string> {
         let item: any = {};
@@ -262,17 +270,17 @@ export class FourDInterface {
 
         });
 
-    }  
+    }
 
 
     /**
      * Function setRegistryValue: set a registry entry value
-     * 
+     *
      * @param theClass the Registry Class to set
      * @param theParameter the Registry Parameter to set
      * @param theValue a Registry value to set
      * @param theSelector the Registry Selector to set (optional)
-     * 
+     *
     */
     public setRegistryValue(theClass: string, theParameter: string, theValue: string, theSelector: string = ''): Promise<any> {
         let body: any = { class: theClass, parameter: theParameter, value: theValue, selector: theSelector };
@@ -290,14 +298,14 @@ export class FourDInterface {
 
         });
 
-    }  
- 
+    }
+
     /**
      * Converts a DOM date to 4D format (YYYYMMDD).
-     *  
+     *
      * @param theDate a DOM date value
      * @return a 4D formatted date string (YYYYMMDD)
-     * 
+     *
      */
     public dateTo4DFormat(theDate: Date): string {
 
@@ -305,7 +313,7 @@ export class FourDInterface {
     }
 
 }
- 
+
 
 /**
  * MD5 has calculation
@@ -505,7 +513,7 @@ export class MD5 {
                 x = 0x10000 + ((x & 0x03FF) << 10) + (y & 0x03FF);
                 i++;
             }
-		
+
             /* Encode output as utf-8 */
             if (x <= 0x7F) {
                 output += String.fromCharCode(x);

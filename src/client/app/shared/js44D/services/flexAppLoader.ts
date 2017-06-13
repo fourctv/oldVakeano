@@ -1,6 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core';
 
-import {ModalDialogInstance, ModalConfig, ICustomModal, ICustomModalComponent} from '../angular2-modal/index';
+import {ModalDialogInstance} from '../angular2-modal/models/ModalDialogInstance';
+import {ModalConfig} from '../angular2-modal/models/ModalConfig';
+import { ICustomModal } from '../angular2-modal/models/ICustomModal';
+import { ICustomModalComponent } from '../angular2-modal/models/ICustomModalComponent';
 
 import { fourDUrl, FourDInterface } from '../js44D/JSFourDInterface';
 

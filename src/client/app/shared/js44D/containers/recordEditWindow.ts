@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 import { FourDModel } from '../js44D/JSFourDModel';
-import { ICustomModal, ICustomModalComponent } from '../angular2-modal/models/ICustomModal';
+import { ICustomModal } from '../angular2-modal/models/ICustomModal';
+import { ICustomModalComponent } from '../angular2-modal/models/ICustomModalComponent';
 import { ModalDialogInstance } from '../angular2-modal/models/ModalDialogInstance';
 
 @Component({

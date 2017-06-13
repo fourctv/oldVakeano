@@ -1,7 +1,8 @@
 import { Component, ContentChild, ElementRef, ViewContainerRef, AfterViewInit, Input } from '@angular/core';
 
 import { ModalDialogInstance } from '../angular2-modal/models/ModalDialogInstance';
-import { ICustomModal, ICustomModalComponent } from '../angular2-modal/models/ICustomModal';
+import { ICustomModal } from '../angular2-modal/models/ICustomModal';
+import { ICustomModalComponent } from '../angular2-modal/models/ICustomModalComponent';
 import { ModalConfig } from '../angular2-modal/models/ModalConfig';
 import { FourDInterface } from '../js44D/JSFourDInterface';
 
@@ -13,7 +14,7 @@ import { FourDInterface } from '../js44D/JSFourDInterface';
 })
 
 export class AdvancedQueryComponent implements ICustomModalComponent, AfterViewInit {
-    public static dialogConfig: ModalConfig = <ModalConfig>{size: 'sm', 
+    public static dialogConfig: ModalConfig = <ModalConfig>{size: 'sm',
             selfCentered:true,
             isResizable: false,
             isModal: true,
@@ -47,7 +48,7 @@ export class AdvancedQueryComponent implements ICustomModalComponent, AfterViewI
             if (element.relatesTo && element.relatesTo !== '') {
                 this.relatedOneTables.push(element.relatesTo.split('.')[0]);
             }
-            
+
         }
    }
 
@@ -65,7 +66,7 @@ export class AdvancedQueryComponent implements ICustomModalComponent, AfterViewI
         if (event.target.selectedIndex > 0) {
             queryField.field = queryField.listOfFields[event.target.selectedIndex-1];
         } else {
-            queryField.field  = {type:'string', name:''}; 
+            queryField.field  = {type:'string', name:''};
         }
     }
 

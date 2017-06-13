@@ -1,6 +1,6 @@
 {
   "name": "vakeano",
-  "version": "1.17.05.10a",
+  "version": "1.17.06.13a",
   "description": "The Vakeano web/mobile app",
   "repository": {
     "url": "https://github.com/NathanWalker/angular-seed-advanced"
@@ -195,15 +195,16 @@
     "@progress/kendo-angular-intl": "^0.11.1",
     "@progress/kendo-angular-l10n": "^0.2.1",
     "@progress/kendo-data-query": "^0.5.0",
+    "angulartics2": "^1.6.4",
     "base-64": "^0.1.0",
     "bootstrap": "^3.3.5",
-    "angulartics2": "^1.6.4",
     "core-js": "^2.4.1",
     "es-module-loader": "^1.0.0",
     "intl": "^1.2.5",
     "jquery": "^2.2.0",
     "lodash": "^4.17.4",
     "minimatch": "^3.0.3",
+    "ngx-bootstrap": "^1.7.1",
     "reflect-metadata": "^0.1.8",
     "rxjs": "~5.2.0",
     "systemjs": "0.19.41",

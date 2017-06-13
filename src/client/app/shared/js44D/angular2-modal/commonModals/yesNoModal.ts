@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 
 
-import {ICustomModal, ICustomModalComponent} from '../models/ICustomModal';
+import {ICustomModal} from '../models/ICustomModal';
+import {ICustomModalComponent} from '../models/ICustomModalComponent';
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
 
 /**

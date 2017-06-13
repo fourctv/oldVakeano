@@ -2,7 +2,7 @@ import { Component, Input, ReflectiveInjector } from '@angular/core';
 import { Config } from '../../core/utils/config';
 
 import { ModalDialogInstance } from '../angular2-modal/models/ModalDialogInstance';
-import { ICustomModalComponent } from '../angular2-modal/models/ICustomModal';
+import { ICustomModalComponent } from '../angular2-modal/models/ICustomModalComponent';
 import { ModalConfig } from '../angular2-modal/models/ModalConfig';
 
 import { FourDInterface, MD5 } from '../js44D/JSFourDInterface';
@@ -15,7 +15,7 @@ import { FourDInterface, MD5 } from '../js44D/JSFourDInterface';
     styleUrls : ['login.css']
 })
 export class LoginCmp implements ICustomModalComponent {
-    public static dialogConfig: ModalConfig = <ModalConfig>{size: 'sm', 
+    public static dialogConfig: ModalConfig = <ModalConfig>{size: 'sm',
             selfCentered:true,
             isResizable: false,
             isModal: true,
@@ -42,7 +42,7 @@ export class LoginCmp implements ICustomModalComponent {
             .then((authentication) => {
                 if (FourDInterface.authentication) {
                     //console.log('authenticated');
- 
+
                     this.showError = false;
                      this.dialog.close('loggedin');
                 } else {
