@@ -7,18 +7,19 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 // libs
 import { StoreModule } from '@ngrx/store';
-import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2Segment } from 'angulartics2/dist/providers/segment/angulartics2-segment';
+import { Angulartics2Module, Angulartics2Segment } from 'angulartics2';
 
 // app
-import { t } from '../shared/test/index';
-import { TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS } from '../shared/core/testing/index';
-import { NameListService, NavbarComponent, ToolbarComponent } from '../shared/sample/index';
-import { MultilingualModule } from '../shared/i18n/multilingual.module';
-import { reducer } from '../shared/i18n/index';
+import { t } from '../modules/test/index';
+import { Config } from '../modules/core/index';
+import { TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS } from '../modules/core/testing/index';
+import { NameListService } from '../modules/sample/index';
+import { SharedModule } from '../modules/shared/index';
+import { MultilingualModule } from '../modules/i18n/multilingual.module';
+import { reducer, LanguageProviders } from '../modules/i18n/index';
 
 // module
-import { AppComponent } from './app.component';
+import { APP_COMPONENTS } from './index';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
@@ -31,7 +32,7 @@ const config:Route[] = [
 const testModuleConfig = () => {
   TestBed.configureTestingModule({
     imports: [
-      FormsModule,
+      SharedModule,
       Angulartics2Module.forRoot([
         Angulartics2Segment
       ]),
@@ -40,14 +41,14 @@ const testModuleConfig = () => {
       RouterTestingModule.withRoutes(config)
     ],
     declarations: [
-      TestComponent, AppComponent,
-      HomeComponent, AboutComponent,
-      NavbarComponent, ToolbarComponent
+      TestComponent,
+      ...APP_COMPONENTS
     ],
     providers: [
       TEST_CORE_PROVIDERS(),
       TEST_HTTP_PROVIDERS(),
-      NameListService
+      NameListService,
+      LanguageProviders
     ]
   });
 };

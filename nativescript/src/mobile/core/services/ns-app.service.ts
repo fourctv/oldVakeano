@@ -17,15 +17,14 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 
 // app
-import { AppService } from '../../../app/shared/core/services/app.service';
-import { Config } from '../../../app/shared/core/utils';
-import { LogService, WindowService, RouterExtensions } from '../../../app/shared/core/index';
-import { AnalyticsService } from '../../../app/shared/analytics/index';
+import { AppService } from '../../../app/modules/core/services/app.service';
+import { Config } from '../../../app/modules/core/utils';
+import { LogService, WindowService, RouterExtensions } from '../../../app/modules/core/index';
+import { AnalyticsService } from '../../../app/modules/analytics/index';
 import { ActionBarUtil } from '../utils/actionbar.util';
-import * as multilingual from '../../../app/shared/i18n/index';
+import * as multilingual from '../../../app/modules/i18n/index';
 
 declare var android: any;
-const trackingId = '<%= TNS_CONFIG.ANALYTICS_TRACKING_ID %>';
 
 @Injectable()
 export class NSAppService extends AppService {
@@ -67,14 +66,6 @@ export class NSAppService extends AppService {
     ActionBarUtil.STATUSBAR_STYLE(
       isIOS ? 1 : '#3280CF'
     );
-
-    if (String('<%= BUILD_TYPE %>') !== 'prod') {
-      log.debug('NSAppCmp ----');
-
-      router.events.subscribe((e) => {
-        this.log.debug(`Router Event: ${e.toString()}`);
-      });
-    }
 
     // Fix: Reset all nsApp events before subscribing to avoid Duplicate events.
     // this.unsubscribeAll();

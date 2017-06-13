@@ -13,7 +13,7 @@ let template: any;
 let menu: any;
 
 // app
-import { DesktopConfig } from './app/shared/electron/index';
+import { DesktopConfig } from './app/modules/electron/index';
 
 // Sample
 // You would need a valid `submitURL` to use
@@ -57,7 +57,7 @@ app.on('ready', () => {
     label: 'Language',
     submenu: []
   };
-  for (var lang of DesktopConfig.SUPPORTED_LANGUAGES) {
+  for (var lang of DesktopConfig.GET_SUPPORTED_LANGUAGES()) {
     let code = lang.code;
     let langOption = {
       label: lang.title,

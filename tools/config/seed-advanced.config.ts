@@ -33,7 +33,7 @@ export class SeedAdvancedConfig extends SeedConfig {
 
     let arg: string;
     if (argv && argv._) {
-      arg = argv._[0];
+      arg = argv._;
       if (arg.indexOf('desktop') > -1) {
         this.TARGET_DESKTOP = true;
         if (arg.indexOf('.mac') > -1 || arg.indexOf('.windows') > -1 || arg.indexOf('.linux') > -1) {
@@ -124,14 +124,7 @@ export class SeedAdvancedConfig extends SeedConfig {
       {
         name: 'angulartics2',
         packageMeta: {
-          main: 'dist/index.js',
-          defaultExtension: 'js'
-        }
-      },
-      {
-        name: 'angulartics2/dist/providers',
-        packageMeta: {
-          main: 'index.js',
+          main: 'dist/core.umd.js',
           defaultExtension: 'js'
         }
       },

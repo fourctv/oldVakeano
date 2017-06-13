@@ -13,11 +13,13 @@ import { MockBackend } from '@angular/http/testing';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { t } from '../../shared/test/index';
-import { NameListService, NameListEffects, reducer } from '../../shared/sample/index';
-import { CoreModule } from '../../shared/core/core.module';
-import { AnalyticsModule } from '../../shared/analytics/analytics.module';
-import { MultilingualModule } from '../../shared/i18n/multilingual.module';
+import { t } from '../../modules/test/index';
+import { NameListService, SampleEffects, reducer } from '../../modules/sample/index';
+import { CoreModule } from '../../modules/core/core.module';
+import { AnalyticsModule } from '../../modules/analytics/analytics.module';
+import { MultilingualModule } from '../../modules/i18n/multilingual.module';
+import { LanguageProviders } from '../../modules/i18n/index';
+import { SharedModule } from '../../modules/shared/index';
 import { HomeComponent } from './home.component';
 
 // test module configuration for each test
@@ -25,14 +27,16 @@ const testModuleConfig = () => {
   TestBed.configureTestingModule({
     imports: [
       CoreModule,
+      SharedModule,
       RouterTestingModule,
       AnalyticsModule,
       MultilingualModule,
       StoreModule.provideStore({ sample: reducer }),
-      EffectsModule.run(NameListEffects)
+      EffectsModule.run(SampleEffects)
     ],
     declarations: [HomeComponent, TestComponent],
     providers: [
+      LanguageProviders,
       NameListService,
       BaseRequestOptions,
       MockBackend,

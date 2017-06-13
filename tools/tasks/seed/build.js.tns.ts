@@ -21,12 +21,13 @@ export =
     run() {
       const src = [
         '**/*.ts',
+        'mobile/**/*.ts',
         'app/**/*.ts',
         '!**/*.spec.ts',
         '!app/**/*.spec.ts',
         '!**/*.e2e-spec.ts',
         '!app/**/*.e2e-spec.ts',
-        '!app/shared/test/**/*',
+        '!app/modules/test/**/*',
         `!**/${Config.NG_FACTORY_FILE}.ts`,
       ];
 
@@ -36,15 +37,18 @@ export =
         ...src,
         '!**/*.aot.ts',
       ], {
-        base: Config.TNS_APP_SRC,
-        cwd: Config.TNS_APP_SRC,
-      })
+          base: Config.TNS_APP_SRC,
+          cwd: Config.TNS_APP_SRC,
+        })
         .pipe(plugins.sourcemaps.init())
         .pipe(tsProject());
 
       const template = (<any>Object).assign(
+        // new TemplateLocalsBuilder().withStringifiedSystemConfigDev().build(), {
+        //   SYSTEM_CONFIG_TNS: jsonSystemConfig
+        // },
         new TemplateLocalsBuilder().withStringifiedSystemConfigDev().build(), {
-          SYSTEM_CONFIG_TNS: jsonSystemConfig
+          TNS_CONFIG: jsonSystemConfig
         },
       );
 
@@ -57,7 +61,7 @@ export =
         //      sourceRoot: (file: any) =>
         //        relative(file.path, PROJECT_ROOT + '/' + APP_SRC).replace(sep, '/') + '/' + APP_SRC
         //    }))
-        .pipe(plugins.template(template))
+        .pipe(plugins.template(template, {interpolate: /<%=([\s\S]+?)%>/g}))
         .pipe(gulp.dest(Config.TNS_APP_DEST));
 
       const copy = gulp.src(src, {
