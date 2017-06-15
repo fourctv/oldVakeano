@@ -1,9 +1,7 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, ViewChild } from '@angular/core';
 
 import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
 import { DataGrid } from '../../modules/js44D/dataGrid/dataGrid';
-import { ModalConfig } from '../../modules/js44D/angular2-modal/models/ModalConfig';
 import { Modal } from '../../modules/js44D/angular2-modal/providers/Modal';
 
 import {FeatureInfoDialog} from './featureInfoDialog';
@@ -40,11 +38,6 @@ import {FeaturesEx} from '../../modules/moviegenome/index';
 })
 
 export class FeatureListApp {
-    public mdiWindowConfig: ModalConfig = <ModalConfig>{size: 'lg', 
-            position: {top:50, left:50},
-            title:'Feature Info',
-            width:1400, height:1000};
-         
     /**
      * get the associated Datagrid object instance
      */
@@ -78,8 +71,7 @@ export class FeatureListApp {
      //
     // We need access to a Modal dialog component, to open an associated Record Edit Form 
     //
-    constructor(private modal: Modal, private viewref:ViewContainerRef, private http:Http) {
-        if (!FourDInterface.http) FourDInterface.http = http;
+    constructor(private modal: Modal) {
     }
 
     public checkFeature() {

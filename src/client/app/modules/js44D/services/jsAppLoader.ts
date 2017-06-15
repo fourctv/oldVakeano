@@ -30,7 +30,7 @@ export class JSAppLoader implements ICustomModalComponent, AfterViewInit {
 
     ngAfterViewInit() {
         this.dialog.setTitle(this.webApp.title);
-        let compRef = this.viewRef.createComponent(this.webApp.provider,0,this.webApp.injector);
+        let compRef = this.viewRef.createComponent(this.webApp.provider,0,null,null,this.webApp.injector);
         compRef.changeDetectorRef.detectChanges();
         let kwindow = $(this.el.nativeElement).data('kendoWindow');
         if (compRef.instance.hasOwnProperty('mdiWindowConfig')) {

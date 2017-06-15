@@ -1,7 +1,5 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 
-import { Http } from '@angular/http';
-
 import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
 import { FourDCollection } from '../../modules/js44D/js44D/JSFourDCollection';
 
@@ -20,8 +18,7 @@ export class UserRating implements AfterViewInit {
     @Input() currentProfile:number = 0;
     @Input() controlList:FourDCollection = new FourDCollection();
     
-    constructor(private fourD:FourDInterface, private http:Http) {
-        if (!FourDInterface.http) FourDInterface.http = <any>http;
+    constructor(private fourD:FourDInterface) {
     }
 
     ngAfterViewInit() {

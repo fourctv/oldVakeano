@@ -12,19 +12,26 @@ import { Modal } from '../../modules/js44D/angular2-modal/providers/modal';
 import { FourDInterface } from '../../modules/js44D/js44D/JSFourDInterface';
 
 import { BlankPage } from './blankPage';
-import { UserRating } from '../userRating/userRating'; 
-import { UserRecommendations } from '../userRecommendations/userRecommendations'; 
-import { FeatureListApp } from '../featureList/featureList'; 
-import { UserProfileListApp } from '../userProfileList/userProfileList'; 
-import { GenomeMapListApp } from '../genomeMapList/genomeMapList'; 
+import { UserRatingAppDialog } from '../userRating/userRatingAppdialog'; 
+import { UserRecommendationsAppDialog } from '../userRecommendations/userRecommendationsAppDialog'; 
+import { FeatureListDialog } from '../featureList/featureListDialog'; 
+import { UserProfileListDialog } from '../userProfileList/userProfileListDialog'; 
+import { GenomeMapListDialog } from '../genomeMapList/genomeMapListDialog'; 
+
+
+import { UserRatingModule } from '../userRating/userRatingModule'; 
+import { UserRecommendationsModule } from '../userRecommendations/userRecommendationsModule'; 
+import { FeatureListModule } from '../featureList/featureListModule'; 
+import { UserProfileListModule} from '../userProfileList/userProfileListModule'; 
+import { GenomeMapListModule } from '../genomeMapList/genomeMapListModule'; 
 
 export const routes: Routes = [
     {path: 'login', component: BlankPage},
-    {path: 'userRating', component: UserRating},
-    {path: 'featureList', component: FeatureListApp},
-    {path: 'userProfileList', component: UserProfileListApp},
-    {path: 'genomeMapList', component: GenomeMapListApp},
-    {path: 'userRecommendations', component: UserRecommendations},
+    {path: 'userRating', component:UserRatingAppDialog},
+    {path: 'featureList', component: FeatureListDialog},
+    {path: 'userProfileList', component: UserProfileListDialog},
+    {path: 'genomeMapList', component: GenomeMapListDialog},
+    {path: 'userRecommendations', component: UserRecommendationsAppDialog},
     {path: '**',  component: BlankPage}
 ];
 
@@ -40,6 +47,7 @@ export const routes: Routes = [
 
 export class AppComponent implements AfterContentInit {
     public static MAIN_APP_VERSION = '';
+
     public menuList = [
         {
             routePath: '/userRating',
@@ -77,7 +85,7 @@ export class AppComponent implements AfterContentInit {
         return (FourDInterface.authentication) ? FourDInterface.currentUser : '?';
     }
 
-    constructor (public router:Router, private http:Http, private logger: LogService, private modal: Modal, private viewref: ViewContainerRef) {
+    constructor (public router:Router, private http:Http, private logger: LogService, private modal: Modal, private hostViewRef: ViewContainerRef) {
         FourDInterface.http = http;
         FourDInterface.log = logger;
         AppComponent.MAIN_APP_VERSION = Config.APP_VERSION();
@@ -117,7 +125,7 @@ export class AppComponent implements AfterContentInit {
     }
 
     showLoginDialog() {
-        this.modal.openInside(<any>LoginCmp, this.viewref, null, LoginCmp.dialogConfig)
+        this.modal.openInside(<any>LoginCmp, this.hostViewRef, null, LoginCmp.dialogConfig)
             .then((result) => {
                     this.userHasLoggedIn();
             });        

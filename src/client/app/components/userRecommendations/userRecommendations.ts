@@ -1,5 +1,4 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
-import { Http } from '@angular/http';
 
 import { LogService } from '../../modules/core/services/logging/log.service';
 
@@ -27,8 +26,7 @@ export class UserRecommendations implements AfterViewInit {
     @Input() profileName:string = '';
     @Input() showCuratedList:Boolean = false;
 
-    constructor(private fourD:FourDInterface, private http:Http, private log:LogService) {
-        if (!FourDInterface.http) FourDInterface.http = http;
+    constructor(private fourD:FourDInterface, private log:LogService) {
     }
 
     /**

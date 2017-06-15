@@ -6,8 +6,7 @@
     "build.assets.dev",
     "build.html_css",
     "build.js.dev",
-    "build.index.dev",
-    "build.index.webapps.dev"
+    "build.index.dev"
   ],
 
   "build.prod.lazy": [

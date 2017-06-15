@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, PreloadAllModules } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule }      from '@angular/common';
 
@@ -20,7 +20,8 @@ import { AppComponent } from './app/components/appNS/app.component';
 import { routes } from './app/components/appNS/app.component';
 
 // feature modules
-import { CoreModule } from './app/modules/core/core.module';
+import { WindowService, StorageService, ConsoleService, createConsoleTarget, provideConsoleTarget, LogTarget, LogLevel, ConsoleTarget } from './app/modules/core/services/index';
+import { CoreModule, Config } from './app/modules/core/index';
 import { JS44DModule } from './app/modules/js44D/js44D.module';
 import { ModalModule } from './app/modules/js44D/modal.module';
 import { MGModule } from './app/modules/moviegenome/mg.module';
@@ -34,7 +35,6 @@ import { UserProfileListModule } from './app/components/userProfileList/userProf
 import { GenomeMapListModule } from './app/components/genomeMapList/genomeMapListModule'; 
 
 // config
-import { Config, WindowService, ConsoleService, createConsoleTarget, provideConsoleTarget, LogTarget, LogLevel, ConsoleTarget } from './app/modules/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 if (String('<%= BUILD_TYPE %>') === 'dev') {
   // only output console logging in dev mode
@@ -49,16 +49,18 @@ if (String('<%= TARGET_DESKTOP %>') === 'true') {
   routerModule = RouterModule.forRoot(routes, { useHash: true });
 }
 
-declare var window, console;
+declare var window, console, localStorage;
 
 // For AoT compilation to work:
 export function win() {
   return window;
 }
+export function storage() {
+  return localStorage;
+}
 export function cons() {
   return console;
 }
-
 export function consoleLogTarget(consoleService: ConsoleService) {
   return new ConsoleTarget(consoleService, { minLogLevel: LogLevel.Debug });
 }
@@ -79,6 +81,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
     CommonModule,
     CoreModule.forRoot([
       { provide: WindowService, useFactory: (win) },
+      { provide: StorageService, useFactory: (storage) },
       { provide: ConsoleService, useFactory: (cons) },
       { provide: LogTarget, useFactory: (consoleLogTarget), deps: [ConsoleService], multi: true }
     ]),

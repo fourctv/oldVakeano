@@ -1,6 +1,6 @@
 import {Type,
     ComponentFactoryResolver,
-    ViewContainerRef,
+    ViewContainerRef, ApplicationRef,
     Injectable,
     Optional
 } from '@angular/core';
@@ -20,7 +20,7 @@ export class Modal {
 
     private theDialog:any;
 
-    constructor(private componentFactoryResolver: ComponentFactoryResolver, private appRef: ViewContainerRef,
+    constructor(private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef,
                 @Optional() defaultConfig: ModalConfig) {
         // The Modal class should be an application wide service (i.e: singleton).
         // This will run once in most applications...
@@ -37,13 +37,15 @@ export class Modal {
      * @returns {Promise<ModalDialogInstance>}
      */
     public open(componentType: any, parameters?: any,
-                config?: ModalConfig, allowMultiple:boolean=false): Promise<string> {
+                config?: ModalConfig, allowMultiple:boolean=false, dialogID:string=''): Promise<string> {
         // TODO: appRef.injector.get(APP_COMPONENT) Doesn't work.
         // When it does replace with the hack below.
         //let viewRef = this.appRef.element.nativeElement.location;
         //let viewRef: viewRef = this.appRef['_rootComponents'][0].location;
 
-        return this.openInside(componentType, (Modal.hostViewRef)?Modal.hostViewRef:this.appRef, parameters, config, allowMultiple);
+        let hostView = (this.appRef.components[0].instance).hostViewRef;
+        return this.openInside(componentType, (hostView)?hostView:this.appRef, parameters, config, allowMultiple, dialogID);
+        //return this.openInside(componentType, (Modal.hostViewRef)?Modal.hostViewRef:this.appRef, parameters, config, allowMultiple);
     }
 
     /**
@@ -53,17 +55,21 @@ export class Modal {
      * @param anchorName A template variable within the component.
      * @param bindings Resolved providers that will inject into the component provided.
      * @param config A Modal Configuration object.
+     * @param allowMultiple indinates if multiple version of the same dialog are allowed.
+     * @param dialogID a dialog identification token to control multiple occurrences.
      * @returns {Promise<ModalDialogInstance>}
      */
     public openInside(componentType: Type<any>, viewRef: ViewContainerRef,
                       parameters: any,
                       config?: ModalConfig,
-                      allowMultiple:boolean=false): Promise<string> {
+                      allowMultiple:boolean=false,
+                      dialogID:string=''): Promise<string> {
 
         if (!allowMultiple) {
             for (var index = 0; index < Modal.openDialogList.length; index++) {
                 let item = Modal.openDialogList[index];
-                if (item.component === componentType['name']) {
+                let id = (dialogID && dialogID !== '')?dialogID:componentType['name'];
+                if (item.component === id) {
                     item.dialog.toFront(); // bring diaog to front
                     return null;
                 }
@@ -104,7 +110,8 @@ export class Modal {
 
         // if multiples not allowed, save this instance
         if (!allowMultiple) {
-            Modal.openDialogList.push({component:componentType['name'], dialog:this.theDialog});
+            let id = (dialogID && dialogID !== '')?dialogID:componentType['name'];
+            Modal.openDialogList.push({component:id, dialog:this.theDialog});
         }
 
         return dialogInstance.result;
@@ -148,9 +155,9 @@ export class Modal {
         theDialog.destroy();
     }
 
-    public openDialog(component:any, parameters:any, allowMultiple:boolean=false): Promise<string>  {
+    public openDialog(component:any, parameters:any, allowMultiple:boolean=false, dialogID:string=''): Promise<string>  {
 
-       return this.open(<any>component, parameters, component.dialogConfig, allowMultiple);
+       return this.open(<any>component, parameters, component.dialogConfig, allowMultiple, dialogID);
     }
 
 }

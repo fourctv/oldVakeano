@@ -1,6 +1,7 @@
 // angular
 import { NgModule } from '@angular/core';
 
+import { UserProfileListDialog } from './userProfileListDialog';
 import { UserProfileListApp } from './userProfileList';
 import { ProfileGenesInfo } from './profileGenesInfo';
 import { UserProfileInfo } from './userProfileInfo';
@@ -16,16 +17,18 @@ import { UserRatingModule } from '../userRating/userRatingModule';
 import { UserRecommendationsModule } from '../userRecommendations/userRecommendationsModule';
 
 import { JS44DModule } from '../../modules/js44D/js44D.module';
+import { ModalModule } from '../../modules/js44D/modal.module';
 import { MGModule } from '../../modules/moviegenome/mg.module';
 
 @NgModule({
   imports: [
-      JS44DModule,
+      JS44DModule, ModalModule,
       MGModule,
       UserRatingModule,
       UserRecommendationsModule
       ],
-  declarations: [ 
+  declarations: [
+      UserProfileListDialog, 
       UserProfileListApp,
       UserProfileQueryBand,
       ProfileGenesInfo,
@@ -36,7 +39,7 @@ import { MGModule } from '../../modules/moviegenome/mg.module';
       ProfileGenesInfoDialog
       ],
   entryComponents:[
-      UserProfileInfoDialog,
+      UserProfileListDialog, UserProfileInfoDialog, UserProfileListApp,
       ProfileGenesInfoDialog
       ]
 })

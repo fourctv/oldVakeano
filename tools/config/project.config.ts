@@ -38,6 +38,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
       // My libraries
       { src: 'base-64/base64.js', inject: 'libs' },
       { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
+      { src: 'utf8/utf8.js', inject: 'libs' },
       // { src: 'http://kendo.cdn.telerik.com/2017.1.118/js/jszip.min.js', inject: 'libs', env: 'dev' },
       // { src: 'http://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js', inject: 'libs', env: 'dev' },
       //     { src: 'backbone/backbone-min.js', inject: 'libs' },
@@ -76,7 +77,8 @@ export class ProjectConfig extends SeedAdvancedConfig {
     this.SYSTEM_CONFIG.paths['@progress/kendo-data-query'] = `${this.APP_BASE}node_modules/@progress/kendo-data-query/dist/cdn/js/kendo-data-query.js`;
 
     // our bootstrap app 
-    this.BOOTSTRAP_PROD_MODULE = 'mainNS.web';
+          this.SYSTEM_CONFIG.paths[this.BOOTSTRAP_MODULE] = `${this.APP_BASE}mainNS.web`;
+this.BOOTSTRAP_PROD_MODULE = 'mainNS.web';
 
 
     // Add `local` third-party libraries to be injected/bundled.

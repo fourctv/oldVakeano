@@ -17,6 +17,7 @@ import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui/sidedraw
 // app
 import {
   WindowService,
+  StorageService,
   ConsoleService, ConsoleTarget, LogLevel,
   RouterExtensions,
   AppService
@@ -46,7 +47,7 @@ import { FeatureRating } from './mobile/userrating/featureRating';
 import { ProfileBuildingPage } from './mobile/userrating/profileBuildingPage'; 
 import { CuratedProfiles } from './mobile/recommendations/curatedProfile';
 // {N} custom app specific
-import { WindowNative, NSAppService } from './mobile/core/index';
+import { WindowNative, StorageNative, NSAppService } from './mobile/core/index';
 import { NS_ANALYTICS_PROVIDERS } from './mobile/analytics/index';
 
 // lazyloading components (not used)
@@ -123,6 +124,7 @@ export function consoleLogTarget(service: ConsoleService) {
   imports: [
     CoreModule.forRoot([
       { provide: WindowService, useClass: WindowNative },
+      { provide: StorageService, useClass: StorageNative },
       { provide: ConsoleService, useFactory: (cons) },
       { provide: LogTarget, multi: true, deps: [ConsoleService], useFactory: (consoleLogTarget) }
     ]),
